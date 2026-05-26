@@ -15,7 +15,6 @@
             --card-bg: #ffffff;
             --success: #2e7d32;
             --warning: #ef6c00;
-            --accent: #facc15; /* High-contrast gold/yellow for visibility */
         }
 
         * {
@@ -57,20 +56,9 @@
         }
         
         .brand-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 1rem;
             font-weight: bold;
-            color: white;
-        }
-
-        .programme-label {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-bottom: 0.4rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .programme-select {
@@ -78,18 +66,13 @@
             padding: 0.75rem;
             background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             outline: none;
             appearance: none;
-            transition: border-color 0.2s;
-        }
-
-        .programme-select:hover, .programme-select:focus {
-            border-color: var(--accent);
         }
 
         .programme-select option {
@@ -402,7 +385,6 @@
     <aside class="sidebar">
         <div class="brand">
             <div class="brand-title">Programme Catalogue</div>
-            <label for="programme-selector" class="programme-label">Select a programme:</label>
             <select class="programme-select" id="programme-selector" onchange="switchProgramme()">
                 <option value="">Loading Programmes...</option>
             </select>
@@ -456,8 +438,7 @@
         // 1. Fetch JSON Data with Cache-Busting
         async function loadData() {
             try {
-                // Adds the current exact millisecond to the URL to bypass the browser's cache.
-                // The directory has been updated to point to the 'data' folder.
+                // Adds the current exact millisecond to the URL to bypass the browser's cache
                 const response = await fetch('data/programme_data.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error("File not found");
                 
@@ -526,8 +507,8 @@
                     if(lvl.level === 1) levelName = 'Year 1';
                     if(lvl.level === 2) levelName = 'Year 2';
                     if(lvl.level === 3) levelName = 'Year 3';
-                    if(lvl.level === 5) levelName = 'Master\\'s (Level 5)';
-                    if(lvl.level === 6) levelName = 'Master\\'s (Level 6)';
+                    if(lvl.level === 5) levelName = 'Master\'s (Level 5)';
+                    if(lvl.level === 6) levelName = 'Master\'s (Level 6)';
 
                     li.innerHTML = `${levelName} <span id="ind-level-${lvl.level}">0 cr</span>`;
                     li.onclick = () => switchLevel(lvl.level);
@@ -554,8 +535,8 @@
             if(levelNum === 1) titleText = 'Year 1: Foundations';
             if(levelNum === 2) titleText = 'Year 2: Specialisation';
             if(levelNum === 3) titleText = 'Year 3: Application';
-            if(levelNum === 5) titleText = 'Master\\'s Level 5 Specialisation';
-            if(levelNum === 6) titleText = 'Master\\'s Level 6 Advanced';
+            if(levelNum === 5) titleText = 'Master\'s Level 5 Specialisation';
+            if(levelNum === 6) titleText = 'Master\'s Level 6 Advanced';
             
             document.getElementById('level-title').innerText = titleText;
             
