@@ -15,6 +15,7 @@
             --card-bg: #ffffff;
             --success: #2e7d32;
             --warning: #ef6c00;
+            --accent: #facc15; /* High-contrast gold/yellow for visibility */
         }
 
         * {
@@ -56,9 +57,20 @@
         }
         
         .brand-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
             font-weight: bold;
+            color: white;
+        }
+
+        .programme-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .programme-select {
@@ -66,13 +78,18 @@
             padding: 0.75rem;
             background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             outline: none;
             appearance: none;
+            transition: border-color 0.2s;
+        }
+
+        .programme-select:hover, .programme-select:focus {
+            border-color: var(--accent);
         }
 
         .programme-select option {
@@ -385,6 +402,7 @@
     <aside class="sidebar">
         <div class="brand">
             <div class="brand-title">Programme Catalogue</div>
+            <label for="programme-selector" class="programme-label">Select a programme:</label>
             <select class="programme-select" id="programme-selector" onchange="switchProgramme()">
                 <option value="">Loading Programmes...</option>
             </select>
@@ -439,7 +457,7 @@
         async function loadData() {
             try {
                 // Adds the current exact millisecond to the URL to bypass the browser's cache
-                const response = await fetch('data/programme_data.json?v=' + new Date().getTime());
+                const response = await fetch('programme_data.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error("File not found");
                 
                 const data = await response.json();
