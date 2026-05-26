@@ -403,9 +403,12 @@
     </aside>
 
     <main class="main-content">
-        <header style="margin-bottom: 2rem;">
-            <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Loading...</h2>
-            <p id="level-subtitle" style="color: var(--text-muted);">Configure your pathways and map out your academic load.</p>
+        <header style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;">
+            <div>
+                <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Loading...</h2>
+                <p id="level-subtitle" style="color: var(--text-muted);">Configure your pathways and map out your academic load.</p>
+            </div>
+            <img src="university-of-leeds-logo-6B8E9B14B5-seeklogo.com.png" alt="University of Leeds Logo" style="max-height: 60px; width: auto;">
         </header>
 
         <section class="controls-panel" id="controls-panel">
@@ -605,147 +608,4 @@
                 .filter(m => selections[m.module_code])
                 .reduce((sum, m) => sum + m.credits, 0);
 
-            // Sometimes compulsory credits alone might equal more than standard targets based on JSON structure
-            const compulsoryTotal = currentLevelObj.modules.filter(m => m.compulsory).reduce((sum, m) => sum + m.credits, 0);
-            if (compulsoryTotal > targetCredits) targetCredits = compulsoryTotal;
-
-            const percentage = Math.min((currentTotal / targetCredits) * 100, 100);
-            document.getElementById('credit-status-text').innerText = `${currentTotal} / ${targetCredits} Credits`;
-            
-            const fill = document.getElementById('tracker-fill');
-            fill.style.width = `${percentage}%`;
-
-            const msg = document.getElementById('tracker-message');
-            
-            if (currentTotal === targetCredits) {
-                fill.style.backgroundColor = 'var(--success)';
-                msg.innerText = 'Credit target achieved.';
-                msg.style.color = 'var(--success)';
-            } else if (currentTotal > targetCredits) {
-                fill.style.backgroundColor = 'var(--secondary)';
-                msg.innerText = `Overloaded by ${currentTotal - targetCredits} credits.`;
-                msg.style.color = 'var(--secondary)';
-            } else {
-                fill.style.backgroundColor = 'var(--warning)';
-                msg.innerText = `Requires ${targetCredits - currentTotal} more credits.`;
-                msg.style.color = 'var(--warning)';
-            }
-        }
-
-        function showDetails(id) {
-            const mod = currentLevelObj.modules.find(m => m.module_code === id);
-            const termString = getTermString(mod.semester);
-            
-            let notesHtml = mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Notes:</strong> ${mod.notes}</p>` : '';
-            
-            const content = `
-                <span class="module-code">${mod.module_code}</span>
-                <h3 style="margin: 1rem 0 0.5rem 0; font-size: 1.5rem;">${mod.module_title}</h3>
-                <div style="margin-bottom: 1rem;">
-                    <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
-                    <span class="badge badge-term">${termString}</span>
-                    <span class="badge" style="background:#e2e8f0;">${mod.credits} Credits</span>
-                </div>
-                <hr style="border:0; border-top:1px solid var(--border); margin-bottom:1rem;">
-                <p style="color:#4a5568;"><strong>Module Leader:</strong> ${mod.module_leader || 'TBC'}</p>
-                ${notesHtml}
-            `;
-            document.getElementById('modal-content').innerHTML = content;
-            toggleModal(true);
-        }
-
-        function toggleModal(open) {
-            document.getElementById('modal').classList.toggle('active', open);
-        }
-
-        function closeModal(e) {
-            if (e.target.id === 'modal') toggleModal(false);
-        }
-
-        // Template string generator for individual module cards
-        function createCardHTML(mod) {
-            const isSelected = selections[mod.module_code] ? 'selected' : '';
-            const btnText = mod.compulsory ? 'Compulsory Base' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
-            const btnDisabled = mod.compulsory ? 'disabled style="opacity:0.6; cursor:not-allowed; background:#eee; border-color:#ccc;"' : '';
-            const termString = getTermString(mod.semester);
-            
-            return `
-                <div class="module-card ${isSelected}" onclick="showDetails('${mod.module_code}')">
-                    <div class="module-header">
-                        <span class="module-code">${mod.module_code}</span>
-                        <span class="module-credits">${mod.credits} Credits</span>
-                    </div>
-                    <h3 class="module-title">${mod.module_title}</h3>
-                    <div class="module-meta">
-                        <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
-                        <span class="badge badge-term">${termString}</span>
-                    </div>
-                    <p class="module-desc" style="font-size: 0.85rem;"><strong>Leader:</strong> ${mod.module_leader || 'TBC'}</p>
-                    <div class="card-actions">
-                        <button class="select-btn" ${btnDisabled} onclick="toggleModuleSelection('${mod.module_code}', event)">
-                            ${btnText}
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function render() {
-            const container = document.getElementById('modules-container');
-            const searchVal = document.getElementById('search-input').value.toLowerCase();
-            
-            if (!currentLevelObj || !currentLevelObj.modules) return;
-
-            // Apply Filters (Search and Term)
-            const filtered = currentLevelObj.modules.filter(mod => {
-                const termString = getTermString(mod.semester);
-                
-                // If "Full Year" is the active tab, bypass the specific semester restriction so ALL show up.
-                if (currentTermFilter === 'Semester 1' && termString !== 'Semester 1' && termString !== 'Full Year') return false;
-                if (currentTermFilter === 'Semester 2' && termString !== 'Semester 2' && termString !== 'Full Year') return false;
-                
-                const matchesSearch = mod.module_title.toLowerCase().includes(searchVal) || 
-                                      mod.module_code.toLowerCase().includes(searchVal);
-                return matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No modules found matching current filter configurations.</div>`;
-                updateTrackers();
-                return;
-            }
-
-            let html = '';
-            
-            // Separate into Compulsory and Optional groupings
-            const comps = filtered.filter(m => m.compulsory);
-            const opts = filtered.filter(m => !m.compulsory);
-
-            if (comps.length > 0) {
-                html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>`;
-                html += comps.map(m => createCardHTML(m)).join('');
-            }
-            
-            // Only draw the horizontal line and Optional section if optional modules actually exist
-            if (opts.length > 0) {
-                html += `
-                    <div class="section-divider">
-                        <hr>
-                        <h3>Optional Modules</h3>
-                    </div>`;
-                html += opts.map(m => createCardHTML(m)).join('');
-            }
-
-            container.innerHTML = html;
-            updateTrackers();
-        }
-
-        // Initialize App on Load
-        window.onload = () => {
-            loadData();
-            scheduleMidnightRefresh();
-        };
-
-    </script>
-</body>
-</html>
+            // Sometimes compulsory
