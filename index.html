@@ -385,6 +385,7 @@
     <aside class="sidebar">
         <div class="brand">
             <div class="brand-title">Programme Catalogue</div>
+            <label for="programme-selector" style="display: block; font-size: 0.8rem; color: #facc15; margin-bottom: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Select a programme:</label>
             <select class="programme-select" id="programme-selector" onchange="switchProgramme()">
                 <option value="">Loading Programmes...</option>
             </select>
@@ -532,7 +533,7 @@
             
             // Update Headers
             let titleText = `Level ${levelNum}`;
-            if(levelNum === 1) titleText = 'Year 1: ???????';
+            if(levelNum === 1) titleText = 'Year 1: Foundations';
             if(levelNum === 2) titleText = 'Year 2: Specialisation';
             if(levelNum === 3) titleText = 'Year 3: Application';
             if(levelNum === 5) titleText = 'Master\'s Level 5 Specialisation';
