@@ -456,8 +456,9 @@
         // 1. Fetch JSON Data with Cache-Busting
         async function loadData() {
             try {
-                // Adds the current exact millisecond to the URL to bypass the browser's cache
-                const response = await fetch('programme_data.json?v=' + new Date().getTime());
+                // Adds the current exact millisecond to the URL to bypass the browser's cache.
+                // The directory has been updated to point to the 'data' folder.
+                const response = await fetch('data/programme_data.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error("File not found");
                 
                 const data = await response.json();
@@ -525,8 +526,8 @@
                     if(lvl.level === 1) levelName = 'Year 1';
                     if(lvl.level === 2) levelName = 'Year 2';
                     if(lvl.level === 3) levelName = 'Year 3';
-                    if(lvl.level === 5) levelName = 'Master\'s (Level 5)';
-                    if(lvl.level === 6) levelName = 'Master\'s (Level 6)';
+                    if(lvl.level === 5) levelName = 'Master\\'s (Level 5)';
+                    if(lvl.level === 6) levelName = 'Master\\'s (Level 6)';
 
                     li.innerHTML = `${levelName} <span id="ind-level-${lvl.level}">0 cr</span>`;
                     li.onclick = () => switchLevel(lvl.level);
@@ -553,8 +554,8 @@
             if(levelNum === 1) titleText = 'Year 1: Foundations';
             if(levelNum === 2) titleText = 'Year 2: Specialisation';
             if(levelNum === 3) titleText = 'Year 3: Application';
-            if(levelNum === 5) titleText = 'Master\'s Level 5 Specialisation';
-            if(levelNum === 6) titleText = 'Master\'s Level 6 Advanced';
+            if(levelNum === 5) titleText = 'Master\\'s Level 5 Specialisation';
+            if(levelNum === 6) titleText = 'Master\\'s Level 6 Advanced';
             
             document.getElementById('level-title').innerText = titleText;
             
