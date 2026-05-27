@@ -416,7 +416,6 @@
 
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            .top-header-main, .top-header-sub { padding: 0 1.5rem; }
             .sidebar { width: 100%; height: auto; position: relative; top: 0; padding: 1.5rem; }
             .main-content { margin-left: 0; padding: 1.5rem; }
             .tracker-card { margin-top: 2rem; }
@@ -444,7 +443,7 @@
         </div>
         
         <ul class="nav-menu" id="level-nav">
-            </ul>
+        </ul>
 
         <div class="tracker-card">
             <div class="tracker-title">Credits Selected</div>
@@ -470,7 +469,7 @@
         </section>
 
         <section class="module-grid" id="modules-container">
-            </section>
+        </section>
     </main>
 
     <div class="modal-overlay" id="modal" onclick="closeModal(event)">
@@ -717,8 +716,9 @@
         // Template string generator for individual module cards
         function createCardHTML(mod) {
             const isSelected = selections[mod.module_code] ? 'selected' : '';
+            // Change "Compulsory Base" button color to Pale Green
             const btnText = mod.compulsory ? 'Compulsory Base' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
-            const btnDisabled = mod.compulsory ? 'disabled style="opacity:0.6; cursor:not-allowed; background:#eee; border-color:#ccc;"' : '';
+            const btnDisabled = mod.compulsory ? 'disabled style="cursor:not-allowed; background:#d4edda; color:#155724; border-color:#c3e6cb;"' : '';
             const termString = getTermString(mod.semester);
             
             return `
