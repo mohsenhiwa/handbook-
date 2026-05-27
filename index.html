@@ -300,7 +300,7 @@
             font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.5;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .card-actions {
@@ -321,6 +321,7 @@
             font-weight: 500;
             width: 100%;
             transition: all 0.2s;
+            margin-top: 1rem;
         }
 
         .module-card.selected .select-btn {
@@ -368,7 +369,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease;
-            z-index: 3000; /* Adjusted to be above head bar */
+            z-index: 3000;
             padding: 1rem;
         }
 
@@ -484,13 +485,11 @@
         let allProgrammes = [];
         let currentProgrammeObj = null;
         let currentLevelObj = null;
-        let currentTermFilter = 'Full Year'; // Default Tab
+        let currentTermFilter = 'Full Year'; 
         let selections = {}; 
 
-        // 1. Fetch JSON Data with Cache-Busting
         async function loadData() {
             try {
-                // Adds the current exact millisecond to the URL to bypass the browser's cache
                 const response = await fetch('data/programme_data.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error("File not found");
                 
@@ -508,108 +507,68 @@
             }
         }
 
-        // 2. Midnight Auto-Refresh logic for open tabs
         function scheduleMidnightRefresh() {
             const now = new Date();
-            // Calculate exactly when the next midnight is
             const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
             const timeUntilMidnight = midnight.getTime() - now.getTime();
-            
-            // Tell the browser to silently refresh the page when that timer runs out
-            setTimeout(() => {
-                window.location.reload(true);
-            }, timeUntilMidnight);
+            setTimeout(() => { window.location.reload(true); }, timeUntilMidnight);
         }
 
-        // 3. Populate Dropdown
         function populateProgrammeDropdown() {
             const selector = document.getElementById('programme-selector');
             selector.innerHTML = '';
-            
             allProgrammes.forEach(prog => {
                 const option = document.createElement('option');
                 option.value = prog.prog_id;
                 option.textContent = prog.programme_title;
                 selector.appendChild(option);
             });
-            
-            // Trigger initial load for the first programme
-            if (allProgrammes.length > 0) {
-                switchProgramme();
-            }
+            if (allProgrammes.length > 0) switchProgramme();
         }
 
-        // 4. Switch Programme logic
         function switchProgramme() {
             const progId = document.getElementById('programme-selector').value;
             currentProgrammeObj = allProgrammes.find(p => p.prog_id == progId);
-            
-            // Build the Sidebar Level Navigation
             const navContainer = document.getElementById('level-nav');
             navContainer.innerHTML = '';
             
             if (currentProgrammeObj && currentProgrammeObj.levels) {
-                currentProgrammeObj.levels.forEach((lvl, index) => {
+                currentProgrammeObj.levels.forEach((lvl) => {
                     const li = document.createElement('li');
                     li.className = 'nav-item';
                     li.id = `nav-level-${lvl.level}`;
-                    
-                    // Display friendly names based on Level number
-                    let levelName = `Level ${lvl.level}`;
-                    if(lvl.level === 1) levelName = 'Year 1';
-                    if(lvl.level === 2) levelName = 'Year 2';
-                    if(lvl.level === 3) levelName = 'Year 3';
-                    if(lvl.level === 5) levelName = 'Master\'s (Level 5)';
-                    if(lvl.level === 6) levelName = 'Master\'s (Level 6)';
-
+                    let levelName = (lvl.level === 1) ? 'Year 1' : (lvl.level === 2) ? 'Year 2' : (lvl.level === 3) ? 'Year 3' : `Level ${lvl.level}`;
                     li.innerHTML = `${levelName} <span id="ind-level-${lvl.level}">0 cr</span>`;
                     li.onclick = () => switchLevel(lvl.level);
                     navContainer.appendChild(li);
                 });
-                
-                // Select the first available level by default
-                if (currentProgrammeObj.levels.length > 0) {
-                    switchLevel(currentProgrammeObj.levels[0].level);
-                }
+                if (currentProgrammeObj.levels.length > 0) switchLevel(currentProgrammeObj.levels[0].level);
             }
         }
 
-        // 5. Switch Level (Year) Logic
         function switchLevel(levelNum) {
             currentLevelObj = currentProgrammeObj.levels.find(l => l.level === levelNum);
-            
-            // Update UI Active states
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(`nav-level-${levelNum}`).classList.add('active');
-            
-            // Update Headers
             let titleText = `Level ${levelNum}`;
             if(levelNum === 1) titleText = 'Year 1: Foundations';
             if(levelNum === 2) titleText = 'Year 2: Specialisation';
             if(levelNum === 3) titleText = 'Year 3: Application';
-            if(levelNum === 5) titleText = 'Master\'s Level 5 Specialisation';
-            if(levelNum === 6) titleText = 'Master\'s Level 6 Advanced';
-            
             document.getElementById('level-title').innerText = titleText;
             
-            // Reset Selections & Enforce Compulsory Modules
             selections = {};
             if (currentLevelObj && currentLevelObj.modules) {
                 currentLevelObj.modules.forEach(mod => {
-                    if (mod.compulsory) {
-                        selections[mod.module_code] = true;
-                    }
+                    if (mod.compulsory) selections[mod.module_code] = true;
                 });
             }
-            
             render();
         }
 
-        // 6. Utility: Map Semester Integer to String
         function getTermString(semInt) {
             if (semInt === 1) return 'Semester 1';
             if (semInt === 2) return 'Semester 2';
-            return 'Full Year'; // Maps 0, 3, or anything else to Full Year
+            return 'Full Year';
         }
 
         function setTermFilter(term, buttonEl) {
@@ -619,16 +578,12 @@
             render();
         }
 
-        function filterModules() {
-            render();
-        }
+        function filterModules() { render(); }
 
         function toggleModuleSelection(id, event) {
             event.stopPropagation(); 
             const mod = currentLevelObj.modules.find(m => m.module_code === id);
-            
-            if (mod.compulsory) return; // Cannot toggle compulsory
-            
+            if (mod.compulsory) return;
             selections[id] = !selections[id];
             render();
             updateTrackers();
@@ -636,59 +591,32 @@
 
         function updateTrackers() {
             if(!currentProgrammeObj) return;
-
-            // Update sidebar indicators for all levels in the programme
             currentProgrammeObj.levels.forEach(lvl => {
                 let lvlTotal = 0;
-                lvl.modules.forEach(m => {
-                    if(selections[m.module_code] && lvl.level === currentLevelObj.level) {
-                        lvlTotal += m.credits;
-                    }
-                });
+                lvl.modules.forEach(m => { if(selections[m.module_code] && lvl.level === currentLevelObj.level) lvlTotal += m.credits; });
                 const ind = document.getElementById(`ind-level-${lvl.level}`);
                 if(ind && lvl.level === currentLevelObj.level) ind.innerText = `${lvlTotal} cr`;
             });
 
-            // Calculate Target Credits dynamically based on the programme (Usually 120, MSc is usually 180)
             let targetCredits = (currentLevelObj.level >= 5) ? 180 : 120;
+            const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
             
-            const currentTotal = currentLevelObj.modules
-                .filter(m => selections[m.module_code])
-                .reduce((sum, m) => sum + m.credits, 0);
-
-            // Sometimes compulsory credits alone might equal more than standard targets based on JSON structure
             const compulsoryTotal = currentLevelObj.modules.filter(m => m.compulsory).reduce((sum, m) => sum + m.credits, 0);
             if (compulsoryTotal > targetCredits) targetCredits = compulsoryTotal;
 
             const percentage = Math.min((currentTotal / targetCredits) * 100, 100);
             document.getElementById('credit-status-text').innerText = `${currentTotal} / ${targetCredits} Credits`;
+            document.getElementById('tracker-fill').style.width = `${percentage}%`;
             
-            const fill = document.getElementById('tracker-fill');
-            fill.style.width = `${percentage}%`;
-
             const msg = document.getElementById('tracker-message');
-            
-            if (currentTotal === targetCredits) {
-                fill.style.backgroundColor = 'var(--success)';
-                msg.innerText = 'Credit target achieved.';
-                msg.style.color = 'var(--success)';
-            } else if (currentTotal > targetCredits) {
-                fill.style.backgroundColor = 'var(--secondary)';
-                msg.innerText = `Overloaded by ${currentTotal - targetCredits} credits.`;
-                msg.style.color = 'var(--secondary)';
-            } else {
-                fill.style.backgroundColor = 'var(--warning)';
-                msg.innerText = `Requires ${targetCredits - currentTotal} more credits.`;
-                msg.style.color = 'var(--warning)';
-            }
+            if (currentTotal === targetCredits) { msg.innerText = 'Credit target achieved.'; msg.style.color = 'var(--success)'; }
+            else if (currentTotal > targetCredits) { msg.innerText = `Overloaded by ${currentTotal - targetCredits} credits.`; msg.style.color = 'var(--secondary)'; }
+            else { msg.innerText = `Requires ${targetCredits - currentTotal} more credits.`; msg.style.color = 'var(--warning)'; }
         }
 
         function showDetails(id) {
             const mod = currentLevelObj.modules.find(m => m.module_code === id);
             const termString = getTermString(mod.semester);
-            
-            let notesHtml = mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Notes:</strong> ${mod.notes}</p>` : '';
-            
             const content = `
                 <span class="module-code">${mod.module_code}</span>
                 <h3 style="margin: 1rem 0 0.5rem 0; font-size: 1.5rem;">${mod.module_title}</h3>
@@ -699,24 +627,19 @@
                 </div>
                 <hr style="border:0; border-top:1px solid var(--border); margin-bottom:1rem;">
                 <p style="color:#4a5568;"><strong>Module Leader:</strong> ${mod.module_leader || 'TBC'}</p>
-                ${notesHtml}
+                <p style="margin-top:0.5rem; color:#4a5568;"><strong>Note:</strong> information will be added in due course</p>
+                <p style="margin-top:0.5rem; color:#4a5568;"><strong>Assessment:</strong> information will be added in due course</p>
+                ${mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Additional Notes:</strong> ${mod.notes}</p>` : ''}
             `;
             document.getElementById('modal-content').innerHTML = content;
             toggleModal(true);
         }
 
-        function toggleModal(open) {
-            document.getElementById('modal').classList.toggle('active', open);
-        }
+        function toggleModal(open) { document.getElementById('modal').classList.toggle('active', open); }
+        function closeModal(e) { if (e.target.id === 'modal') toggleModal(false); }
 
-        function closeModal(e) {
-            if (e.target.id === 'modal') toggleModal(false);
-        }
-
-        // Template string generator for individual module cards
         function createCardHTML(mod) {
             const isSelected = selections[mod.module_code] ? 'selected' : '';
-            // Change "Compulsory Base" button color to Pale Green
             const btnText = mod.compulsory ? 'Compulsory Base' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
             const btnDisabled = mod.compulsory ? 'disabled style="cursor:not-allowed; background:#d4edda; color:#155724; border-color:#c3e6cb;"' : '';
             const termString = getTermString(mod.semester);
@@ -732,11 +655,10 @@
                         <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
                         <span class="badge badge-term">${termString}</span>
                     </div>
-                    <p class="module-desc" style="font-size: 0.85rem;"><strong>Leader:</strong> ${mod.module_leader || 'TBC'}</p>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">Note: information will be added in due course</p>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.75rem;">Assessment: information will be added in due course</p>
                     <div class="card-actions">
-                        <button class="select-btn" ${btnDisabled} onclick="toggleModuleSelection('${mod.module_code}', event)">
-                            ${btnText}
-                        </button>
+                        <button class="select-btn" ${btnDisabled} onclick="toggleModuleSelection('${mod.module_code}', event)">${btnText}</button>
                     </div>
                 </div>
             `;
@@ -745,59 +667,27 @@
         function render() {
             const container = document.getElementById('modules-container');
             const searchVal = document.getElementById('search-input').value.toLowerCase();
-            
             if (!currentLevelObj || !currentLevelObj.modules) return;
-
-            // Apply Filters (Search and Term)
             const filtered = currentLevelObj.modules.filter(mod => {
                 const termString = getTermString(mod.semester);
-                
-                // If "Full Year" is the active tab, bypass the specific semester restriction so ALL show up.
                 if (currentTermFilter === 'Semester 1' && termString !== 'Semester 1' && termString !== 'Full Year') return false;
                 if (currentTermFilter === 'Semester 2' && termString !== 'Semester 2' && termString !== 'Full Year') return false;
-                
-                const matchesSearch = mod.module_title.toLowerCase().includes(searchVal) || 
-                                      mod.module_code.toLowerCase().includes(searchVal);
-                return matchesSearch;
+                return mod.module_title.toLowerCase().includes(searchVal) || mod.module_code.toLowerCase().includes(searchVal);
             });
-
             if (filtered.length === 0) {
-                container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No modules found matching current filter configurations.</div>`;
-                updateTrackers();
-                return;
+                container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No modules found.</div>`;
+                updateTrackers(); return;
             }
-
             let html = '';
-            
-            // Separate into Compulsory and Optional groupings
             const comps = filtered.filter(m => m.compulsory);
             const opts = filtered.filter(m => !m.compulsory);
-
-            if (comps.length > 0) {
-                html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>`;
-                html += comps.map(m => createCardHTML(m)).join('');
-            }
-            
-            // Only draw the horizontal line and Optional section if optional modules actually exist
-            if (opts.length > 0) {
-                html += `
-                    <div class="section-divider">
-                        <hr>
-                        <h3>Optional Modules</h3>
-                    </div>`;
-                html += opts.map(m => createCardHTML(m)).join('');
-            }
-
+            if (comps.length > 0) html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
+            if (opts.length > 0) html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
             container.innerHTML = html;
             updateTrackers();
         }
 
-        // Initialize App on Load
-        window.onload = () => {
-            loadData();
-            scheduleMidnightRefresh();
-        };
-
+        window.onload = () => { loadData(); scheduleMidnightRefresh(); };
     </script>
 </body>
 </html>
