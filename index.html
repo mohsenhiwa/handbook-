@@ -94,7 +94,7 @@
 
         /* Sidebar Elements */
         .brand {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         .brand-title {
@@ -129,9 +129,34 @@
             color: white;
         }
 
+        /* External Assessment Portal Navigation Button */
+        .sidebar-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.06);
+            color: white;
+            border: 1px dashed rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-link-btn:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: #facc15;
+            color: #facc15;
+        }
+
         .nav-menu {
             list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
 
         .nav-item {
@@ -285,7 +310,7 @@
             font-size: 0.8rem;
             font-weight: bold;
             color: var(--secondary);
-            background: rgba(165, 24, 30, 0.08); /* Adjusted to Leeds Red */
+            background: rgba(165, 24, 30, 0.08); 
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
         }
@@ -347,6 +372,7 @@
             font-weight: 500;
             width: 100%;
             transition: all 0.2s;
+            margin-top: 1rem;
         }
 
         .module-card.selected .select-btn {
@@ -394,7 +420,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease;
-            z-index: 3000; /* Adjusted to be above head bar */
+            z-index: 3000; 
             padding: 1rem;
         }
 
@@ -452,7 +478,7 @@
             .tracker-card { margin-top: 2rem; }
         }
 
-        /* Clean, table-structured printable layout stylesheet rule matrices */
+        /* Printable layout styles */
         @media print {
             body {
                 padding-top: 0 !important;
@@ -553,6 +579,11 @@
                 <option value="">Loading Programmes...</option>
             </select>
         </div>
+
+        <a href="https://eps-apps.leeds.ac.uk/kai/staff/cwt/index.php" target="_blank" class="sidebar-link-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            View Assessment Details
+        </a>
         
         <ul class="nav-menu" id="level-nav">
         </ul>
@@ -603,7 +634,7 @@
         let allProgrammes = [];
         let currentProgrammeObj = null;
         let currentLevelObj = null;
-        let currentTermFilter = 'Full Year'; // Default Tab
+        let currentTermFilter = 'Full Year'; 
         let selections = {}; 
 
         // 1. Fetch JSON Data with Cache-Busting
