@@ -410,7 +410,6 @@
             font-weight: 500;
             width: 100%;
             transition: all 0.2s;
-            margin-top: 1rem;
         }
 
         .module-card.selected .select-btn {
@@ -712,7 +711,6 @@
                 // Rule set A: MArch, MEng Architecture (5 year)
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
-                    
                     prog.specCode = "MAMB-CIVE/AR";
                     prog.specDuration = "5 Years";
                     prog.specAttendance = "Full Time";
@@ -720,22 +718,18 @@
                     prog.specEmail = "j.s.lunn@leeds.ac.uk";
                     prog.specTotalCredits = "600";
                     prog.isMScType = false;
+                    prog.isLongMScExclusion = false;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            if (lvl.level === 1) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 2) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 3) { lvl.friendlyYearLabel = "Year 3"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 4"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 5"; lvl.targetOverrideCredits = 120; }
-                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
+                            lvl.friendlyYearLabel = `Year ${lvl.level === 5 ? 4 : lvl.level === 6 ? 5 : lvl.level}`;
+                            lvl.targetOverrideCredits = 120;
                         });
                     }
                 } 
                 // Rule set B: MEng, BEng Architectural Engineering
                 else if (titleLower.includes('architectural engineering') || titleLower.includes('architectural eng')) {
                     prog.programme_title = "MEng, BEng Architectural Engineering";
-                    
                     prog.specCode = "MEBE-CIV/ARC";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
@@ -743,21 +737,18 @@
                     prog.specEmail = "Y.Awais@leeds.ac.uk";
                     prog.specTotalCredits = "480";
                     prog.isMScType = false;
+                    prog.isLongMScExclusion = false;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            if (lvl.level === 1) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 2) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 3) { lvl.friendlyYearLabel = "Year 3"; lvl.targetOverrideCredits = 120; }
-                            else if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 4"; lvl.targetOverrideCredits = 120; }
-                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
+                            lvl.friendlyYearLabel = `Year ${lvl.level === 5 ? 4 : lvl.level}`;
+                            lvl.targetOverrideCredits = 120;
                         });
                     }
                 }
                 // Rule set C: MArch Architecture (2 year)
                 else if (titleLower.includes('march architecture') || titleLower.includes('architecture (2 year)')) {
                     prog.programme_title = "MArch Architecture";
-                    
                     prog.specCode = "MARC-CIVE/AR";
                     prog.specDuration = "24 Months";
                     prog.specAttendance = "Full Time";
@@ -765,6 +756,7 @@
                     prog.specEmail = "j.s.lunn@leeds.ac.uk";
                     prog.specTotalCredits = "240";
                     prog.isMScType = true;
+                    prog.isLongMScExclusion = false; // Permitted exception to the 1-year rule
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
@@ -777,7 +769,6 @@
                 // Rule set D: MSc Architecture Design
                 else if (titleLower.includes('msc architecture design') || titleLower.includes('architecture design')) {
                     prog.programme_title = "MSc Architecture Design";
-                    
                     prog.specCode = "MSC-CIVE/ARD";
                     prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time";
@@ -785,6 +776,7 @@
                     prog.specEmail = "g.selim@leeds.ac.uk";
                     prog.specTotalCredits = "180";
                     prog.isMScType = true;
+                    prog.isLongMScExclusion = false;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
@@ -798,64 +790,75 @@
                     prog.programme_title = "MSc Engineering Project Management";
                     prog.specCode = "MSE-EPM-FT"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Dr Rodrigo Juarez";
-                    prog.specEmail = "J.R.JuarezCornelio@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "J.R.JuarezCornelio@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
                 else if (titleLower.includes('geotechnics') || titleLower.includes('geotechnical')) {
                     prog.programme_title = "MSc Geotechnical Engineering";
                     prog.specCode = "MSE-CV/GTE-F"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Professor Peter Woodward";
-                    prog.specEmail = "P.K.Woodward@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "P.K.Woodward@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
                 else if (titleLower.includes('international construction management') || titleLower.includes('icme')) {
                     prog.programme_title = "MSc International Construction Management and Engineering";
                     prog.specCode = "MSE-CIV/I-FT"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Dr William Collinge";
-                    prog.specEmail = "W.H.Collinge@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "W.H.Collinge@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
                 else if (titleLower.includes('structural engineering')) {
                     prog.programme_title = "MSc Structural Engineering";
                     prog.specCode = "MSE-CV/SE-FT"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Dr Han Fang";
-                    prog.specEmail = "H.Fang1@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "H.Fang1@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
                 else if (titleLower.includes('transport infrastructure') || titleLower.includes('transport')) {
                     prog.programme_title = "MSc Transport Infrastructure: Design and Construction";
                     prog.specCode = "MSE-CV/TI-F"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Dr Ana Heitor";
-                    prog.specEmail = "A.Heitor@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "A.Heitor@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
                 else if (titleLower.includes('water, sanitation') || titleLower.includes('wash')) {
                     prog.programme_title = "MSc Water, Sanitation and Health Engineering";
                     prog.specCode = "MSE-CV/WSHE"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Dr Paul Hutchings";
-                    prog.specEmail = "P.Hutchings@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "P.Hutchings@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
                 else if (titleLower.includes('environmental engineering') || titleLower.includes('eepm')) {
                     prog.programme_title = "MSc Environmental Engineering and Project Management";
                     prog.specCode = "MSE-CIV/E-FT"; prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time"; prog.specManager = "Dr Marco-Felipe King";
-                    prog.specEmail = "M.F.King@leeds.ac.uk"; prog.specTotalCredits = "180"; prog.isMScType = true;
+                    prog.specEmail = "M.F.King@leeds.ac.uk"; prog.specTotalCredits = "180"; 
+                    prog.isMScType = true; prog.isLongMScExclusion = false;
                 }
-                // Fallback context template: Default Courses & Generic MSc pipelines
+                // Fallback catch-all structural mapping configurations
                 else {
                     prog.specCode = ""; prog.specDuration = "";
                     prog.specAttendance = ""; prog.specManager = ""; prog.specEmail = "";
                     prog.specTotalCredits = "";
                     prog.isMScType = titleLower.includes('msc');
+                    
+                    // Flags if an unexpected MSc entry is longer than 1 year (e.g. multi-year parts)
+                    const durationText = (prog.duration || "").toLowerCase();
+                    const isLongDuration = durationText.includes('year') && !durationText.includes('1 year');
+                    prog.isLongMScExclusion = prog.isMScType && isLongDuration;
                 }
 
-                // Global timeline processing application step for postgraduate records
-                if (prog.isMScType && prog.levels) {
+                // Unified chronological year calculations block mapping standard loops
+                if (prog.isMScType && !prog.isLongMScExclusion && prog.levels) {
                     prog.levels.forEach(lvl => {
-                        if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
-                        else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; } 
-                        else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
+                        if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = lvl.targetOverrideCredits || 180; }
+                        else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = lvl.targetOverrideCredits || 120; }
+                        else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = lvl.targetOverrideCredits || 180; }
                     });
-                } else if (!prog.isMScType && prog.levels) {
+                } else if (prog.levels) {
                     prog.levels.forEach(lvl => {
                         if (!lvl.friendlyYearLabel) {
-                            let num = lvl.level;
-                            lvl.friendlyYearLabel = `Year ${num}`;
+                            lvl.friendlyYearLabel = `Year ${lvl.level === 5 ? 4 : lvl.level === 6 ? 5 : lvl.level}`;
                             lvl.targetOverrideCredits = 120;
                         }
                     });
@@ -884,8 +887,11 @@
             allProgrammes.forEach(prog => {
                 const title = prog.programme_title.toLowerCase();
                 
-                if (prog.isMScType) {
+                // Route long MSc programs to Civil BEng MEng section, leaving exactly the 9 matching 1-year courses plus MArch Architecture in MSc
+                if (prog.isMScType && !prog.isLongMScExclusion) {
                     groups['MSc'].push(prog);
+                } else if (prog.isLongMScExclusion) {
+                    groups['Civil BEng MEng'].push(prog);
                 } else if (title.includes('architecture') || title.includes('architectural')) {
                     groups['Architecture'].push(prog);
                 } else {
