@@ -198,6 +198,10 @@
             margin-top: 0.5rem;
         }
 
+        .spec-grid a {
+            word-break: break-all;
+        }
+
         .spec-item {
             font-size: 0.85rem;
             color: var(--text-main);
@@ -616,7 +620,6 @@
             </select>
         </div>
 
-        <!-- Embedded Interactive Assessment External Link Button -->
         <a href="https://eps-apps.leeds.ac.uk/kai/staff/cwt/index.php" target="_blank" class="sidebar-link-btn">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             View Assessment Details
@@ -638,7 +641,6 @@
             <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.25rem;">Loading...</h2>
         </header>
 
-        <!-- New Dynamic Specs Block Panel Interface View Template -->
         <section class="programme-spec-panel" id="spec-meta-panel" style="display:none;">
             <div style="font-size:0.8rem; font-weight:700; color:var(--secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.25rem;">Programme Specifications</div>
             <div class="spec-grid" id="spec-meta-grid"></div>
@@ -660,7 +662,6 @@
         <section class="module-grid" id="modules-container">
         </section>
 
-        <!-- Document Sheet Injection Matrix Target -->
         <section id="print-output-element">
         </section>
     </main>
@@ -703,7 +704,7 @@
             }
         }
 
-        // Translation Rule Engine translating architecture raw values to template specifications
+        // Structural Rule Normalisation Engine
         function cleanseProgrammeStructure() {
             allProgrammes.forEach(prog => {
                 const titleLower = prog.programme_title.toLowerCase();
@@ -712,7 +713,6 @@
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
                     
-                    // Inject hardcoded specification files metadata from source blueprint documents
                     prog.specCode = "MAMB-CIVE/AR";
                     prog.specUcas = "K1H3";
                     prog.specDuration = "5 Years";
@@ -720,29 +720,16 @@
                     prog.specManager = "Justin Lunn";
                     prog.specEmail = "j.s.lunn@leeds.ac.uk";
                     prog.specTotalCredits = "600";
+                    prog.isMScType = false;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Simplified layouts removing subtitles
-                            if (lvl.level === 1) {
-                                lvl.friendlyYearLabel = "Year 1";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 2) {
-                                lvl.friendlyYearLabel = "Year 2";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 3) {
-                                lvl.friendlyYearLabel = "Year 3";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 5) {
-                                lvl.friendlyYearLabel = "Year 4";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 6) {
-                                lvl.friendlyYearLabel = "Year 5";
-                                lvl.targetOverrideCredits = 120;
-                            } else {
-                                lvl.friendlyYearLabel = `Year ${lvl.level}`;
-                                lvl.targetOverrideCredits = 120;
-                            }
+                            if (lvl.level === 1) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 2) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 3) { lvl.friendlyYearLabel = "Year 3"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 4"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 5"; lvl.targetOverrideCredits = 120; }
+                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
                         });
                     }
                 } 
@@ -750,7 +737,6 @@
                 else if (titleLower.includes('architectural engineering') || titleLower.includes('architectural eng')) {
                     prog.programme_title = "MEng, BEng Architectural Engineering";
                     
-                    // Inject hardcoded specification files metadata from source blueprint documents
                     prog.specCode = "MEBE-CIV/ARC";
                     prog.specUcas = "HK21";
                     prog.specDuration = "4 Years";
@@ -758,47 +744,78 @@
                     prog.specManager = "Yasar Awais";
                     prog.specEmail = "Y.Awais@leeds.ac.uk";
                     prog.specTotalCredits = "480";
+                    prog.isMScType = false;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            if (lvl.level === 1) {
-                                lvl.friendlyYearLabel = "Year 1";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 2) {
-                                lvl.friendlyYearLabel = "Year 2";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 3) {
-                                lvl.friendlyYearLabel = "Year 3";
-                                lvl.targetOverrideCredits = 120;
-                            } else if (lvl.level === 5) {
-                                lvl.friendlyYearLabel = "Year 4";
-                                lvl.targetOverrideCredits = 120;
-                            } else {
-                                lvl.friendlyYearLabel = `Year ${lvl.level}`;
-                                lvl.targetOverrideCredits = 120;
-                            }
+                            if (lvl.level === 1) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 2) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 3) { lvl.friendlyYearLabel = "Year 3"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 4"; lvl.targetOverrideCredits = 120; }
+                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
                         });
                     }
                 }
-                // Fallback context template: Default Courses & MSc pipelines
+                // Rule set C: MArch Architecture (2 year)
+                else if (titleLower.includes('march architecture') || titleLower.includes('architecture (2 year)')) {
+                    prog.programme_title = "MArch Architecture";
+                    
+                    prog.specCode = "MARC-CIVE/AR";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "24 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Justin Lunn";
+                    prog.specEmail = "j.s.lunn@leeds.ac.uk";
+                    prog.specTotalCredits = "240";
+                    prog.isMScType = true;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
+                            else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
+                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
+                        });
+                    }
+                }
+                // Rule set D: MSc Architecture Design
+                else if (titleLower.includes('msc architecture design') || titleLower.includes('architecture design')) {
+                    prog.programme_title = "MSc Architecture Design";
+                    
+                    prog.specCode = "MSC-CIVE/ARD";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "12 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Professor Gehan Selim";
+                    prog.specEmail = "g.selim@leeds.ac.uk";
+                    prog.specTotalCredits = "180";
+                    prog.isMScType = true;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            // Translate Level 5 to Year 1 and guarantee standard credit limit of 180 credits as instructed
+                            if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
+                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
+                        });
+                    }
+                }
+                // Fallback context template: Default Courses & Generic MSc pipelines
                 else {
-                    // Populate empty specification fallbacks
                     prog.specCode = ""; prog.specUcas = ""; prog.specDuration = "";
                     prog.specAttendance = ""; prog.specManager = ""; prog.specEmail = "";
                     prog.specTotalCredits = "";
+                    prog.isMScType = titleLower.includes('msc');
 
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            let labelNum = lvl.level;
-                            if (lvl.level === 5) {
-                                lvl.friendlyYearLabel = "Year 4";
-                                lvl.targetOverrideCredits = 180;
-                            } else if (lvl.level === 6) {
-                                lvl.friendlyYearLabel = "Year 5";
-                                lvl.targetOverrideCredits = 180;
+                            if (prog.isMScType) {
+                                if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
+                                else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
+                                else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
                             } else {
-                                lvl.friendlyYearLabel = `Year ${labelNum}`;
-                                lvl.targetOverrideCredits = 120;
+                                let labelNum = lvl.level;
+                                if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 4"; lvl.targetOverrideCredits = 180; }
+                                else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 5"; lvl.targetOverrideCredits = 180; }
+                                else { lvl.friendlyYearLabel = `Year ${labelNum}`; lvl.targetOverrideCredits = 120; }
                             }
                         });
                     }
@@ -826,10 +843,11 @@
 
             allProgrammes.forEach(prog => {
                 const title = prog.programme_title.toLowerCase();
-                if (title.includes('architecture') || title.includes('architectural')) {
-                    groups['Architecture'].push(prog);
-                } else if (title.includes('msc')) {
+                
+                if (prog.isMScType) {
                     groups['MSc'].push(prog);
+                } else if (title.includes('architecture') || title.includes('architectural')) {
+                    groups['Architecture'].push(prog);
                 } else {
                     groups['Civil BEng MEng'].push(prog);
                 }
@@ -907,7 +925,6 @@
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(`nav-level-${levelNum}`).classList.add('active');
             
-            // Clean year display strings without subtitles
             let titleText = currentLevelObj.friendlyYearLabel || `Year ${levelNum}`;
             document.getElementById('level-title').innerText = titleText;
             
@@ -920,6 +937,7 @@
             render();
         }
 
+        // Utility mapping term logic
         function getTermString(semInt) {
             if (semInt === 1) return 'Semester 1';
             if (semInt === 2) return 'Semester 2';
