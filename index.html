@@ -180,6 +180,33 @@
             background-color: rgba(255, 255, 255, 0.15);
         }
 
+        /* Programme Specifications Overview Panel Block Style */
+        .programme-spec-panel {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--secondary);
+            border-radius: 6px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .spec-item {
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .spec-item strong {
+            color: #1C1C1C;
+        }
+
         /* Top Controls / Filters */
         .controls-panel {
             background: var(--card-bg);
@@ -496,7 +523,7 @@
                 font-size: 11pt !important;
                 display: block !important;
             }
-            .top-header, .sidebar, .controls-panel, #modules-container, .modal-overlay, main > header {
+            .top-header, .sidebar, .controls-panel, #modules-container, .modal-overlay, main > header, .programme-spec-panel {
                 display: none !important;
             }
             .main-content {
@@ -589,6 +616,7 @@
             </select>
         </div>
 
+        <!-- Embedded Interactive Assessment External Link Button -->
         <a href="https://eps-apps.leeds.ac.uk/kai/staff/cwt/index.php" target="_blank" class="sidebar-link-btn">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             View Assessment Details
@@ -606,10 +634,15 @@
     </aside>
 
     <main class="main-content">
-        <header style="margin-bottom: 2rem;">
-            <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Loading...</h2>
-            <p id="level-subtitle" style="color: var(--text-muted);">Configure your pathways and map out your academic load.</p>
+        <header style="margin-bottom: 1rem;">
+            <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.25rem;">Loading...</h2>
         </header>
+
+        <!-- New Dynamic Specs Block Panel Interface View Template -->
+        <section class="programme-spec-panel" id="spec-meta-panel" style="display:none;">
+            <div style="font-size:0.8rem; font-weight:700; color:var(--secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.25rem;">Programme Specifications</div>
+            <div class="spec-grid" id="spec-meta-grid"></div>
+        </section>
 
         <section class="controls-panel" id="controls-panel">
             <div class="search-box">
@@ -627,6 +660,7 @@
         <section class="module-grid" id="modules-container">
         </section>
 
+        <!-- Document Sheet Injection Matrix Target -->
         <section id="print-output-element">
         </section>
     </main>
@@ -669,7 +703,7 @@
             }
         }
 
-        // Structural Rule Normalisation Engine
+        // Translation Rule Engine translating architecture raw values to template specifications
         function cleanseProgrammeStructure() {
             allProgrammes.forEach(prog => {
                 const titleLower = prog.programme_title.toLowerCase();
@@ -678,31 +712,35 @@
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
                     
+                    // Inject hardcoded specification files metadata from source blueprint documents
+                    prog.specCode = "MAMB-CIVE/AR";
+                    prog.specUcas = "K1H3";
+                    prog.specDuration = "5 Years";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Justin Lunn";
+                    prog.specEmail = "j.s.lunn@leeds.ac.uk";
+                    prog.specTotalCredits = "600";
+                    
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
+                            // Simplified layouts removing subtitles
                             if (lvl.level === 1) {
                                 lvl.friendlyYearLabel = "Year 1";
-                                lvl.headerDisplayTitle = "Year 1: Foundations";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 2) {
                                 lvl.friendlyYearLabel = "Year 2";
-                                lvl.headerDisplayTitle = "Year 2: Specialisation";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 3) {
                                 lvl.friendlyYearLabel = "Year 3";
-                                lvl.headerDisplayTitle = "Year 3: Application";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 5) {
                                 lvl.friendlyYearLabel = "Year 4";
-                                lvl.headerDisplayTitle = "Year 4: Advanced Specialisation";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 6) {
                                 lvl.friendlyYearLabel = "Year 5";
-                                lvl.headerDisplayTitle = "Year 5: Advanced Professional Practice";
                                 lvl.targetOverrideCredits = 120;
                             } else {
                                 lvl.friendlyYearLabel = `Year ${lvl.level}`;
-                                lvl.headerDisplayTitle = `Year ${lvl.level}: Core Curriculum`;
                                 lvl.targetOverrideCredits = 120;
                             }
                         });
@@ -712,49 +750,54 @@
                 else if (titleLower.includes('architectural engineering') || titleLower.includes('architectural eng')) {
                     prog.programme_title = "MEng, BEng Architectural Engineering";
                     
+                    // Inject hardcoded specification files metadata from source blueprint documents
+                    prog.specCode = "MEBE-CIV/ARC";
+                    prog.specUcas = "HK21";
+                    prog.specDuration = "4 Years";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Yasar Awais";
+                    prog.specEmail = "Y.Awais@leeds.ac.uk";
+                    prog.specTotalCredits = "480";
+                    
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
                             if (lvl.level === 1) {
                                 lvl.friendlyYearLabel = "Year 1";
-                                lvl.headerDisplayTitle = "Year 1: Foundations";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 2) {
                                 lvl.friendlyYearLabel = "Year 2";
-                                lvl.headerDisplayTitle = "Year 2: Specialisation";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 3) {
                                 lvl.friendlyYearLabel = "Year 3";
-                                lvl.headerDisplayTitle = "Year 3: Application";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 5) {
-                                // Translate Level 5 to Year 4 with target set at 120 credits per prompt instructions
                                 lvl.friendlyYearLabel = "Year 4";
-                                lvl.headerDisplayTitle = "Year 4: Sustainable Systems & Practice";
                                 lvl.targetOverrideCredits = 120;
                             } else {
                                 lvl.friendlyYearLabel = `Year ${lvl.level}`;
-                                lvl.headerDisplayTitle = `Year ${lvl.level}: Core Curriculum`;
                                 lvl.targetOverrideCredits = 120;
                             }
                         });
                     }
                 }
-                // Fallback context: Default Courses & MSc pipelines
+                // Fallback context template: Default Courses & MSc pipelines
                 else {
+                    // Populate empty specification fallbacks
+                    prog.specCode = ""; prog.specUcas = ""; prog.specDuration = "";
+                    prog.specAttendance = ""; prog.specManager = ""; prog.specEmail = "";
+                    prog.specTotalCredits = "";
+
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
                             let labelNum = lvl.level;
                             if (lvl.level === 5) {
-                                lvl.friendlyYearLabel = "Master's (Level 5)";
-                                lvl.headerDisplayTitle = "Master's Level 5 Specialisation";
+                                lvl.friendlyYearLabel = "Year 4";
                                 lvl.targetOverrideCredits = 180;
                             } else if (lvl.level === 6) {
-                                lvl.friendlyYearLabel = "Master's (Level 6)";
-                                lvl.headerDisplayTitle = "Master's Level 6 Advanced";
+                                lvl.friendlyYearLabel = "Year 5";
                                 lvl.targetOverrideCredits = 180;
                             } else {
                                 lvl.friendlyYearLabel = `Year ${labelNum}`;
-                                lvl.headerDisplayTitle = `Year ${labelNum}: ${labelNum === 1 ? 'Foundations' : labelNum === 2 ? 'Specialisation' : 'Application'}`;
                                 lvl.targetOverrideCredits = 120;
                             }
                         });
@@ -815,6 +858,26 @@
         function switchProgramme() {
             const progId = document.getElementById('programme-selector').value;
             currentProgrammeObj = allProgrammes.find(p => p.prog_id == progId);
+            
+            // Render Specifications Overview Metadata Block if information exists
+            const specPanel = document.getElementById('spec-meta-panel');
+            const specGrid = document.getElementById('spec-meta-grid');
+            
+            if (currentProgrammeObj && currentProgrammeObj.specCode) {
+                specGrid.innerHTML = `
+                    <div class="spec-item"><strong>Prog Code:</strong> ${currentProgrammeObj.specCode}</div>
+                    <div class="spec-item"><strong>UCAS Code:</strong> ${currentProgrammeObj.specUcas || 'N/A'}</div>
+                    <div class="spec-item"><strong>Duration:</strong> ${currentProgrammeObj.specDuration}</div>
+                    <div class="spec-item"><strong>Attendance:</strong> ${currentProgrammeObj.specAttendance}</div>
+                    <div class="spec-item"><strong>Total Load:</strong> ${currentProgrammeObj.specTotalCredits} Credits</div>
+                    <div class="spec-item"><strong>Manager:</strong> ${currentProgrammeObj.specManager}</div>
+                    <div class="spec-item" style="grid-column: 1 / -1;"><strong>Contact:</strong> <a href="mailto:${currentProgrammeObj.specEmail}" style="color:var(--secondary); text-decoration:none; font-weight:600;">${currentProgrammeObj.specEmail}</a></div>
+                `;
+                specPanel.style.display = 'block';
+            } else {
+                specPanel.style.display = 'none';
+            }
+
             const navContainer = document.getElementById('level-nav');
             navContainer.innerHTML = '';
             
@@ -844,7 +907,8 @@
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(`nav-level-${levelNum}`).classList.add('active');
             
-            let titleText = currentLevelObj.headerDisplayTitle || `Level ${levelNum}`;
+            // Clean year display strings without subtitles
+            let titleText = currentLevelObj.friendlyYearLabel || `Year ${levelNum}`;
             document.getElementById('level-title').innerText = titleText;
             
             selections = {};
