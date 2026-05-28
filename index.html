@@ -581,14 +581,6 @@
                 vertical-align: top;
                 line-height: 1.4;
             }
-            .print-badge {
-                font-size: 8pt;
-                font-weight: bold;
-                text-transform: uppercase;
-                color: #555555;
-                display: block;
-                margin-top: 2px;
-            }
             .print-footer {
                 margin-top: 30px;
                 border-top: 2px solid #1C1C1C;
@@ -596,6 +588,14 @@
                 text-align: right;
                 font-size: 12pt;
                 font-weight: bold;
+            }
+            .print-badge {
+                font-size: 8pt;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #555555;
+                display: block;
+                margin-top: 2px;
             }
         }
     </style>
@@ -714,6 +714,7 @@
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
                     
                     prog.specCode = "MAMB-CIVE/AR";
+                    prog.specUcas = "K1H3";
                     prog.specDuration = "5 Years";
                     prog.specAttendance = "Full Time";
                     prog.specManager = "Justin Lunn";
@@ -737,6 +738,7 @@
                     prog.programme_title = "MEng, BEng Architectural Engineering";
                     
                     prog.specCode = "MEBE-CIV/ARC";
+                    prog.specUcas = "HK21";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
                     prog.specManager = "Yasar Awais";
@@ -759,6 +761,7 @@
                     prog.programme_title = "MArch Architecture";
                     
                     prog.specCode = "MARC-CIVE/AR";
+                    prog.specUcas = "N/A";
                     prog.specDuration = "24 Months";
                     prog.specAttendance = "Full Time";
                     prog.specManager = "Justin Lunn";
@@ -779,6 +782,7 @@
                     prog.programme_title = "MSc Architecture Design";
                     
                     prog.specCode = "MSC-CIVE/ARD";
+                    prog.specUcas = "N/A";
                     prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time";
                     prog.specManager = "Professor Gehan Selim";
@@ -793,9 +797,30 @@
                         });
                     }
                 }
+                // Rule set E: MSc (Eng) Water, Sanitation and Health Engineering
+                else if (titleLower.includes('water, sanitation and health') || titleLower.includes('wash')) {
+                    prog.programme_title = "MSc (Eng) Water, Sanitation and Health Engineering";
+                    
+                    prog.specCode = "MSE-CV/WSHE";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "12 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Dr Paul Hutchings";
+                    prog.specEmail = "P.Hutchings@leeds.ac.uk";
+                    prog.specTotalCredits = "180";
+                    prog.isMScType = true;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            // Translate Level 5 to Year 1 and hold the credit ceiling at 180 credits as instructed
+                            if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
+                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
+                        });
+                    }
+                }
                 // Fallback context template: Default Courses & Generic MSc pipelines
                 else {
-                    prog.specCode = ""; prog.specDuration = "";
+                    prog.specCode = ""; prog.specUcas = ""; prog.specDuration = "";
                     prog.specAttendance = ""; prog.specManager = ""; prog.specEmail = "";
                     prog.specTotalCredits = "";
                     prog.isMScType = titleLower.includes('msc');
@@ -879,6 +904,7 @@
             if (currentProgrammeObj && currentProgrammeObj.specCode) {
                 specGrid.innerHTML = `
                     <div class="spec-item"><strong>Prog Code:</strong> ${currentProgrammeObj.specCode}</div>
+                    <div class="spec-item"><strong>UCAS Code:</strong> ${currentProgrammeObj.specUcas || 'N/A'}</div>
                     <div class="spec-item"><strong>Duration:</strong> ${currentProgrammeObj.specDuration}</div>
                     <div class="spec-item"><strong>Attendance:</strong> ${currentProgrammeObj.specAttendance}</div>
                     <div class="spec-item"><strong>Total Load:</strong> ${currentProgrammeObj.specTotalCredits} Credits</div>
@@ -931,7 +957,6 @@
             render();
         }
 
-        // Utility mapping term logic
         function getTermString(semInt) {
             if (semInt === 1) return 'Semester 1';
             if (semInt === 2) return 'Semester 2';
