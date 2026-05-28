@@ -620,7 +620,6 @@
             </select>
         </div>
 
-        <!-- Embedded Interactive Assessment External Link Button -->
         <a href="https://eps-apps.leeds.ac.uk/kai/staff/cwt/index.php" target="_blank" class="sidebar-link-btn">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             View Assessment Details
@@ -638,13 +637,10 @@
     </aside>
 
     <main class="main-content">
-        <!-- Persistent Full Header View Template Block for All Programme Layouts across Years -->
-        <header style="margin-bottom: 1.5rem;">
-            <h1 id="programme-main-title" style="font-size: 2rem; font-weight: 800; color: #1C1C1C; margin-bottom: 0.25rem;">Loading Programme...</h1>
-            <h2 id="level-title" style="font-size: 1.3rem; font-weight: 600; color: var(--secondary);">Loading Year...</h2>
+        <header style="margin-bottom: 1rem;">
+            <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.25rem;">Loading...</h2>
         </header>
 
-        <!-- Dynamic Specs Block Panel Interface View Template -->
         <section class="programme-spec-panel" id="spec-meta-panel" style="display:none;">
             <div style="font-size:0.8rem; font-weight:700; color:var(--secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.25rem;">Programme Specifications</div>
             <div class="spec-grid" id="spec-meta-grid"></div>
@@ -666,7 +662,6 @@
         <section class="module-grid" id="modules-container">
         </section>
 
-        <!-- Document Sheet Injection Matrix Target -->
         <section id="print-output-element">
         </section>
     </main>
@@ -714,16 +709,17 @@
             allProgrammes.forEach(prog => {
                 const titleLower = prog.programme_title.toLowerCase();
                 
-                // Rule set A: MArch, MEng Architecture (5 year)[cite: 2]
+                // Rule set A: MArch, MEng Architecture (5 year)
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
                     
-                    prog.specCode = "MAMB-CIVE/AR";[cite: 2]
-                    prog.specDuration = "5 Years";[cite: 2]
-                    prog.specAttendance = "Full Time";[cite: 2]
-                    prog.specManager = "Justin Lunn";[cite: 2]
-                    prog.specEmail = "j.s.lunn@leeds.ac.uk";[cite: 2]
-                    prog.specTotalCredits = "600";[cite: 2]
+                    prog.specCode = "MAMB-CIVE/AR";
+                    prog.specUcas = "K1H3";
+                    prog.specDuration = "5 Years";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Justin Lunn";
+                    prog.specEmail = "j.s.lunn@leeds.ac.uk";
+                    prog.specTotalCredits = "600";
                     prog.isMScType = false;
                     
                     if (prog.levels) {
@@ -737,16 +733,17 @@
                         });
                     }
                 } 
-                // Rule set B: MEng, BEng Architectural Engineering[cite: 3]
+                // Rule set B: MEng, BEng Architectural Engineering
                 else if (titleLower.includes('architectural engineering') || titleLower.includes('architectural eng')) {
                     prog.programme_title = "MEng, BEng Architectural Engineering";
                     
-                    prog.specCode = "MEBE-CIV/ARC";[cite: 3]
-                    prog.specDuration = "4 Years";[cite: 3]
-                    prog.specAttendance = "Full Time";[cite: 3]
-                    prog.specManager = "Yasar Awais";[cite: 3]
-                    prog.specEmail = "Y.Awais@leeds.ac.uk";[cite: 3]
-                    prog.specTotalCredits = "480";[cite: 3]
+                    prog.specCode = "MEBE-CIV/ARC";
+                    prog.specUcas = "HK21";
+                    prog.specDuration = "4 Years";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Yasar Awais";
+                    prog.specEmail = "Y.Awais@leeds.ac.uk";
+                    prog.specTotalCredits = "480";
                     prog.isMScType = false;
                     
                     if (prog.levels) {
@@ -759,16 +756,17 @@
                         });
                     }
                 }
-                // Rule set C: MArch Architecture (2 year)[cite: 4]
+                // Rule set C: MArch Architecture (2 year)
                 else if (titleLower.includes('march architecture') || titleLower.includes('architecture (2 year)')) {
                     prog.programme_title = "MArch Architecture";
                     
-                    prog.specCode = "MARC-CIVE/AR";[cite: 4]
-                    prog.specDuration = "24 Months";[cite: 4]
-                    prog.specAttendance = "Full Time";[cite: 4]
-                    prog.specManager = "Justin Lunn";[cite: 4]
-                    prog.specEmail = "j.s.lunn@leeds.ac.uk";[cite: 4]
-                    prog.specTotalCredits = "240";[cite: 4]
+                    prog.specCode = "MARC-CIVE/AR";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "24 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Justin Lunn";
+                    prog.specEmail = "j.s.lunn@leeds.ac.uk";
+                    prog.specTotalCredits = "240";
                     prog.isMScType = true;
                     
                     if (prog.levels) {
@@ -779,16 +777,17 @@
                         });
                     }
                 }
-                // Rule set D: MSc Architecture Design[cite: 5]
+                // Rule set D: MSc Architecture Design
                 else if (titleLower.includes('msc architecture design') || titleLower.includes('architecture design')) {
                     prog.programme_title = "MSc Architecture Design";
                     
-                    prog.specCode = "MSC-CIVE/ARD";[cite: 5]
-                    prog.specDuration = "12 Months";[cite: 5]
-                    prog.specAttendance = "Full Time";[cite: 5]
-                    prog.specManager = "Professor Gehan Selim";[cite: 5]
-                    prog.specEmail = "g.selim@leeds.ac.uk";[cite: 5]
-                    prog.specTotalCredits = "180";[cite: 5]
+                    prog.specCode = "MSC-CIVE/ARD";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "12 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Professor Gehan Selim";
+                    prog.specEmail = "g.selim@leeds.ac.uk";
+                    prog.specTotalCredits = "180";
                     prog.isMScType = true;
                     
                     if (prog.levels) {
@@ -798,28 +797,30 @@
                         });
                     }
                 }
-                // Rule set E: MSc (Eng) Water, Sanitation and Health Engineering[cite: 6]
+                // Rule set E: MSc (Eng) Water, Sanitation and Health Engineering
                 else if (titleLower.includes('water, sanitation and health') || titleLower.includes('wash')) {
                     prog.programme_title = "MSc (Eng) Water, Sanitation and Health Engineering";
                     
-                    prog.specCode = "MSE-CV/WSHE";[cite: 6]
-                    prog.specDuration = "12 Months";[cite: 6]
-                    prog.specAttendance = "Full Time";[cite: 6]
-                    prog.specManager = "Dr Paul Hutchings";[cite: 6]
-                    prog.specEmail = "P.Hutchings@leeds.ac.uk";[cite: 6]
-                    prog.specTotalCredits = "180";[cite: 6]
+                    prog.specCode = "MSE-CV/WSHE";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "12 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Dr Paul Hutchings";
+                    prog.specEmail = "P.Hutchings@leeds.ac.uk";
+                    prog.specTotalCredits = "180";
                     prog.isMScType = true;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
+                            // Translate Level 5 to Year 1 and hold the credit ceiling at 180 credits as instructed
                             if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
                             else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
                         });
                     }
                 }
-                // Fallback context template: Default Courses & Generic MSc pipelines[cite: 1]
+                // Fallback context template: Default Courses & Generic MSc pipelines
                 else {
-                    prog.specCode = ""; prog.specDuration = "";
+                    prog.specCode = ""; prog.specUcas = ""; prog.specDuration = "";
                     prog.specAttendance = ""; prog.specManager = ""; prog.specEmail = "";
                     prog.specTotalCredits = "";
                     prog.isMScType = titleLower.includes('msc');
@@ -896,18 +897,14 @@
             const progId = document.getElementById('programme-selector').value;
             currentProgrammeObj = allProgrammes.find(p => p.prog_id == progId);
             
-            // Render persistent parent header profile titles permanently[cite: 2, 3, 4, 5, 6]
-            if (currentProgrammeObj) {
-                document.getElementById('programme-main-title').innerText = currentProgrammeObj.programme_title;
-            }
-
-            // Render Specifications Overview Metadata Block if information exists[cite: 2, 3, 4, 5, 6]
+            // Render Specifications Overview Metadata Block if information exists
             const specPanel = document.getElementById('spec-meta-panel');
             const specGrid = document.getElementById('spec-meta-grid');
             
             if (currentProgrammeObj && currentProgrammeObj.specCode) {
                 specGrid.innerHTML = `
                     <div class="spec-item"><strong>Prog Code:</strong> ${currentProgrammeObj.specCode}</div>
+                    <div class="spec-item"><strong>UCAS Code:</strong> ${currentProgrammeObj.specUcas || 'N/A'}</div>
                     <div class="spec-item"><strong>Duration:</strong> ${currentProgrammeObj.specDuration}</div>
                     <div class="spec-item"><strong>Attendance:</strong> ${currentProgrammeObj.specAttendance}</div>
                     <div class="spec-item"><strong>Total Load:</strong> ${currentProgrammeObj.specTotalCredits} Credits</div>
@@ -948,7 +945,6 @@
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(`nav-level-${levelNum}`).classList.add('active');
             
-            // Clean year display strings without redundant descriptive subtitles
             let titleText = currentLevelObj.friendlyYearLabel || `Year ${levelNum}`;
             document.getElementById('level-title').innerText = titleText;
             
