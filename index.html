@@ -669,17 +669,17 @@
             }
         }
 
-        // Translation Rule Engine translating architecture raw values to "MArch, MEng Architecture (Level 5+)"
+        // Structural Rule Normalisation Engine
         function cleanseProgrammeStructure() {
             allProgrammes.forEach(prog => {
                 const titleLower = prog.programme_title.toLowerCase();
+                
+                // Rule set A: MArch, MEng Architecture (5 year)
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
-                    // Force final custom structural title representation
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Core level-to-year translations
                             if (lvl.level === 1) {
                                 lvl.friendlyYearLabel = "Year 1";
                                 lvl.headerDisplayTitle = "Year 1: Foundations";
@@ -693,12 +693,10 @@
                                 lvl.headerDisplayTitle = "Year 3: Application";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 5) {
-                                // Translate Level 5 to Year 4
                                 lvl.friendlyYearLabel = "Year 4";
                                 lvl.headerDisplayTitle = "Year 4: Advanced Specialisation";
                                 lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 6) {
-                                // Translate Level 6 to Year 5, with target fixed at 120
                                 lvl.friendlyYearLabel = "Year 5";
                                 lvl.headerDisplayTitle = "Year 5: Advanced Professional Practice";
                                 lvl.targetOverrideCredits = 120;
@@ -709,8 +707,40 @@
                             }
                         });
                     }
-                } else {
-                    // Standard processing fallback configurations for default courses
+                } 
+                // Rule set B: MEng, BEng Architectural Engineering
+                else if (titleLower.includes('architectural engineering') || titleLower.includes('architectural eng')) {
+                    prog.programme_title = "MEng, BEng Architectural Engineering";
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            if (lvl.level === 1) {
+                                lvl.friendlyYearLabel = "Year 1";
+                                lvl.headerDisplayTitle = "Year 1: Foundations";
+                                lvl.targetOverrideCredits = 120;
+                            } else if (lvl.level === 2) {
+                                lvl.friendlyYearLabel = "Year 2";
+                                lvl.headerDisplayTitle = "Year 2: Specialisation";
+                                lvl.targetOverrideCredits = 120;
+                            } else if (lvl.level === 3) {
+                                lvl.friendlyYearLabel = "Year 3";
+                                lvl.headerDisplayTitle = "Year 3: Application";
+                                lvl.targetOverrideCredits = 120;
+                            } else if (lvl.level === 5) {
+                                // Translate Level 5 to Year 4 with target set at 120 credits per prompt instructions
+                                lvl.friendlyYearLabel = "Year 4";
+                                lvl.headerDisplayTitle = "Year 4: Sustainable Systems & Practice";
+                                lvl.targetOverrideCredits = 120;
+                            } else {
+                                lvl.friendlyYearLabel = `Year ${lvl.level}`;
+                                lvl.headerDisplayTitle = `Year ${lvl.level}: Core Curriculum`;
+                                lvl.targetOverrideCredits = 120;
+                            }
+                        });
+                    }
+                }
+                // Fallback context: Default Courses & MSc pipelines
+                else {
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
                             let labelNum = lvl.level;
@@ -859,7 +889,6 @@
                 if(ind && lvl.level === currentLevelObj.level) ind.innerText = `${lvlTotal} cr`;
             });
 
-            // Use the override configuration value setup in normalisation step
             let targetCredits = (currentLevelObj && currentLevelObj.targetOverrideCredits) ? currentLevelObj.targetOverrideCredits : 120;
             const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
             
