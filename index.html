@@ -712,7 +712,6 @@
                 // Rule set A: MArch, MEng Architecture (5 year)
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
-                    
                     prog.specCode = "MAMB-CIVE/AR";
                     prog.specDuration = "5 Years";
                     prog.specAttendance = "Full Time";
@@ -735,7 +734,6 @@
                 // Rule set B: MEng, BEng Architectural Engineering
                 else if (titleLower.includes('architectural engineering') || titleLower.includes('architectural eng')) {
                     prog.programme_title = "MEng, BEng Architectural Engineering";
-                    
                     prog.specCode = "MEBE-CIV/ARC";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
@@ -757,7 +755,6 @@
                 // Rule set C: MArch Architecture (2 year)
                 else if (titleLower.includes('march architecture') || titleLower.includes('architecture (2 year)')) {
                     prog.programme_title = "MArch Architecture";
-                    
                     prog.specCode = "MARC-CIVE/AR";
                     prog.specDuration = "24 Months";
                     prog.specAttendance = "Full Time";
@@ -777,7 +774,6 @@
                 // Rule set D: MSc Architecture Design
                 else if (titleLower.includes('msc architecture design') || titleLower.includes('architecture design')) {
                     prog.programme_title = "MSc Architecture Design";
-                    
                     prog.specCode = "MSC-CIVE/ARD";
                     prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time";
@@ -790,6 +786,29 @@
                         prog.levels.forEach(lvl => {
                             if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
                             else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
+                        });
+                    }
+                }
+                // Rule set E: MSc (Eng) Water, Sanitation and Health Engineering
+                else if (titleLower.includes('water, sanitation and health') || titleLower.includes('water, sanitation & health') || titleLower.includes('wash')) {
+                    prog.programme_title = "MSc (Eng) Water, Sanitation and Health Engineering"[cite: 8];
+                    prog.specCode = "MSE-CV/WSHE"[cite: 10];
+                    prog.specDuration = "12 Months"[cite: 12];
+                    prog.specAttendance = "Full Time"[cite: 13];
+                    prog.specManager = "Dr Paul Hutchings"[cite: 14];
+                    prog.specEmail = "P.Hutchings@leeds.ac.uk"[cite: 15];
+                    prog.specTotalCredits = "180"[cite: 16];
+                    prog.isMScType = true;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            if (lvl.level === 1 || lvl.level === 5) { 
+                                lvl.friendlyYearLabel = "Year 1"[cite: 40]; 
+                                lvl.targetOverrideCredits = 180; 
+                            } else { 
+                                lvl.friendlyYearLabel = `Year ${lvl.level}`; 
+                                lvl.targetOverrideCredits = 180; 
+                            }
                         });
                     }
                 }
@@ -933,8 +952,9 @@
 
         // Utility mapping term logic
         function getTermString(semInt) {
-            if (semInt === 1) return 'Semester 1';
-            if (semInt === 2) return 'Semester 2';
+            // Support explicit string matches or fallback integers
+            if (semInt === 1 || String(semInt).toLowerCase().includes('semester 1')) return 'Semester 1';
+            if (semInt === 2 || String(semInt).toLowerCase().includes('semester 2')) return 'Semester 2';
             return 'Full Year';
         }
 
@@ -1148,9 +1168,10 @@
             const searchVal = document.getElementById('search-input').value.toLowerCase();
             if (!currentLevelObj || !currentLevelObj.modules) return;
             const filtered = currentLevelObj.modules.filter(mod => {
-                const termString = getTermString(mod.semester);
-                if (currentTermFilter === 'Semester 1' && termString !== 'Semester 1' && termString !== 'Full Year') return false;
-                if (currentTermFilter === 'Semester 2' && termString !== 'Semester 2' && termString !== 'Full Year') return false;
+                const termString = getTermString(mod.semester).toLowerCase();
+                const filterString = currentTermFilter.toLowerCase();
+                if (filterString === 'semester 1' && termString !== 'semester 1' && termString !== 'full year') return false;
+                if (filterString === 'semester 2' && termString !== 'semester 2' && termString !== 'full year') return false;
                 return mod.module_title.toLowerCase().includes(searchVal) || mod.module_code.toLowerCase().includes(searchVal);
             });
             
