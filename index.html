@@ -843,7 +843,7 @@
                 });
                 assessmentsHtml += '</ul>';
             } else {
-                assessmentsHtml = '<p style="margin-top: 0.25rem; color: #718096; italic">No assessment information available.</p>';
+                assessmentsHtml = '<p style="margin-top: 0.25rem; color: #718096; font-style: italic;">No assessment information available.</p>';
             }
 
             let notesHtml = mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Notes:</strong> ${mod.notes}</p>` : '';
@@ -991,15 +991,31 @@
                 if (currentTermFilter === 'Semester 2' && termString !== 'Semester 2' && termString !== 'Full Year') return false;
                 return mod.module_title.toLowerCase().includes(searchVal) || mod.module_code.toLowerCase().includes(searchVal);
             });
-            if (filtered.length === 0) {
-                container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No modules found.</div>`;
-                updateTrackers(); return;
-            }
+            
             let html = '';
             const comps = filtered.filter(m => m.compulsory);
             const opts = filtered.filter(m => !m.compulsory);
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No modules found matching current configurations.</div>`;
+                updateTrackers(); return;
+            }
+
             if (comps.length > 0) html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
-            if (opts.length > 0) html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
+            
+            if (opts.length > 0) {
+                html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
+            } else {
+                // If there are zero option modules listed for this program year, inject the line and notice
+                html += `
+                    <div class="section-divider">
+                        <hr>
+                        <p style="padding: 1.5rem 0; text-align: center; font-style: italic; color: var(--text-muted); font-size: 0.95rem;">
+                            No optional modules available for this programme year.
+                        </p>
+                    </div>`;
+            }
+            
             container.innerHTML = html;
             updateTrackers();
         }
