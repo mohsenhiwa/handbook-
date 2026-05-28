@@ -677,25 +677,35 @@
                     // Force final custom structural title representation
                     prog.programme_title = "MArch, MEng Architecture (Level 5+)";
                     
-                    // Maps layout structures sequentially 
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Translate level index counters into explicit physical display Year arrays
-                            if (lvl.level === 5) {
-                                lvl.friendlyYearLabel = "Year 5";
-                                lvl.headerDisplayTitle = "Year 5: Advanced Professional Practice";
-                            } else if (lvl.level === 1) {
+                            // Core level-to-year translations
+                            if (lvl.level === 1) {
                                 lvl.friendlyYearLabel = "Year 1";
                                 lvl.headerDisplayTitle = "Year 1: Foundations";
+                                lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 2) {
                                 lvl.friendlyYearLabel = "Year 2";
                                 lvl.headerDisplayTitle = "Year 2: Specialisation";
+                                lvl.targetOverrideCredits = 120;
                             } else if (lvl.level === 3) {
                                 lvl.friendlyYearLabel = "Year 3";
                                 lvl.headerDisplayTitle = "Year 3: Application";
+                                lvl.targetOverrideCredits = 120;
+                            } else if (lvl.level === 5) {
+                                // Translate Level 5 to Year 4
+                                lvl.friendlyYearLabel = "Year 4";
+                                lvl.headerDisplayTitle = "Year 4: Advanced Specialisation";
+                                lvl.targetOverrideCredits = 120;
+                            } else if (lvl.level === 6) {
+                                // Translate Level 6 to Year 5, with target fixed at 120
+                                lvl.friendlyYearLabel = "Year 5";
+                                lvl.headerDisplayTitle = "Year 5: Advanced Professional Practice";
+                                lvl.targetOverrideCredits = 120;
                             } else {
                                 lvl.friendlyYearLabel = `Year ${lvl.level}`;
                                 lvl.headerDisplayTitle = `Year ${lvl.level}: Core Curriculum`;
+                                lvl.targetOverrideCredits = 120;
                             }
                         });
                     }
@@ -707,12 +717,15 @@
                             if (lvl.level === 5) {
                                 lvl.friendlyYearLabel = "Master's (Level 5)";
                                 lvl.headerDisplayTitle = "Master's Level 5 Specialisation";
+                                lvl.targetOverrideCredits = 180;
                             } else if (lvl.level === 6) {
                                 lvl.friendlyYearLabel = "Master's (Level 6)";
                                 lvl.headerDisplayTitle = "Master's Level 6 Advanced";
+                                lvl.targetOverrideCredits = 180;
                             } else {
                                 lvl.friendlyYearLabel = `Year ${labelNum}`;
                                 lvl.headerDisplayTitle = `Year ${labelNum}: ${labelNum === 1 ? 'Foundations' : labelNum === 2 ? 'Specialisation' : 'Application'}`;
+                                lvl.targetOverrideCredits = 120;
                             }
                         });
                     }
@@ -846,7 +859,8 @@
                 if(ind && lvl.level === currentLevelObj.level) ind.innerText = `${lvlTotal} cr`;
             });
 
-            let targetCredits = (currentLevelObj.level >= 5) ? 180 : 120;
+            // Use the override configuration value setup in normalisation step
+            let targetCredits = (currentLevelObj && currentLevelObj.targetOverrideCredits) ? currentLevelObj.targetOverrideCredits : 120;
             const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
             
             const compulsoryTotal = currentLevelObj.modules.filter(m => m.compulsory).reduce((sum, m) => sum + m.credits, 0);
