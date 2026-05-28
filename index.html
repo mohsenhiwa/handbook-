@@ -831,7 +831,7 @@
                 </div>
                 <hr style="border:0; border-top:1px solid var(--border); margin-bottom:1rem;">
                 <p style="color:#4a5568;"><strong>Module Leader:</strong> ${mod.module_leader || 'TBC'}</p>
-                <p style="margin-top:0.5rem; color:#4a5568;"><strong>Note:</strong> information will be added in due course</p>
+                <p style="margin-top:0.5rem; color:#4a5568;"><strong>Description:</strong> information will be added in due course</p>
                 <p style="margin-top:0.5rem; color:#4a5568;"><strong>Assessment:</strong> information will be added in due course</p>
                 ${notesHtml}
             `;
@@ -860,7 +860,7 @@
                         <span class="badge badge-term">${termString}</span>
                     </div>
                     <p class="module-desc" style="font-size: 0.85rem;"><strong>Leader:</strong> ${mod.module_leader || 'TBC'}</p>
-                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">Note: information will be added in due course</p>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">Description: information will be added in due course</p>
                     <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.75rem;">Assessment: information will be added in due course</p>
                     <div class="card-actions">
                         <button class="select-btn" ${btnDisabled} onclick="toggleModuleSelection('${mod.module_code}', event)">${btnText}</button>
@@ -901,7 +901,7 @@
                             <td>${getTermString(m.semester)}</td>
                             <td>${m.module_leader || 'TBC'}</td>
                             <td>
-                                <div><strong>Note:</strong> information will be added in due course</div>
+                                <div><strong>Description:</strong> information will be added in due course</div>
                                 <div style="margin-top: 3px;"><strong>Assessment:</strong> information will be added in due course</div>
                                 ${m.notes ? `<div style="margin-top: 3px; color: #444;"><strong>Additional:</strong> ${m.notes}</div>` : ''}
                             </td>
