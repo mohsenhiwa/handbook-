@@ -812,7 +812,27 @@
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Translate Level 5 to Year 1 and hold the credit ceiling at 180 credits as instructed
+                            if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
+                            else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
+                        });
+                    }
+                }
+                // Rule set F: MSc (Eng) Environmental Engineering and Project Management
+                else if (titleLower.includes('environmental engineering') || titleLower.includes('eepm')) {
+                    prog.programme_title = "MSc (Eng) Environmental Engineering and Project Management";
+                    
+                    prog.specCode = "MSE-CIV/E-FT";
+                    prog.specUcas = "N/A";
+                    prog.specDuration = "12 Months";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Dr Marco-Felipe King";
+                    prog.specEmail = "M.F.King@leeds.ac.uk";
+                    prog.specTotalCredits = "180";
+                    prog.isMScType = true;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            // Translate Level 5 to Year 1 and guarantee standard ceiling weight at 180 credits as instructed
                             if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
                             else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
                         });
