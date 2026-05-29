@@ -896,22 +896,22 @@
                         });
                     }
                 }
-                // Rule set J: MSc Structural Engineering route
-                else if (titleLower.includes('structural engineering') || titleLower.includes('structures') || titleLower.includes('ste')) {
-                    prog.programme_title = "MSc (Eng) Structural Engineering";
+                // Rule set J: MSc Transport Infrastructure: Design and Construction route
+                else if (titleLower.includes('transport infrastructure') || titleLower.includes('transport infrastructure: design and construction') || titleLower.includes('ti-f')) {
+                    prog.programme_title = "MSc (Eng) Transport Infrastructure: Design and Construction";
                     
-                    prog.specCode = "MSE-CV/SE-FT";
+                    prog.specCode = "MSE-CV/TI-F";
                     prog.specUcas = "N/A";
                     prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time";
-                    prog.specManager = "Dr Han Fang";
-                    prog.specEmail = "H.Fang1@leeds.ac.uk";
+                    prog.specManager = "Dr Ana Heitor";
+                    prog.specEmail = "A.Heitor@leeds.ac.uk";
                     prog.specTotalCredits = "180";
                     prog.isMScType = true;
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Translate Level 5 to Year 1 and permanently clamp credit targets to 180
+                            // Translate Level 5 to Year 1 and securely enforce the credit limit threshold at 180
                             if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
                             else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
                         });
@@ -1187,7 +1187,7 @@
                         <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
                         <span class="badge badge-term">${termString}</span>
                     </div>
-                    <p class="module-desc" style="font-size: 0.85rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">mathbf{Description:} ${descSnippet}</p>
+                    <p class="module-desc" style="font-size: 0.85rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;"><strong>Description:</strong> ${descSnippet}</p>
                     <p class="card-subtext"><strong>Leader:</strong> ${mod.module_leader || 'TBC'}</p>
                     <p class="card-subtext" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;"><strong>Assessment:</strong> ${assessmentSummary}</p>
                     <div class="card-actions">
