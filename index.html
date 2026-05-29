@@ -887,7 +887,7 @@
                         });
                     }
                 }
-                // Rule set Z: MSc Transport Infrastructure: Design and Construction
+                // Rule set J: MSc Transport Infrastructure: Design and Construction
                 else if (titleLower.includes('transport infrastructure') || titleLower.includes('transport infrastructure: design and construction') || titleLower.includes('ti-f')) {
                     prog.programme_title = "MSc (Eng) Transport Infrastructure: Design and Construction";
                     prog.specCode = "MSE-CV/TI-F";
@@ -925,7 +925,7 @@
                         });
                     }
                 }
-                // Rule set L: Core Civil Engineering BEng/MEng Undergrad rule isolation matrix logic target
+                // Rule set L: Core Civil Engineering BEng/MEng Undergrad
                 else if (prog.prog_id == 1779) {
                     prog.programme_title = "MEng, BEng Civil Engineering";
                     prog.specCode = "MEBE-CIVE";
@@ -944,7 +944,7 @@
                         });
                     }
                 }
-                // Rule set M: Civil and Environmental Engineering route isolation logic target via unique identifier
+                // Rule set M: Civil and Environmental Engineering
                 else if (prog.prog_id == 1788) {
                     prog.programme_title = "MEng, BEng Civil and Environmental Engineering";
                     prog.specCode = "MEBE-CIV/EE";
@@ -963,7 +963,7 @@
                         });
                     }
                 }
-                // Rule set N: Civil and Structural Engineering undergraduate path rule isolation target via unique identifier
+                // Rule set N: Civil and Structural Engineering
                 else if (prog.prog_id == 1781) {
                     prog.programme_title = "MEng, BEng Civil and Structural Engineering";
                     prog.specCode = "MEBE-CIV/SE";
@@ -973,6 +973,25 @@
                     prog.specManager = "Mohsen Besharat";
                     prog.specEmail = "M.Besharat@leeds.ac.uk";
                     prog.specTotalCredits = "480";
+                    prog.isMScType = false;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            lvl.friendlyYearLabel = `Year ${lvl.level}`;
+                            lvl.targetOverrideCredits = 120;
+                        });
+                    }
+                }
+                // Rule set O: Civil Engineering with Transport undergraduate path isolation matrix logic target
+                else if (prog.prog_id == 1782) {
+                    prog.programme_title = "BEng Civil Engineering with Transport";
+                    prog.specCode = "BEN-CIV/TRA";
+                    prog.specUcas = "H201";
+                    prog.specDuration = "3 Years";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Mohsen Besharat";
+                    prog.specEmail = "M.Besharat@leeds.ac.uk";
+                    prog.specTotalCredits = "360";
                     prog.isMScType = false;
                     
                     if (prog.levels) {
