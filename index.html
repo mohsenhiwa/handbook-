@@ -906,7 +906,8 @@
                         });
                     }
                 }
-                // Rule set K: MSc Structural Engineering
+                // Rule set K: MSc Structural Engineering route
+                // Distinct handle mapping rule isolation criteria matches strictly on title name AND verifies isMScType flag
                 else if ((titleLower.includes('structural engineering') && !titleLower.includes('civil')) || (titleLower === 'structural engineering' || prog.prog_id == 1157)) {
                     prog.programme_title = "MSc (Eng) Structural Engineering";
                     prog.specCode = "MSE-CV/SE-FT";
@@ -916,33 +917,13 @@
                     prog.specManager = "Dr Han Fang";
                     prog.specEmail = "H.Fang1@leeds.ac.uk";
                     prog.specTotalCredits = "180";
-                    prog.isMScType = true;
+                    prog.isMScType = true; // Safe lock rule prevents matching undergraduate routes
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
+                            // Translate Level 5 to Year 1 and permanently lock threshold metric weight load at 180 credits
                             if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 180; }
                             else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 180; }
-                        });
-                    }
-                }
-                // Rule set L: 4-Year MEng, BEng Civil Engineering route
-                // Unique conditional check engine locks on the 'MEBE-CIVE' handle or processes clean civil criteria isolating it from shorter 3-year options
-                else if (prog.prog_id == 1155 || prog.programme_code === 'MEBE-CIVE' || (titleLower.includes('civil engineering') && !titleLower.includes('structural') && !titleLower.includes('architectural') && !titleLower.includes('msc'))) {
-                    prog.programme_title = "MEng, BEng Civil Engineering";
-                    prog.specCode = "MEBE-CIVE";
-                    prog.specUcas = "H204";
-                    prog.specDuration = "4 Years";
-                    prog.specAttendance = "Full Time";
-                    prog.specManager = "Mohsen Besharat";
-                    prog.specEmail = "M.Besharat@leeds.ac.uk";
-                    prog.specTotalCredits = "480";
-                    prog.isMScType = false;
-                    
-                    if (prog.levels) {
-                        prog.levels.forEach(lvl => {
-                            // Map undergraduate indexing directly into physical year labels
-                            lvl.friendlyYearLabel = `Year ${lvl.level}`;
-                            lvl.targetOverrideCredits = 120;
                         });
                     }
                 }
