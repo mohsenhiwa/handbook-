@@ -1184,24 +1184,24 @@
                 if (!selections[id]) {
                     // Rule for List A selection thresholds
                     if (LIST_A_CODES.includes(id) && chosenListA.length >= 2) {
-                        alert("Selection Blocked: We can select a maximum of two modules from List A options.");
+                        alert("Selection Blocked: You can select a maximum of two modules from List A options.");
                         return;
                     }
                     // Rule for List B prerequisites and caps
                     if (LIST_B_CODES.includes(id)) {
                         if (chosenListA.length < 1) {
-                            alert("Selection Blocked: We must select at least one module from List A before unlocking modules from List B.");
+                            alert("Selection Blocked: You must select at least one module from List A before unlocking modules from List B.");
                             return;
                         }
                         if (chosenListB.length >= 2) {
-                            alert("Selection Blocked: We can select a maximum of two modules from List B options.");
+                            alert("Selection Blocked: You can select a maximum of two modules from List B options.");
                             return;
                         }
                     }
                 } else {
                     // Deselection validation check rule: If deselecting the final List A module while List B modules are active
                     if (LIST_A_CODES.includes(id) && chosenListA.length === 1 && chosenListB.length > 0) {
-                        alert("Deselection Blocked: We must retain at least one selection from List A because we have active List B modules checked.");
+                        alert("Deselection Blocked: You must retain at least one selection from List A because You have active List B modules checked.");
                         return;
                     }
                 }
@@ -1245,7 +1245,7 @@
 
             if (is1779FinalYearViolation) {
                 fill.style.backgroundColor = 'var(--secondary)';
-                msg.innerText = '⚠️ Pathway Rule Violation: We must select at least one module from List A options.';
+                msg.innerText = '⚠️ Pathway Rule Violation: You must select at least one module from List A options.';
                 msg.style.color = 'var(--secondary)';
                 msg.style.fontWeight = '700';
             } else if (currentTotal >= targetCredits) { 
@@ -1350,7 +1350,7 @@
             if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
                 const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
                 if (chosenListA.length < 1) {
-                    alert("Submission Blocked: We must satisfy the architecture rules and select at least one option from List A before generating documents.");
+                    alert("Submission Blocked: You must satisfy the architecture rules and select at least one option from List A before generating documents.");
                     return;
                 }
             }
@@ -1457,10 +1457,10 @@
                     html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
                 }
                 if (listA.length > 0) {
-                    html += `<div class="section-divider"><hr><h3>List A Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">We must select between 1 and 2 modules from this cluster.</p></div>` + listA.map(m => createCardHTML(m)).join('');
+                    html += `<div class="section-divider"><hr><h3>List A Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You must select between 1 and 2 modules from this cluster.</p></div>` + listA.map(m => createCardHTML(m)).join('');
                 }
                 if (listB.length > 0) {
-                    html += `<div class="section-divider"><hr><h3>List B Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">We may choose up to 2 modules here, unlocked only after checking a List A option.</p></div>` + listB.map(m => createCardHTML(m)).join('');
+                    html += `<div class="section-divider"><hr><h3>List B Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You may choose up to 2 modules here, unlocked only after checking a List A option.</p></div>` + listB.map(m => createCardHTML(m)).join('');
                 }
             } else {
                 // Standard default uniform fallback design block rendering flow rules for other courses
