@@ -967,7 +967,6 @@
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Enforce custom label swap constraint exclusively for final year (Level 5) to display as Year 4
                             if (lvl.level === 5) {
                                 lvl.friendlyYearLabel = "Year 4";
                             } else {
@@ -1208,6 +1207,34 @@
                 }
             }
 
+            // Programme Specific Selection Pathway Controls for prog_id 1788 Final Year (Level 5)
+            if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                const chosenListB = currentLevelObj.modules.filter(m => LIST_B_CODES_1788.includes(m.module_code) && selections[m.module_code]);
+
+                if (!selections[id]) {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length >= 1) {
+                        alert("Selection Blocked: You can select a maximum of one module from List A options.");
+                        return;
+                    }
+                    if (LIST_B_CODES_1788.includes(id)) {
+                        if (chosenListA.length < 1) {
+                            alert("Selection Blocked: You must select one module from List A before unlocking modules from List B.");
+                            return;
+                        }
+                        if (chosenListB.length >= 2) {
+                            alert("Selection Blocked: You can select a maximum of two modules from List B options.");
+                            return;
+                        }
+                    }
+                } else {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length === 1 && chosenListB.length > 0) {
+                        alert("Deselection Blocked: You must retain your selection from List A because you have active List B modules checked.");
+                        return;
+                    }
+                }
+            }
+
             selections[id] = !selections[id];
             render();
             updateTrackers();
@@ -1235,17 +1262,28 @@
             const msg = document.getElementById('tracker-message');
             const fill = document.getElementById('tracker-fill');
             
-            let is1779FinalYearViolation = false;
+            let isPathwayViolation = false;
+            let violationText = '';
+
             if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
                 const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
                 if (chosenListA.length < 1) {
-                    is1779FinalYearViolation = true;
+                    isPathwayViolation = true;
+                    violationText = '⚠️ Pathway Rule Violation: You must select at least one module from List A options.';
                 }
             }
 
-            if (is1779FinalYearViolation) {
+            if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    isPathwayViolation = true;
+                    violationText = '⚠️ Pathway Rule Violation: You must select one module from List A options.';
+                }
+            }
+
+            if (isPathwayViolation) {
                 fill.style.backgroundColor = 'var(--secondary)';
-                msg.innerText = '⚠️ Pathway Rule Violation: You must select at least one module from List A options.';
+                msg.innerText = violationText;
                 msg.style.color = 'var(--secondary)';
                 msg.style.fontWeight = '700';
             } else if (currentTotal >= targetCredits) { 
@@ -1354,6 +1392,14 @@
                 }
             }
 
+            if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    alert("Submission Blocked: You must satisfy the architecture rules and select one option from List A before generating documents.");
+                    return;
+                }
+            }
+
             let levelLabel = currentLevelObj.friendlyYearLabel || `Level ${currentLevelObj.level}`;
 
             const chosenModules = currentLevelObj.modules.filter(m => selections[m.module_code]);
@@ -1374,6 +1420,10 @@
                     if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
                         if (LIST_A_CODES.includes(m.module_code)) groupContext = 'List A Option';
                         if (LIST_B_CODES_1779.includes(m.module_code)) groupContext = 'List B Option';
+                    }
+                    if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                        if (LIST_A_CODES.includes(m.module_code)) groupContext = 'List A Option';
+                        if (LIST_B_CODES_1788.includes(m.module_code)) groupContext = 'List B Option';
                     }
 
                     return `
@@ -1458,6 +1508,20 @@
                 }
                 if (listB.length > 0) {
                     html += `<div class="section-divider"><hr><h3>List B Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You may choose up to 2 modules here, unlocked only after checking a List A option.</p></div>` + listB.map(m => createCardHTML(m)).join('');
+                }
+            } else if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const comps = filtered.filter(m => m.compulsory);
+                const listA = filtered.filter(m => LIST_A_CODES.includes(m.module_code));
+                const listB = filtered.filter(m => LIST_B_CODES_1788.includes(m.module_code));
+
+                if (comps.length > 0) {
+                    html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
+                }
+                if (listA.length > 0) {
+                    html += `<div class="section-divider"><hr><h3>List A Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You must select only ONE module from List A.</p></div>` + listA.map(m => createCardHTML(m)).join('');
+                }
+                if (listB.length > 0) {
+                    html += `<div class="section-divider"><hr><h3>List B Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You may choose up to TWO modules from List B, unlocked only after checking a List A option.</p></div>` + listB.map(m => createCardHTML(m)).join('');
                 }
             } else {
                 const comps = filtered.filter(m => m.compulsory);
