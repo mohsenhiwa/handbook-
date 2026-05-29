@@ -1001,7 +1001,7 @@
                         });
                     }
                 }
-                // Rule set P: SWJTU Civil Engineering with Transport isolation logic target via unique identifier
+                // Rule set P: SWJTU Civil Engineering with Transport
                 else if (prog.prog_id == 1787) {
                     prog.programme_title = "BEng Civil Engineering with Transport Southwest Jiaotong - Leeds Joint School";
                     prog.specCode = "BEN-CIVE-XJ";
@@ -1178,6 +1178,17 @@
             event.stopPropagation(); 
             const mod = currentLevelObj.modules.find(m => m.module_code === id);
             if (mod.compulsory) return;
+
+            // Global Validation Rule: Calculate active selection totals before committing a checkmark
+            let targetCredits = (currentLevelObj && currentLevelObj.targetOverrideCredits) ? currentLevelObj.targetOverrideCredits : 120;
+            const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
+
+            // Lock block rule validation preventing extra selections when target is already achieved
+            if (!selections[id] && currentTotal >= targetCredits) {
+                alert(`Selection Blocked: Maximum allowed credit limit of ${targetCredits} credits has already been achieved.`);
+                return;
+            }
+
             selections[id] = !selections[id];
             render();
             updateTrackers();
@@ -1205,18 +1216,16 @@
             const msg = document.getElementById('tracker-message');
             const fill = document.getElementById('tracker-fill');
             
-            if (currentTotal === targetCredits) { 
+            if (currentTotal >= targetCredits) { 
                 fill.style.backgroundColor = 'var(--success)';
-                msg.innerText = 'Credit target achieved.'; 
+                msg.innerText = '⚠️ Maximum credit allowance achieved. Selection locked.'; 
                 msg.style.color = 'var(--success)'; 
-            } else if (currentTotal > targetCredits) { 
-                fill.style.backgroundColor = 'var(--secondary)';
-                msg.innerText = `Overloaded by ${currentTotal - targetCredits} credits.`; 
-                msg.style.color = 'var(--secondary)'; 
+                msg.style.fontWeight = '700';
             } else { 
                 fill.style.backgroundColor = 'orange'; 
-                msg.innerText = `Requires ${targetCredits - currentTotal} more credits.`; 
+                msg.innerText = `Requires ${targetCredits - currentTotal} more credits to complete curriculum.`; 
                 msg.style.color = 'var(--warning)'; 
+                msg.style.fontWeight = 'normal';
             }
         }
 
