@@ -680,6 +680,10 @@
         let currentTermFilter = 'Full Year'; // Default Tab
         let selections = {}; 
 
+        // Definitive Module Groups for prog_id 1778 final level routing pathways
+        const LIST_A_CODES = ['CIVE5145M', 'CIVE5670M', 'CIVE5960M'];
+        const LIST_B_CODES = ['CIVE5013M', 'CIVE5025M', 'CIVE5315M', 'CIVE5320M', 'CIVE5437M', 'CIVE5595M'];
+
         // 1. Fetch JSON Data with Cache-Busting
         async function loadData() {
             try {
@@ -925,7 +929,7 @@
                         });
                     }
                 }
-                // Rule set L: Core Civil Engineering BEng/MEng Undergrad
+                // Rule set L: Core Civil Engineering BEng/MEng Undergrad rule isolation matrix logic target
                 else if (prog.prog_id == 1779) {
                     prog.programme_title = "MEng, BEng Civil Engineering";
                     prog.specCode = "MEBE-CIVE";
@@ -939,7 +943,12 @@
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            lvl.friendlyYearLabel = `Year ${lvl.level}`;
+                            // Enforce custom label swap constraint exclusively for final year (Level 5) to display as Year 4
+                            if (lvl.level === 5) {
+                                lvl.friendlyYearLabel = "Year 4";
+                            } else {
+                                lvl.friendlyYearLabel = `Year ${lvl.level}`;
+                            }
                             lvl.targetOverrideCredits = 120;
                         });
                     }
@@ -1017,28 +1026,6 @@
                         prog.levels.forEach(lvl => {
                             lvl.friendlyYearLabel = `Year ${lvl.level}`;
                             lvl.targetOverrideCredits = 120;
-                        });
-                    }
-                }
-                // Fallback context template: Default Courses & Generic MSc pipelines
-                else {
-                    prog.specCode = ""; prog.specUcas = ""; prog.specDuration = "";
-                    prog.specAttendance = ""; prog.specManager = ""; prog.specEmail = "";
-                    prog.specTotalCredits = "";
-                    prog.isMScType = titleLower.includes('msc');
-
-                    if (prog.levels) {
-                        prog.levels.forEach(lvl => {
-                            if (prog.isMScType) {
-                                if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 1"; lvl.targetOverrideCredits = 120; }
-                                else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 2"; lvl.targetOverrideCredits = 120; }
-                                else { lvl.friendlyYearLabel = `Year ${lvl.level}`; lvl.targetOverrideCredits = 120; }
-                            } else {
-                                let labelNum = lvl.level;
-                                if (lvl.level === 5) { lvl.friendlyYearLabel = "Year 4"; lvl.targetOverrideCredits = 180; }
-                                else if (lvl.level === 6) { lvl.friendlyYearLabel = "Year 5"; lvl.targetOverrideCredits = 180; }
-                                else { lvl.friendlyYearLabel = `Year ${labelNum}`; lvl.targetOverrideCredits = 120; }
-                            }
                         });
                     }
                 }
@@ -1179,14 +1166,45 @@
             const mod = currentLevelObj.modules.find(m => m.module_code === id);
             if (mod.compulsory) return;
 
-            // Global Validation Rule: Calculate active selection totals before committing a checkmark
             let targetCredits = (currentLevelObj && currentLevelObj.targetOverrideCredits) ? currentLevelObj.targetOverrideCredits : 120;
             const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
 
-            // Lock block rule validation preventing extra selections when target is already achieved
+            // Global Selection Lock Check Rule
             if (!selections[id] && currentTotal >= targetCredits) {
                 alert(`Selection Blocked: Maximum allowed credit limit of ${targetCredits} credits has already been achieved.`);
                 return;
+            }
+
+            // Programme Specific Selection Pathway Controls for prog_id 1779 Final Year (Level 5)
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                // Determine group counts
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                const chosenListB = currentLevelObj.modules.filter(m => LIST_B_CODES.includes(m.module_code) && selections[m.module_code]);
+
+                if (!selections[id]) {
+                    // Rule for List A selection thresholds
+                    if (LIST_A_CODES.includes(id) && chosenListA.length >= 2) {
+                        alert("Selection Blocked: We can select a maximum of two modules from List A options.");
+                        return;
+                    }
+                    // Rule for List B prerequisites and caps
+                    if (LIST_B_CODES.includes(id)) {
+                        if (chosenListA.length < 1) {
+                            alert("Selection Blocked: We must select at least one module from List A before unlocking modules from List B.");
+                            return;
+                        }
+                        if (chosenListB.length >= 2) {
+                            alert("Selection Blocked: We can select a maximum of two modules from List B options.");
+                            return;
+                        }
+                    }
+                } else {
+                    // Deselection validation check rule: If deselecting the final List A module while List B modules are active
+                    if (LIST_A_CODES.includes(id) && chosenListA.length === 1 && chosenListB.length > 0) {
+                        alert("Deselection Blocked: We must retain at least one selection from List A because we have active List B modules checked.");
+                        return;
+                    }
+                }
             }
 
             selections[id] = !selections[id];
@@ -1216,7 +1234,21 @@
             const msg = document.getElementById('tracker-message');
             const fill = document.getElementById('tracker-fill');
             
-            if (currentTotal >= targetCredits) { 
+            // Check for unique pathway violations for prog_id 1779 final year to update tracking feedback
+            let is1779FinalYearViolation = false;
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    is1779FinalYearViolation = true;
+                }
+            }
+
+            if (is1779FinalYearViolation) {
+                fill.style.backgroundColor = 'var(--secondary)';
+                msg.innerText = '⚠️ Pathway Rule Violation: We must select at least one module from List A options.';
+                msg.style.color = 'var(--secondary)';
+                msg.style.fontWeight = '700';
+            } else if (currentTotal >= targetCredits) { 
                 fill.style.backgroundColor = 'var(--success)';
                 msg.innerText = '⚠️ Maximum credit allowance achieved. Selection locked.'; 
                 msg.style.color = 'var(--success)'; 
@@ -1314,6 +1346,15 @@
             const container = document.getElementById('print-output-element');
             if (!currentProgrammeObj || !currentLevelObj) return;
 
+            // Block print actions if a pathway restriction remains unfulfilled
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    alert("Submission Blocked: We must satisfy the architecture rules and select at least one option from List A before generating documents.");
+                    return;
+                }
+            }
+
             let levelLabel = currentLevelObj.friendlyYearLabel || `Level ${currentLevelObj.level}`;
 
             const chosenModules = currentLevelObj.modules.filter(m => selections[m.module_code]);
@@ -1329,11 +1370,19 @@
                     if (m.assessments && m.assessments.length > 0) {
                         assessPrint = m.assessments.map(a => `${a.description} (${a.percent_of_module ? Math.round(a.percent_of_module * 100) + '%' : 'Formative'})`).join('<br>');
                     }
+                    
+                    // Inject a badge sub-marker mapping out whether an item corresponds to List A or List B pathways
+                    let groupContext = m.compulsory ? 'Compulsory' : 'Optional';
+                    if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                        if (LIST_A_CODES.includes(m.module_code)) groupContext = 'List A Option';
+                        if (LIST_B_CODES.includes(m.module_code)) groupContext = 'List B Option';
+                    }
+
                     return `
                         <tr>
                             <td style="font-weight: bold; white-space: nowrap;">
                                 ${m.module_code}
-                                <span class="print-badge">${m.compulsory ? 'Compulsory' : 'Optional'}</span>
+                                <span class="print-badge">${groupContext}</span>
                             </td>
                             <td style="font-weight: 500;">${m.module_title}</td>
                             <td style="text-align: center;">${m.credits}</td>
@@ -1383,6 +1432,7 @@
             const container = document.getElementById('modules-container');
             const searchVal = document.getElementById('search-input').value.toLowerCase();
             if (!currentLevelObj || !currentLevelObj.modules) return;
+            
             const filtered = currentLevelObj.modules.filter(mod => {
                 const termString = getTermString(mod.semester);
                 if (currentTermFilter === 'Semester 1' && termString !== 'Semester 1' && termString !== 'Full Year') return false;
@@ -1390,27 +1440,45 @@
                 return mod.module_title.toLowerCase().includes(searchVal) || mod.module_code.toLowerCase().includes(searchVal);
             });
             
-            let html = '';
-            const comps = filtered.filter(m => m.compulsory);
-            const opts = filtered.filter(m => !m.compulsory);
-            
             if (filtered.length === 0) {
                 container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No modules found matching current configurations.</div>`;
                 updateTrackers(); return;
             }
 
-            if (comps.length > 0) html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
-            
-            if (opts.length > 0) {
-                html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
+            let html = '';
+
+            // Unique rendering structure split pathway execution exclusively for prog_id 1779 level 5 (Final Year)
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                const comps = filtered.filter(m => m.compulsory);
+                const listA = filtered.filter(m => LIST_A_CODES.includes(m.module_code));
+                const listB = filtered.filter(m => LIST_B_CODES.includes(m.module_code));
+
+                if (comps.length > 0) {
+                    html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
+                }
+                if (listA.length > 0) {
+                    html += `<div class="section-divider"><hr><h3>List A Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">We must select between 1 and 2 modules from this cluster.</p></div>` + listA.map(m => createCardHTML(m)).join('');
+                }
+                if (listB.length > 0) {
+                    html += `<div class="section-divider"><hr><h3>List B Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">We may choose up to 2 modules here, unlocked only after checking a List A option.</p></div>` + listB.map(m => createCardHTML(m)).join('');
+                }
             } else {
-                html += `
-                    <div class="section-divider">
-                        <hr>
-                        <p style="padding: 1.5rem 0; text-align: center; font-style: italic; color: var(--text-muted); font-size: 0.95rem;">
-                            No optional modules available for this programme year.
-                        </p>
-                    </div>`;
+                // Standard default uniform fallback design block rendering flow rules for other courses
+                const comps = filtered.filter(m => m.compulsory);
+                const opts = filtered.filter(m => !m.compulsory);
+
+                if (comps.length > 0) html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
+                if (opts.length > 0) {
+                    html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
+                } else if (comps.length === 0) {
+                    html += `
+                        <div class="section-divider">
+                            <hr>
+                            <p style="padding: 1.5rem 0; text-align: center; font-style: italic; color: var(--text-muted); font-size: 0.95rem;">
+                                No modules configured for this academic block timeline.
+                            </p>
+                        </div>`;
+                }
             }
             
             container.innerHTML = html;
