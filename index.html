@@ -887,7 +887,7 @@
                         });
                     }
                 }
-                // Rule set Z: MSc Transport Infrastructure: Design and Construction
+                // Rule set J: MSc Transport Infrastructure: Design and Construction
                 else if (titleLower.includes('transport infrastructure') || titleLower.includes('transport infrastructure: design and construction') || titleLower.includes('ti-f')) {
                     prog.programme_title = "MSc (Eng) Transport Infrastructure: Design and Construction";
                     prog.specCode = "MSE-CV/TI-F";
@@ -930,6 +930,25 @@
                     prog.programme_title = "MEng, BEng Civil Engineering";
                     prog.specCode = "MEBE-CIVE";
                     prog.specUcas = "H204";
+                    prog.specDuration = "4 Years";
+                    prog.specAttendance = "Full Time";
+                    prog.specManager = "Mohsen Besharat";
+                    prog.specEmail = "M.Besharat@leeds.ac.uk";
+                    prog.specTotalCredits = "480";
+                    prog.isMScType = false;
+                    
+                    if (prog.levels) {
+                        prog.levels.forEach(lvl => {
+                            lvl.friendlyYearLabel = `Year ${lvl.level}`;
+                            lvl.targetOverrideCredits = 120;
+                        });
+                    }
+                }
+                // Rule set M: Civil and Environmental Engineering route isolation logic target via unique identifier
+                else if (prog.prog_id == 1788) {
+                    prog.programme_title = "MEng, BEng Civil and Environmental Engineering";
+                    prog.specCode = "MEBE-CIV/EE";
+                    prog.specUcas = "H291";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
                     prog.specManager = "Mohsen Besharat";
