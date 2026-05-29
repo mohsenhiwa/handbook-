@@ -925,8 +925,9 @@
                         });
                     }
                 }
-                // Rule set L: MEng, BEng Civil Engineering route hardcoded transformation mapping profile definitions
-                else if ((titleLower.includes('civil engineering') && !titleLower.includes('structural') && !prog.isMScType) || titleLower === 'civil engineering') {
+                // Rule set L: 4-Year MEng, BEng Civil Engineering route
+                // Unique conditional check engine locks on the 'MEBE-CIVE' handle or processes clean civil criteria isolating it from shorter 3-year options
+                else if (prog.prog_id == 1155 || prog.programme_code === 'MEBE-CIVE' || (titleLower.includes('civil engineering') && !titleLower.includes('structural') && !titleLower.includes('architectural') && !titleLower.includes('msc'))) {
                     prog.programme_title = "MEng, BEng Civil Engineering";
                     prog.specCode = "MEBE-CIVE";
                     prog.specUcas = "H204";
@@ -936,10 +937,10 @@
                     prog.specEmail = "M.Besharat@leeds.ac.uk";
                     prog.specTotalCredits = "480";
                     prog.isMScType = false;
-                    prog.isCivilPathwayGroup = true; // High importance unique identifier marker
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
+                            // Map undergraduate indexing directly into physical year labels
                             lvl.friendlyYearLabel = `Year ${lvl.level}`;
                             lvl.targetOverrideCredits = 120;
                         });
@@ -1130,23 +1131,7 @@
             const msg = document.getElementById('tracker-message');
             const fill = document.getElementById('tracker-fill');
             
-            // Hard coded rule verification layer to evaluate mandatory List A selection dependencies for MEng Year 4
-            let listAViolated = false;
-            if (currentProgrammeObj.isCivilPathwayGroup && currentLevelObj.level === 4) {
-                const chosenOptions = currentLevelObj.modules.filter(m => !m.compulsory && selections[m.module_code]);
-                if (chosenOptions.length > 0) {
-                    const hasListA = chosenOptions.some(m => m.module_code === 'CIVE5013M' || m.module_code === 'CIVE5025M');
-                    if (!hasListA) {
-                        listAViolated = true;
-                    }
-                }
-            }
-
-            if (listAViolated) {
-                fill.style.backgroundColor = 'orange';
-                msg.innerText = 'Year 4 selection requires at least one module from List A.';
-                msg.style.color = 'orange';
-            } else if (currentTotal === targetCredits) { 
+            if (currentTotal === targetCredits) { 
                 fill.style.backgroundColor = 'var(--success)';
                 msg.innerText = 'Credit target achieved.'; 
                 msg.style.color = 'var(--success)'; 
@@ -1205,7 +1190,7 @@
         function toggleModal(open) { document.getElementById('modal').classList.toggle('active', open); }
         function closeModal(e) { if (e.target.id === 'modal') toggleModal(false); }
 
-        function createCardHTML(mod, listNoticeLabel = '') {
+        function createCardHTML(mod) {
             const isSelected = selections[mod.module_code] ? 'selected' : '';
             const btnText = mod.compulsory ? 'Compulsory Base' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
             const btnDisabled = mod.compulsory ? 'disabled style="cursor:not-allowed; background:#d4edda; color:#155724; border-color:#c3e6cb;"' : '';
@@ -1220,8 +1205,6 @@
                 assessmentSummary = mod.assessments.map(a => a.short_description || a.description).join(', ');
             }
 
-            let categoryBadge = listNoticeLabel ? `<span class="badge" style="background:#edf2f7; color:#2d3748; border:1px solid #cbd5e0;">${listNoticeLabel}</span>` : '';
-
             return `
                 <div class="module-card ${isSelected}" onclick="showDetails('${mod.module_code}')">
                     <div class="module-header">
@@ -1232,7 +1215,6 @@
                     <div class="module-meta">
                         <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
                         <span class="badge badge-term">${termString}</span>
-                        ${categoryBadge}
                     </div>
                     <p class="module-desc" style="font-size: 0.85rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;"><strong>Description:</strong> ${descSnippet}</p>
                     <p class="card-subtext"><strong>Leader:</strong> ${mod.module_leader || 'TBC'}</p>
@@ -1264,17 +1246,11 @@
                     if (m.assessments && m.assessments.length > 0) {
                         assessPrint = m.assessments.map(a => `${a.description} (${a.percent_of_module ? Math.round(a.percent_of_module * 100) + '%' : 'Formative'})`).join('<br>');
                     }
-                    
-                    let listSuffix = '';
-                    if (currentProgrammeObj.isCivilPathwayGroup && currentLevelObj.level === 4 && !m.compulsory) {
-                        listSuffix = (m.module_code === 'CIVE5013M' || m.module_code === 'CIVE5025M') ? ' [List A]' : ' [List B]';
-                    }
-
                     return `
                         <tr>
                             <td style="font-weight: bold; white-space: nowrap;">
                                 ${m.module_code}
-                                <span class="print-badge">${m.compulsory ? 'Compulsory' : 'Optional'}${listSuffix}</span>
+                                <span class="print-badge">${m.compulsory ? 'Compulsory' : 'Optional'}</span>
                             </td>
                             <td style="font-weight: 500;">${m.module_title}</td>
                             <td style="text-align: center;">${m.credits}</td>
@@ -1343,22 +1319,7 @@
             if (comps.length > 0) html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
             
             if (opts.length > 0) {
-                // Specific parsing verification rule layer to sort and append explicit structural headings for Civil MEng Year 4
-                if (currentProgrammeObj.isCivilPathwayGroup && currentLevelObj.level === 4) {
-                    const listAModules = opts.filter(m => m.module_code === 'CIVE5013M' || m.module_code === 'CIVE5025M');
-                    const listBModules = opts.filter(m => m.module_code !== 'CIVE5013M' && m.module_code !== 'CIVE5025M');
-                    
-                    if (listAModules.length > 0) {
-                        html += `<div class="section-divider"><hr><h3>Optional Modules — List A (Choose at least one if selecting options)</h3></div>`;
-                        html += listAModules.map(m => createCardHTML(m, 'List A')).join('');
-                    }
-                    if (listBModules.length > 0) {
-                        html += `<div class="section-divider"><hr><h3>Optional Modules — List B</h3></div>`;
-                        html += listBModules.map(m => createCardHTML(m, 'List B')).join('');
-                    }
-                } else {
-                    html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
-                }
+                html += `<div class="section-divider"><hr><h3>Optional Modules</h3></div>` + opts.map(m => createCardHTML(m)).join('');
             } else {
                 html += `
                     <div class="section-divider">
