@@ -856,7 +856,7 @@
                     prog.specUcas = "N/A";
                     prog.specDuration = "12 Months";
                     prog.specAttendance = "Full Time";
-                    Professor Peter Woodward";
+                    prog.specManager = "Professor Peter Woodward";
                     prog.specEmail = "P.K.Woodward@leeds.ac.uk";
                     prog.specTotalCredits = "180";
                     prog.isMScType = true;
@@ -887,7 +887,7 @@
                         });
                     }
                 }
-                // Rule set Y: MSc Transport Infrastructure: Design and Construction
+                // Rule set Z: MSc Transport Infrastructure: Design and Construction
                 else if (titleLower.includes('transport infrastructure') || titleLower.includes('transport infrastructure: design and construction') || titleLower.includes('ti-f')) {
                     prog.programme_title = "MSc (Eng) Transport Infrastructure: Design and Construction";
                     prog.specCode = "MSE-CV/TI-F";
@@ -939,12 +939,7 @@
                     
                     if (prog.levels) {
                         prog.levels.forEach(lvl => {
-                            // Translate Level 5 directly to Year 4 per instruction requirements
-                            if (lvl.level === 5) {
-                                lvl.friendlyYearLabel = "Year 4";
-                            } else {
-                                lvl.friendlyYearLabel = `Year ${lvl.level}`;
-                            }
+                            lvl.friendlyYearLabel = `Year ${lvl.level}`;
                             lvl.targetOverrideCredits = 120;
                         });
                     }
