@@ -684,6 +684,7 @@
         </section>
     </main>
 
+    <!-- Interactive Module Detail View Modal Section Popup -->
     <div class="modal-overlay" id="modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="toggleModal(false)">&times;</button>
@@ -691,6 +692,7 @@
         </div>
     </div>
 
+    <!-- Mandatory Informational Enrollment Site Disclaimer Modal Layout -->
     <div class="modal-overlay" id="disclaimer-modal">
         <div class="modal-container" style="max-width: 500px; text-align: center;">
             <div style="color: var(--secondary); margin-bottom: 1rem;">
@@ -789,19 +791,17 @@
                 const titleLower = prog.programme_title.toLowerCase();
                 
                 // --- Tailored Suffix Exception Patch for CIVE5013 ---
-                // Dynamically normalises CIVE5013 to CIVE5013M for Core Civil (1779) and Civil & Structural (1781)
                 if ((prog.prog_id == 1779 || prog.prog_id == 1781) && prog.levels) {
                     prog.levels.forEach(lvl => {
                         if (lvl.level === 5 && lvl.modules) {
                             lvl.modules.forEach(mod => {
                                 if (mod.module_code === "CIVE5013") {
-                                    mod.module_code = "CIVE5013M"; // Normalises suffix to match List B pathway code rules
+                                    mod.module_code = "CIVE5013M";
                                 }
                             });
                         }
                     });
                 }
-                // -----------------------------------------------------
                 
                 // Rule set A: MArch, MEng Architecture (5 year)
                 if (titleLower.includes('architecture (5 year)') || titleLower.includes('architecture (5-year)') || prog.prog_id == 1778) {
@@ -1027,7 +1027,7 @@
                     prog.specUcas = "H204";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
-                    prog.specManager = "Mohsen Besharat";
+                    prog.specManager = "Ashani Ranathunga";
                     prog.specEmail = "M.Besharat@leeds.ac.uk";
                     prog.specTotalCredits = "480";
                     prog.isMScType = false;
@@ -1050,7 +1050,7 @@
                     prog.specUcas = "H291";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
-                    prog.specManager = "Mohsen Besharat";
+                    prog.specManager = "Ashani Ranathunga";
                     prog.specEmail = "M.Besharat@leeds.ac.uk";
                     prog.specTotalCredits = "480";
                     prog.isMScType = false;
@@ -1073,7 +1073,7 @@
                     prog.specUcas = "H200";
                     prog.specDuration = "4 Years";
                     prog.specAttendance = "Full Time";
-                    prog.specManager = "Mohsen Besharat";
+                    prog.specManager = "Ashani Ranathunga";
                     prog.specEmail = "M.Besharat@leeds.ac.uk";
                     prog.specTotalCredits = "480";
                     prog.isMScType = false;
@@ -1096,7 +1096,7 @@
                     prog.specUcas = "H201";
                     prog.specDuration = "3 Years";
                     prog.specAttendance = "Full Time";
-                    prog.specManager = "Mohsen Besharat";
+                    prog.specManager = "Ashani Ranathunga";
                     prog.specEmail = "M.Besharat@leeds.ac.uk";
                     prog.specTotalCredits = "360";
                     prog.isMScType = false;
