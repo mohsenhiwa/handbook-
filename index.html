@@ -664,8 +664,10 @@
     </aside>
 
     <main class="main-content">
-        <header style="margin-bottom: 1rem;">
+        <header style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
             <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.25rem;">Loading...</h2>
+            <!-- Right-aligned Program Title -->
+            <div id="programme-display-title" style="font-size: 1rem; font-weight: 600; color: var(--text-muted); text-align: right; max-width: 50%;"></div>
         </header>
 
         <section class="programme-spec-panel" id="spec-meta-panel" style="display:none;">
@@ -1196,6 +1198,9 @@
             // Render Specifications Overview Metadata Block if information exists
             const specPanel = document.getElementById('spec-meta-panel');
             const specGrid = document.getElementById('spec-meta-grid');
+            
+            // Set Programme Display Title
+            document.getElementById('programme-display-title').innerText = currentProgrammeObj ? currentProgrammeObj.programme_title : '';
             
             if (currentProgrammeObj && currentProgrammeObj.specCode) {
                 // Apply custom Title formatting to Manager
