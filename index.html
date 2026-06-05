@@ -29,10 +29,10 @@
             color: var(--text-main);
             display: flex;
             min-height: 100vh;
-            padding-top: 110px; /* Offset for the fixed head bar */
+            padding-top: 190px; /* Offset expanded to accommodate Global Search header banner layout wrapper zone */
         }
 
-        /* Top Branded Head Bar */
+        /* Top Branded Head Bar & Global Search Component Wrapper Zone */
         .top-header {
             position: fixed;
             top: 0;
@@ -41,6 +41,7 @@
             z-index: 2000;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .top-header-main {
@@ -71,6 +72,59 @@
             letter-spacing: 0.3px;
         }
 
+        /* Branded Cross-Programme Global Search Engine Layout Control Bar */
+        .global-search-banner {
+            background-color: #e9ecef;
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            height: 60px;
+        }
+
+        .global-search-label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .global-search-input-box {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .global-search-input-box input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .global-search-input-box input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(165, 24, 30, 0.15);
+        }
+
+        .global-search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
         /* Layout Structure */
         .sidebar {
             width: 320px;
@@ -78,8 +132,8 @@
             color: white;
             padding: 2rem 1.5rem;
             position: fixed;
-            top: 110px;
-            height: calc(100vh - 110px);
+            top: 170px; /* Shift down corresponding layout profiles context rules */
+            height: calc(100vh - 170px);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -377,6 +431,7 @@
         .badge-compulsory { background: #e6fffa; color: #1d4ed8; border: 1px solid #bfdbfe; }
         .badge-optional { background: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
         .badge-term { background: #f3f4f6; color: #374151; }
+        .badge-global-context { background: #e2e8f0; color: #475569; border: 1px solid #cbd5e1; font-size: 0.75rem; margin-top: 0.4rem; display: inline-block; }
 
         .module-desc {
             font-size: 0.9rem;
@@ -421,6 +476,25 @@
         .module-card.selected {
             border-color: var(--success);
             box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+        }
+
+        .jump-route-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .jump-route-btn:hover {
+            background-color: var(--secondary);
         }
 
         /* Section Dividers */
@@ -529,7 +603,8 @@
         }
 
         @media (max-width: 768px) {
-            body { flex-direction: column; }
+            body { padding-top: 250px; flex-direction: column; }
+            .global-search-banner { flex-direction: column; height: auto; padding: 1rem 1.5rem; gap: 0.5rem; }
             .top-header-main, .top-header-sub { padding: 0 1.5rem; }
             .sidebar { width: 100%; height: auto; position: relative; top: 0; padding: 1.5rem; }
             .main-content { margin-left: 0; padding: 1.5rem; }
@@ -636,6 +711,17 @@
         <div class="top-header-sub">
             School of Civil Engineering
         </div>
+        <!-- Branded Global Cross-Programme Search System -->
+        <div class="global-search-banner">
+            <div class="global-search-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Global Search (All Degrees):
+            </div>
+            <div class="global-search-input-box">
+                <input type="text" id="global-cross-search" placeholder="Type a module code, name, staff member, keyword, or assessment criteria (e.g. 'Exam', 'Dissertation') across all paths..." oninput="executeGlobalCrossSearch()">
+                <span class="global-search-icon">🔍</span>
+            </div>
+        </div>
     </header>
 
     <aside class="sidebar">
@@ -677,7 +763,7 @@
 
         <section class="controls-panel" id="controls-panel">
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search module names, keywords or codes..." oninput="filterModules()">
+                <input type="text" id="search-input" placeholder="Search current year modules..." oninput="filterModules()">
             </div>
             <button class="filter-btn active" data-filter="Full Year" onclick="setTermFilter('Full Year', this)">Full Year</button>
             <button class="filter-btn" data-filter="Semester 1" onclick="setTermFilter('Semester 1', this)">Semester 1</button>
@@ -754,6 +840,7 @@
         let currentLevelObj = null;
         let currentTermFilter = 'Full Year'; // Default Tab
         let selections = {}; 
+        let globalSearchActive = false;
 
         // Module Groups for final level routing pathways
         const LIST_A_CODES = ['CIVE5145M', 'CIVE5670M', 'CIVE5960M'];
@@ -1239,7 +1326,13 @@
                     }
 
                     li.innerHTML = `${levelName} <span id="ind-level-${lvl.level}">${initialCredits} cr</span>`;
-                    li.onclick = () => switchLevel(lvl.level);
+                    li.onclick = () => {
+                        // Clear global search context to allow navigation
+                        document.getElementById('global-cross-search').value = '';
+                        globalSearchActive = false;
+                        document.getElementById('controls-panel').style.display = 'flex';
+                        switchLevel(lvl.level);
+                    };
                     navContainer.appendChild(li);
                 });
                 if (currentProgrammeObj.levels.length > 0) switchLevel(currentProgrammeObj.levels[0].level);
@@ -1277,6 +1370,167 @@
         }
 
         function filterModules() { render(); }
+
+        // Core Trigger for Global Cross-Programme Search System
+        function executeGlobalCrossSearch() {
+            const query = document.getElementById('global-cross-search').value.toLowerCase().trim();
+            const container = document.getElementById('modules-container');
+            
+            if (query === '') {
+                globalSearchActive = false;
+                document.getElementById('controls-panel').style.display = 'flex';
+                if (currentLevelObj) {
+                    let titleText = currentLevelObj.friendlyYearLabel || `Year ${currentLevelObj.level}`;
+                    document.getElementById('level-title').innerText = titleText;
+                }
+                render();
+                return;
+            }
+
+            globalSearchActive = true;
+            document.getElementById('controls-panel').style.display = 'none';
+            document.getElementById('level-title').innerText = `Global Search Results Matrix`;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+            let resultsHTML = '';
+            let matchedCount = 0;
+
+            // Loop across the absolute total array space
+            allProgrammes.forEach(prog => {
+                if (!prog.levels) return;
+                prog.levels.forEach(lvl => {
+                    if (!lvl.modules) return;
+                    lvl.modules.forEach(mod => {
+                        // Gather descriptive search criteria strings safely
+                        const code = (mod.module_code || '').toLowerCase();
+                        const title = (mod.module_title || '').toLowerCase();
+                        const desc = (mod.module_description || '').toLowerCase();
+                        
+                        const leaderClean = getCleanName(mod.module_leader || '');
+                        const leaderTitle = STAFF_TITLES[leaderClean] || 'NoT';
+                        const leaderDisplay = leaderTitle === 'NoT' ? leaderClean : `${leaderTitle} ${leaderClean}`;
+                        const leaderSearchStr = leaderDisplay.toLowerCase();
+
+                        // Loop text nodes in assessments block array criteria rules
+                        let assessmentMatch = false;
+                        if (mod.assessments) {
+                            mod.assessments.forEach(ass => {
+                                if ((ass.description || '').toLowerCase().includes(query) || 
+                                    (ass.short_description || '').toLowerCase().includes(query)) {
+                                    assessmentMatch = true;
+                                }
+                            });
+                        }
+
+                        // Evaluate Boolean Conditional Formula Mapping Vector
+                        if (code.includes(query) || title.includes(query) || desc.includes(query) || leaderSearchStr.includes(query) || assessmentMatch) {
+                            matchedCount++;
+                            const termString = getTermString(mod.semester);
+                            
+                            let assessmentSummary = 'No assessment info tracked.';
+                            if (mod.assessments && mod.assessments.length > 0) {
+                                assessmentSummary = mod.assessments.map(a => a.short_description || a.description).join(', ');
+                            }
+
+                            const yearLabel = lvl.friendlyYearLabel || `Level ${lvl.level}`;
+
+                            resultsHTML += `
+                                <div class="module-card" onclick="openGlobalModuleContextModal('${prog.prog_id}', ${lvl.level}, '${mod.module_code}')">
+                                    <div class="module-header">
+                                        <span class="module-code">${mod.module_code}</span>
+                                        <span class="module-credits">${mod.credits} Credits</span>
+                                    </div>
+                                    <h3 class="module-title">${mod.module_title}</h3>
+                                    <div class="module-meta">
+                                        <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
+                                        <span class="badge badge-term">${termString}</span>
+                                    </div>
+                                    <div class="badge badge-global-context">
+                                        📍 ${prog.programme_short_title || prog.programme_title} — ${yearLabel}
+                                    </div>
+                                    <p class="module-desc" style="font-size: 0.85rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: 0.5rem;"><strong>Description:</strong> ${desc || 'No description available.'}</p>
+                                    <p class="card-subtext"><strong>Leader:</strong> ${leaderDisplay}</p>
+                                    <p class="card-subtext" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;"><strong>Assessment:</strong> ${assessmentSummary}</p>
+                                    <button class="jump-route-btn" onclick="jumpToTargetProgrammeRoute(event, '${prog.prog_id}', ${lvl.level})">Jump to Programme Layout →</button>
+                                </div>
+                            `;
+                        }
+                    });
+                });
+            });
+
+            if (matchedCount === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No records discovered matching criteria "${query}" across the database universe.</div>`;
+            } else {
+                container.innerHTML = resultsHTML;
+            }
+        }
+
+        // Handles dynamic view shifting logic loops
+        function jumpToTargetProgrammeRoute(event, progId, levelNum) {
+            event.stopPropagation(); // Avoid triggering details modal opening
+            document.getElementById('programme-selector').value = progId;
+            
+            // Clear search string references safely
+            document.getElementById('global-cross-search').value = '';
+            globalSearchActive = false;
+            document.getElementById('controls-panel').style.display = 'flex';
+
+            switchProgramme();
+            switchLevel(levelNum);
+            
+            // Auto scroll browser window viewport back up to workspace view smoothly
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        // Modal context anchor lookup tracker loops
+        function openGlobalModuleContextModal(progId, levelNum, moduleCode) {
+            const targetProg = allProgrammes.find(p => p.prog_id == progId);
+            const targetLvl = targetProg.levels.find(l => l.level === levelNum);
+            const mod = targetLvl.modules.find(m => m.module_code === moduleCode);
+            
+            const termString = getTermString(mod.semester);
+            let descHtml = mod.module_description && mod.module_description.trim() !== "" ? mod.module_description : 'No description available.';
+
+            let assessmentsHtml = '';
+            if (mod.assessments && mod.assessments.length > 0) {
+                assessmentsHtml = '<ul style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 1.6; color: #4a5568;">';
+                mod.assessments.forEach(ass => {
+                    let weight = ass.percent_of_module ? Math.round(ass.percent_of_module * 100) + '%' : 'Formative';
+                    let date = ass.submission_date ? ass.submission_date : 'TBC';
+                    assessmentsHtml += `<li><strong>${ass.description}</strong> (${weight}) - Due: ${date}</li>`;
+                });
+                assessmentsHtml += '</ul>';
+            } else {
+                assessmentsHtml = '<p style="margin-top: 0.25rem; color: #718096; font-style: italic;">No assessment information available.</p>';
+            }
+
+            let notesHtml = mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Notes:</strong> ${mod.notes}</p>` : '';
+            
+            const cleanName = getCleanName(mod.module_leader || 'TBC');
+            const title = STAFF_TITLES[cleanName] || 'NoT';
+            const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
+            const content = `
+                <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:0.5rem;">
+                    Context: ${targetProg.programme_title} (${targetLvl.friendlyYearLabel || 'Level ' + levelNum})
+                </div>
+                <span class="module-code">${mod.module_code}</span>
+                <h3 style="margin: 1rem 0 0.5rem 0; font-size: 1.5rem;">${mod.module_title}</h3>
+                <div style="margin-bottom: 1.25rem;">
+                    <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
+                    <span class="badge badge-term">${termString}</span>
+                    <span class="badge" style="background:#e2e8f0;">${mod.credits} Credits</span>
+                </div>
+                <hr style="border:0; border-top:1px solid var(--border); margin-bottom:1rem;">
+                <p style="color:#4a5568; margin-bottom: 0.75rem;"><strong>Module Leader:</strong> ${leaderDisplay}</p>
+                <div style="margin-bottom: 1rem; color: #2d3748; line-height: 1.5;"><strong>Description:</strong> <p style="margin-top:0.25rem; color:#4a5568;">${descHtml}</p></div>
+                <div style="margin-bottom: 1rem; color: #2d3748;"><strong>Assessment Breakdown:</strong> ${assessmentsHtml}</div>
+                ${notesHtml}
+            `;
+            document.getElementById('modal-content').innerHTML = content;
+            toggleModal(true);
+        }
 
         function toggleModuleSelection(id, event) {
             event.stopPropagation(); 
@@ -1405,7 +1659,7 @@
         }
 
         function updateTrackers() {
-            if(!currentProgrammeObj) return;
+            if(!currentProgrammeObj || globalSearchActive) return;
             currentProgrammeObj.levels.forEach(lvl => {
                 let lvlTotal = 0;
                 lvl.modules.forEach(m => { if(selections[m.module_code] && lvl.level === currentLevelObj.level) lvlTotal += m.credits; });
@@ -1471,14 +1725,12 @@
             }
         }
 
-        // Display module description and breakdowns smoothly
         function showDetails(id) {
+            if(globalSearchActive) return; // Prevent double firing inside cross program mode triggers
             const mod = currentLevelObj.modules.find(m => m.module_code === id);
             const termString = getTermString(mod.semester);
             
-            let descHtml = mod.module_description && mod.module_description.trim() !== "" 
-                ? mod.module_description 
-                : 'No description available.';
+            let descHtml = mod.module_description && mod.module_description.trim() !== "" ? mod.module_description : 'No description available.';
 
             let assessmentsHtml = '';
             if (mod.assessments && mod.assessments.length > 0) {
@@ -1527,9 +1779,7 @@
             const btnDisabled = mod.compulsory ? 'disabled style="cursor:not-allowed; background:#d4edda; color:#155724; border-color:#c3e6cb;"' : '';
             const termString = getTermString(mod.semester);
             
-            let descSnippet = mod.module_description && mod.module_description.trim() !== "" 
-                ? mod.module_description 
-                : 'No description available.';
+            let descSnippet = mod.module_description && mod.module_description.trim() !== "" ? mod.module_description : 'No description available.';
 
             let assessmentSummary = 'No assessment information available.';
             if (mod.assessments && mod.assessments.length > 0) {
@@ -1684,6 +1934,7 @@
         }
 
         function render() {
+            if(globalSearchActive) return; // Yield rendering sequence if multi program layout engine is running
             const container = document.getElementById('modules-container');
             const searchVal = document.getElementById('search-input').value.toLowerCase();
             if (!currentLevelObj || !currentLevelObj.modules) return;
