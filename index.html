@@ -29,7 +29,7 @@
             color: var(--text-main);
             display: flex;
             min-height: 100vh;
-            padding-top: 190px; /* Offset to accommodate Global Search header banner layout wrapper zone */
+            padding-top: 190px; /* Offset expanded to accommodate Global Search header banner layout wrapper zone */
         }
 
         /* Top Branded Head Bar & Global Search Component Wrapper Zone */
@@ -711,6 +711,7 @@
         <div class="top-header-sub">
             School of Civil Engineering
         </div>
+        <!-- Branded Global Cross-Programme Search System -->
         <div class="global-search-banner">
             <div class="global-search-label">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -751,6 +752,7 @@
     <main class="main-content">
         <header style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
             <h2 id="level-title" style="font-size: 1.8rem; margin-bottom: 0.25rem;">Loading...</h2>
+            <!-- Right-aligned Program Title -->
             <div id="programme-display-title" style="font-size: 1rem; font-weight: 600; color: var(--text-muted); text-align: right; max-width: 50%;"></div>
         </header>
 
@@ -779,6 +781,7 @@
         </section>
     </main>
 
+    <!-- Interactive Module Detail View Modal Section Popup -->
     <div class="modal-overlay" id="modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="toggleModal(false)">&times;</button>
@@ -786,6 +789,7 @@
         </div>
     </div>
 
+    <!-- Mandatory Informational Enrollment Site Disclaimer Modal Layout -->
     <div class="modal-overlay" id="disclaimer-modal">
         <div class="modal-container" style="max-width: 500px; text-align: center;">
             <div style="color: var(--secondary); margin-bottom: 1rem;">
@@ -1300,7 +1304,7 @@
                     <div class="spec-item"><strong>Programme Leader:</strong> ${managerDisplay}</div>
                     <div class="spec-item" style="grid-column: 1 / -1;"><strong>Contact:</strong> <a href="mailto:${currentProgrammeObj.specEmail}" style="color:var(--secondary); text-decoration:none; font-weight:600;">${currentProgrammeObj.specEmail}</a></div>
                 `;
-                if (!globalSearchActive) specPanel.style.display = 'block';
+                specPanel.style.display = 'block';
             } else {
                 specPanel.style.display = 'none';
             }
@@ -1371,18 +1375,10 @@
         function executeGlobalCrossSearch() {
             const query = document.getElementById('global-cross-search').value.toLowerCase().trim();
             const container = document.getElementById('modules-container');
-            const specPanel = document.getElementById('spec-meta-panel');
-            const displayTitle = document.getElementById('programme-display-title');
             
             if (query === '') {
                 globalSearchActive = false;
                 document.getElementById('controls-panel').style.display = 'flex';
-                if (currentProgrammeObj && currentProgrammeObj.specCode) {
-                    specPanel.style.display = 'block';
-                }
-                if (currentProgrammeObj) {
-                    displayTitle.innerText = currentProgrammeObj.programme_title;
-                }
                 if (currentLevelObj) {
                     let titleText = currentLevelObj.friendlyYearLabel || `Year ${currentLevelObj.level}`;
                     document.getElementById('level-title').innerText = titleText;
@@ -1393,8 +1389,6 @@
 
             globalSearchActive = true;
             document.getElementById('controls-panel').style.display = 'none';
-            specPanel.style.display = 'none'; // Hide specification overview board card
-            displayTitle.innerText = ''; // Clear default program title reference
             document.getElementById('level-title').innerText = `Global Search Results Matrix`;
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
 
@@ -1538,6 +1532,407 @@
             toggleModal(true);
         }
 
+        function toggleModuleSelection(id, event) {
+            event.stopPropagation(); 
+            const mod = currentLevelObj.modules.find(m => m.module_code === id);
+            if (mod.compulsory) return;
+
+            let targetCredits = (currentLevelObj && currentLevelObj.targetOverrideCredits) ? currentLevelObj.targetOverrideCredits : 120;
+            const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
+
+            // Global Selection Lock Check Rule
+            if (!selections[id] && currentTotal >= targetCredits) {
+                alert(`Selection Blocked: Maximum allowed credit limit of ${targetCredits} credits has already been achieved.`);
+                return;
+            }
+
+            // Programme Specific Selection Pathway Controls for prog_id 1779 Final Year (Level 5)
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                const chosenListB = currentLevelObj.modules.filter(m => LIST_B_CODES_1779.includes(m.module_code) && selections[m.module_code]);
+
+                if (!selections[id]) {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length >= 2) {
+                        alert("Selection Blocked: You can select a maximum of two modules from List A options.");
+                        return;
+                    }
+                    if (LIST_B_CODES_1779.includes(id)) {
+                        if (chosenListA.length < 1) {
+                            alert("Selection Blocked: You must select at least one module from List A before unlocking modules from List B.");
+                            return;
+                        }
+                        if (chosenListB.length >= 2) {
+                            alert("Selection Blocked: You can select a maximum of two modules from List B options.");
+                            return;
+                        }
+                    }
+                } else {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length === 1 && chosenListB.length > 0) {
+                        alert("Deselection Blocked: You must retain at least one selection from List A because you have active List B modules checked.");
+                        return;
+                    }
+                }
+            }
+
+            // Programme Specific Selection Pathway Controls for prog_id 1788 Final Year (Level 5)
+            if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                const chosenListB = currentLevelObj.modules.filter(m => LIST_B_CODES_1788.includes(m.module_code) && selections[m.module_code]);
+
+                if (!selections[id]) {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length >= 1) {
+                        alert("Selection Blocked: You can select a maximum of one module from List A options.");
+                        return;
+                    }
+                    if (LIST_B_CODES_1788.includes(id)) {
+                        if (chosenListA.length < 1) {
+                            alert("Selection Blocked: You must select one module from List A before unlocking modules from List B.");
+                            return;
+                        }
+                        if (chosenListB.length >= 2) {
+                            alert("Selection Blocked: You can select a maximum of two modules from List B options.");
+                            return;
+                        }
+                    }
+                } else {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length === 1 && chosenListB.length > 0) {
+                        alert("Deselection Blocked: You must retain your selection from List A because you have active List B modules checked.");
+                        return;
+                    }
+                }
+            }
+
+            // Programme Specific Selection Pathway Controls for prog_id 1781 Final Year (Level 5)
+            if (currentProgrammeObj.prog_id == 1781 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                const chosenListB = currentLevelObj.modules.filter(m => LIST_B_CODES_1781.includes(m.module_code) && selections[m.module_code]);
+                const chosenListC = currentLevelObj.modules.filter(m => LIST_C_CODES_1781.includes(m.module_code) && selections[m.module_code]);
+
+                if (!selections[id]) {
+                    if (LIST_A_CODES.includes(id) && chosenListA.length >= 2) {
+                        alert("Selection Blocked: You can select a maximum of two modules from List A options.");
+                        return;
+                    }
+                    if (LIST_B_CODES_1781.includes(id)) {
+                        if (chosenListA.length < 1) {
+                            alert("Selection Blocked: You must select at least one module from List A before unlocking modules from List B.");
+                            return;
+                        }
+                        if (chosenListB.length >= 2) {
+                            alert("Selection Blocked: You can select a maximum of two modules from List B options.");
+                            return;
+                        }
+                    }
+                    if (LIST_C_CODES_1781.includes(id)) {
+                        if ((chosenListA.length + chosenListB.length) < 2) {
+                            alert("Selection Blocked: You must select a total of at least two modules across Lists A and B combined before unlocking modules from List C.");
+                            return;
+                        }
+                        if (chosenListC.length >= 1) {
+                            alert("Selection Blocked: You can select a maximum of one module from List C options.");
+                            return;
+                        }
+                    }
+                } else {
+                    if (LIST_A_CODES.includes(id)) {
+                        if (chosenListA.length === 1 && chosenListB.length > 0) {
+                            alert("Deselection Blocked: You must retain at least one selection from List A because you have active List B modules checked.");
+                            return;
+                        }
+                        if (chosenListC.length > 0 && ((chosenListA.length + chosenListB.length) === 2)) {
+                            alert("Deselection Blocked: You cannot reduce your combined List A and List B total below two modules while a List C option remains checked.");
+                            return;
+                        }
+                    }
+                    if (LIST_B_CODES_1781.includes(id)) {
+                        if (chosenListC.length > 0 && ((chosenListA.length + chosenListB.length) === 2)) {
+                            alert("Deselection Blocked: You cannot reduce your combined List A and List B total below two modules while a List C option remains checked.");
+                            return;
+                        }
+                    }
+                }
+            }
+
+            selections[id] = !selections[id];
+            render();
+            updateTrackers();
+        }
+
+        function updateTrackers() {
+            if(!currentProgrammeObj || globalSearchActive) return;
+            currentProgrammeObj.levels.forEach(lvl => {
+                let lvlTotal = 0;
+                lvl.modules.forEach(m => { if(selections[m.module_code] && lvl.level === currentLevelObj.level) lvlTotal += m.credits; });
+                const ind = document.getElementById(`ind-level-${lvl.level}`);
+                if(ind && lvl.level === currentLevelObj.level) ind.innerText = `${lvlTotal} cr`;
+            });
+
+            let targetCredits = (currentLevelObj && currentLevelObj.targetOverrideCredits) ? currentLevelObj.targetOverrideCredits : 120;
+            const currentTotal = currentLevelObj.modules.filter(m => selections[m.module_code]).reduce((sum, m) => sum + m.credits, 0);
+            
+            const compulsoryTotal = currentLevelObj.modules.filter(m => m.compulsory).reduce((sum, m) => sum + m.credits, 0);
+            if (compulsoryTotal > targetCredits) targetCredits = compulsoryTotal;
+
+            const percentage = Math.min((currentTotal / targetCredits) * 100, 100);
+            document.getElementById('credit-status-text').innerText = `${currentTotal} / ${targetCredits} Credits`;
+            document.getElementById('tracker-fill').style.width = `${percentage}%`;
+            
+            const msg = document.getElementById('tracker-message');
+            const fill = document.getElementById('tracker-fill');
+            
+            let isPathwayViolation = false;
+            let violationText = '';
+
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    isPathwayViolation = true;
+                    violationText = '⚠️ Pathway Rule Violation: You must select at least one module from List A options.';
+                }
+            }
+
+            if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    isPathwayViolation = true;
+                    violationText = '⚠️ Pathway Rule Violation: You must select one module from List A options.';
+                }
+            }
+
+            if (currentProgrammeObj.prog_id == 1781 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    isPathwayViolation = true;
+                    violationText = '⚠️ Pathway Rule Violation: You must select at least one module from List A options.';
+                }
+            }
+
+            if (isPathwayViolation) {
+                fill.style.backgroundColor = 'var(--secondary)';
+                msg.innerText = violationText;
+                msg.style.color = 'var(--secondary)';
+                msg.style.fontWeight = '700';
+            } else if (currentTotal >= targetCredits) { 
+                fill.style.backgroundColor = 'var(--success)';
+                msg.innerText = '⚠️ Maximum credit allowance achieved. Selection locked.'; 
+                msg.style.color = 'var(--success)'; 
+                msg.style.fontWeight = '700';
+            } else { 
+                fill.style.backgroundColor = 'orange'; 
+                msg.innerText = `Requires ${targetCredits - currentTotal} more credits to complete curriculum.`; 
+                msg.style.color = 'var(--warning)'; 
+                msg.style.fontWeight = 'normal';
+            }
+        }
+
+        function showDetails(id) {
+            if(globalSearchActive) return; // Prevent double firing inside cross program mode triggers
+            const mod = currentLevelObj.modules.find(m => m.module_code === id);
+            const termString = getTermString(mod.semester);
+            
+            let descHtml = mod.module_description && mod.module_description.trim() !== "" ? mod.module_description : 'No description available.';
+
+            let assessmentsHtml = '';
+            if (mod.assessments && mod.assessments.length > 0) {
+                assessmentsHtml = '<ul style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 1.6; color: #4a5568;">';
+                mod.assessments.forEach(ass => {
+                    let weight = ass.percent_of_module ? Math.round(ass.percent_of_module * 100) + '%' : 'Formative';
+                    let date = ass.submission_date ? ass.submission_date : 'TBC';
+                    assessmentsHtml += `<li><strong>${ass.description}</strong> (${weight}) - Due: ${date}</li>`;
+                });
+                assessmentsHtml += '</ul>';
+            } else {
+                assessmentsHtml = '<p style="margin-top: 0.25rem; color: #718096; font-style: italic;">No assessment information available.</p>';
+            }
+
+            let notesHtml = mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Notes:</strong> ${mod.notes}</p>` : '';
+            
+            // Format Module Leader Name
+            const cleanName = getCleanName(mod.module_leader || 'TBC');
+            const title = STAFF_TITLES[cleanName] || 'NoT';
+            const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
+            const content = `
+                <span class="module-code">${mod.module_code}</span>
+                <h3 style="margin: 1rem 0 0.5rem 0; font-size: 1.5rem;">${mod.module_title}</h3>
+                <div style="margin-bottom: 1.25rem;">
+                    <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
+                    <span class="badge badge-term">${termString}</span>
+                    <span class="badge" style="background:#e2e8f0;">${mod.credits} Credits</span>
+                </div>
+                <hr style="border:0; border-top:1px solid var(--border); margin-bottom:1rem;">
+                <p style="color:#4a5568; margin-bottom: 0.75rem;"><strong>Module Leader:</strong> ${leaderDisplay}</p>
+                <div style="margin-bottom: 1rem; color: #2d3748; line-height: 1.5;"><strong>Description:</strong> <p style="margin-top:0.25rem; color:#4a5568;">${descHtml}</p></div>
+                <div style="margin-bottom: 1rem; color: #2d3748;"><strong>Assessment Breakdown:</strong> ${assessmentsHtml}</div>
+                ${notesHtml}
+            `;
+            document.getElementById('modal-content').innerHTML = content;
+            toggleModal(true);
+        }
+
+        function toggleModal(open) { document.getElementById('modal').classList.toggle('active', open); }
+        function closeModal(e) { if (e.target.id === 'modal') toggleModal(false); }
+
+        function createCardHTML(mod) {
+            const isSelected = selections[mod.module_code] ? 'selected' : '';
+            const btnText = mod.compulsory ? 'Compulsory Base' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
+            const btnDisabled = mod.compulsory ? 'disabled style="cursor:not-allowed; background:#d4edda; color:#155724; border-color:#c3e6cb;"' : '';
+            const termString = getTermString(mod.semester);
+            
+            let descSnippet = mod.module_description && mod.module_description.trim() !== "" ? mod.module_description : 'No description available.';
+
+            let assessmentSummary = 'No assessment information available.';
+            if (mod.assessments && mod.assessments.length > 0) {
+                assessmentSummary = mod.assessments.map(a => a.short_description || a.description).join(', ');
+            }
+
+            // Format Module Leader Name
+            const cleanName = getCleanName(mod.module_leader || 'TBC');
+            const title = STAFF_TITLES[cleanName] || 'NoT';
+            const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
+            return `
+                <div class="module-card ${isSelected}" onclick="showDetails('${mod.module_code}')">
+                    <div class="module-header">
+                        <span class="module-code">${mod.module_code}</span>
+                        <span class="module-credits">${mod.credits} Credits</span>
+                    </div>
+                    <h3 class="module-title">${mod.module_title}</h3>
+                    <div class="module-meta">
+                        <span class="badge ${mod.compulsory ? 'badge-compulsory' : 'badge-optional'}">${mod.compulsory ? 'Compulsory' : 'Optional'}</span>
+                        <span class="badge badge-term">${termString}</span>
+                    </div>
+                    <p class="module-desc" style="font-size: 0.85rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;"><strong>Description:</strong> ${descSnippet}</p>
+                    <p class="card-subtext"><strong>Leader:</strong> ${leaderDisplay}</p>
+                    <p class="card-subtext" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;"><strong>Assessment:</strong> ${assessmentSummary}</p>
+                    <div class="card-actions">
+                        <button class="select-btn" ${btnDisabled} onclick="toggleModuleSelection('${mod.module_code}', event)">${btnText}</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Compile clean academic enrollment document dataset block for PDF compilation
+        function executeDocumentPrint() {
+            const container = document.getElementById('print-output-element');
+            if (!currentProgrammeObj || !currentLevelObj) return;
+
+            if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    alert("Submission Blocked: You must satisfy the architecture rules and select at least one option from List A before generating documents.");
+                    return;
+                }
+            }
+
+            if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    alert("Submission Blocked: You must satisfy the architecture rules and select one option from List A before generating documents.");
+                    return;
+                }
+            }
+
+            if (currentProgrammeObj.prog_id == 1781 && currentLevelObj.level === 5) {
+                const chosenListA = currentLevelObj.modules.filter(m => LIST_A_CODES.includes(m.module_code) && selections[m.module_code]);
+                if (chosenListA.length < 1) {
+                    alert("Submission Blocked: You must satisfy the architecture rules and select at least one option from List A before generating documents.");
+                    return;
+                }
+            }
+
+            let levelLabel = currentLevelObj.friendlyYearLabel || `Level ${currentLevelObj.level}`;
+
+            const chosenModules = currentLevelObj.modules.filter(m => selections[m.module_code]);
+            const netCredits = chosenModules.reduce((sum, m) => sum + m.credits, 0);
+            const todayStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            let rowsHtml = '';
+            if (chosenModules.length === 0) {
+                rowsHtml = `<tr><td colspan="6" style="text-align: center; padding: 15px;">No modules currently selected.</td></tr>`;
+            } else {
+                rowsHtml = chosenModules.map(m => {
+                    let assessPrint = 'No assessment info available.';
+                    if (m.assessments && m.assessments.length > 0) {
+                        assessPrint = m.assessments.map(a => `${a.description} (${a.percent_of_module ? Math.round(a.percent_of_module * 100) + '%' : 'Formative'})`).join('<br>');
+                    }
+                    
+                    let groupContext = m.compulsory ? 'Compulsory' : 'Optional';
+                    if (currentProgrammeObj.prog_id == 1779 && currentLevelObj.level === 5) {
+                        if (LIST_A_CODES.includes(m.module_code)) groupContext = 'List A Option';
+                        if (LIST_B_CODES_1779.includes(m.module_code)) groupContext = 'List B Option';
+                    }
+                    if (currentProgrammeObj.prog_id == 1788 && currentLevelObj.level === 5) {
+                        if (LIST_A_CODES.includes(m.module_code)) groupContext = 'List A Option';
+                        if (LIST_B_CODES_1788.includes(m.module_code)) groupContext = 'List B Option';
+                    }
+                    if (currentProgrammeObj.prog_id == 1781 && currentLevelObj.level === 5) {
+                        if (LIST_A_CODES.includes(m.module_code)) groupContext = 'List A Option';
+                        if (LIST_B_CODES_1781.includes(m.module_code)) groupContext = 'List B Option';
+                        if (LIST_C_CODES_1781.includes(m.module_code)) groupContext = 'List C Option';
+                    }
+
+                    // Format Module Leader Name
+                    const cleanName = getCleanName(m.module_leader || 'TBC');
+                    const title = STAFF_TITLES[cleanName] || 'NoT';
+                    const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
+                    return `
+                        <tr>
+                            <td style="font-weight: bold; white-space: nowrap;">
+                                ${m.module_code}
+                                <span class="print-badge">${groupContext}</span>
+                            </td>
+                            <td style="font-weight: 500;">${m.module_title}</td>
+                            <td style="text-align: center;">${m.credits}</td>
+                            <td>${getTermString(m.semester)}</td>
+                            <td>${leaderDisplay}</td>
+                            <td style="font-size: 9pt; line-height:1.3;">
+                                ${assessPrint}
+                                ${m.notes ? `<div style="margin-top: 4px; color: #444; font-style: italic;"><strong>Note:</strong> ${m.notes}</div>` : ''}
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            container.innerHTML = `
+                <div class="print-header">
+                    <div class="print-title">${currentProgrammeObj.programme_title}</div>
+                    <div class="print-subtitle">Enrolment Selection Record — ${levelLabel}</div>
+                    <div class="print-meta">Generated on ${todayStr} | School of Civil Engineering | University of Leeds</div>
+                </div>
+                
+                <table class="print-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">Code</th>
+                            <th style="width: 28%;">Module Title</th>
+                            <th style="width: 8%; text-align: center;">Credits</th>
+                            <th style="width: 12%;">Term</th>
+                            <th style="width: 15%;">Module Leader</th>
+                            <th style="width: 25%;">Assessment Tasks Weighting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rowsHtml}
+                    </tbody>
+                </table>
+
+                <div class="print-footer">
+                    Total Selection Weight: ${netCredits} Credits
+                </div>
+                
+                <div class="print-disclaimer">
+                    <strong>Important Enrolment Notice</strong><br>
+                    Please be aware that this handbook tool is not an official module enrolment site from the University of Leeds.<br>
+                    This platform is strictly intended as an interactive planning tool for students to check curriculum pathway programme structures, evaluate course options, and model their educational journeys. Final selections must be formally locked inside your student portal profile.
+                </div>
+            `;
+
+            window.print();
+        }
+
         function render() {
             if(globalSearchActive) return; // Yield rendering sequence if multi program layout engine is running
             const container = document.getElementById('modules-container');
@@ -1596,7 +1991,7 @@
                     html += `<div class="section-divider"><h3>Compulsory Modules</h3></div>` + comps.map(m => createCardHTML(m)).join('');
                 }
                 if (listA.length > 0) {
-                    html += `<div class="section-divider"><hr><h3>List A Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You must select between 1 and 2 modules from this cluster.</p></div>` + listA.map(m => createCardHTML(m)).join('');
+                    html += `<div class="section-divider"><hr><h3>List A Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You must select between 1 and 2 modules from List A.</p></div>` + listA.map(m => createCardHTML(m)).join('');
                 }
                 if (listB.length > 0) {
                     html += `<div class="section-divider"><hr><h3>List B Optional Modules</h3><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.25rem;">You may choose up to TWO modules from List B, unlocked only after checking a List A option.</p></div>` + listB.map(m => createCardHTML(m)).join('');
