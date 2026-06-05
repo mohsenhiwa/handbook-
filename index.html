@@ -443,7 +443,7 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Detail Modal Popup */
+        /* Detail Modal Popup & Disclaimer Layout overlay styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -493,6 +493,25 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-muted);
+        }
+
+        /* Disclaimer Specific Popup UI Formatting block style */
+        .disclaimer-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .disclaimer-btn:hover {
+            opacity: 0.9;
         }
 
         .error-state {
@@ -620,7 +639,7 @@
         </div>
 
         <a href="https://eps-apps.leeds.ac.uk/kai/staff/cwt/index.php" target="_blank" class="sidebar-link-btn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             View Assessment Details
         </a>
         
@@ -665,10 +684,28 @@
         </section>
     </main>
 
+    <!-- Interactive Module Detail View Modal Section Popup -->
     <div class="modal-overlay" id="modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="toggleModal(false)">&times;</button>
             <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Mandatory Informational Enrollment Site Disclaimer Modal Layout -->
+    <div class="modal-overlay" id="disclaimer-modal">
+        <div class="modal-container" style="max-width: 500px; text-align: center;">
+            <div style="color: var(--secondary); margin-bottom: 1rem;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3 style="font-size: 1.4rem; margin-bottom: 1rem; color: var(--primary);">Important Enrolment Notice</h3>
+            <p style="color: #4a5568; line-height: 1.5; margin-bottom: 1rem; text-align: left;">
+                Please be aware that this handbook tool is <strong>not an official module enrolment site</strong> from the University of Leeds.
+            </p>
+            <p style="color: #4a5568; line-height: 1.5; text-align: left;">
+                This platform is strictly intended as an interactive planning tool for students to check curriculum pathway programme structures, evaluate course options, and model their educational journeys. Final selections must be formally locked inside your student portal profile.
+            </p>
+            <button class="disclaimer-btn" onclick="dismissDisclaimer()">I Understand & Proceed</button>
         </div>
     </div>
 
@@ -688,6 +725,15 @@
         const LIST_B_CODES_1781 = ['CIVE5013M', 'CIVE5025M', 'CIVE5026M', 'CIVE5437M'];
         const LIST_C_CODES_1781 = ['CIVE5315M', 'CIVE5320M', 'CIVE5595M'];
 
+        // Disclaimer modal pop up logic rule overrides
+        function triggerDisclaimerPopUp() {
+            document.getElementById('disclaimer-modal').classList.add('active');
+        }
+
+        function dismissDisclaimer() {
+            document.getElementById('disclaimer-modal').classList.remove('active');
+        }
+
         // 1. Fetch JSON Data with Cache-Busting
         async function loadData() {
             try {
@@ -701,6 +747,7 @@
                 cleanseProgrammeStructure();
                 
                 populateProgrammeDropdown();
+                triggerDisclaimerPopUp(); // Open prompt overlay once asset arrays load up successfully
             } catch (error) {
                 document.getElementById('modules-container').innerHTML = `
                     <div class="error-state">
