@@ -1,5 +1,5 @@
 {
-    "export_date": "2026-05-28",
+    "export_date": "2026-06-05",
     "year_begin": 2026,
     "year_end": 2027,
     "school": "civil",
@@ -107,9 +107,9 @@
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
-                                    "is_exam": false,
+                                    "is_exam": true,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/03\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Construction Technology and Management in Construction Examination",
@@ -1374,9 +1374,9 @@
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
-                                    "is_exam": false,
+                                    "is_exam": true,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/03\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Construction Technology and Management in Construction Examination",
@@ -1835,7 +1835,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "16\/11\/2026"
+                                    "submission_date": "17\/11\/2026"
                                 }
                             ]
                         },
@@ -2362,6 +2362,15 @@
                             "other_school": "",
                             "assessments": [
                                 {
+                                    "description": "3 hour unseen exam",
+                                    "short_description": "Unseen exam",
+                                    "percent_of_module": 0.7,
+                                    "credits": 7,
+                                    "is_exam": true,
+                                    "is_multi_submission": false,
+                                    "submission_date": "11\/01\/2027"
+                                },
+                                {
                                     "description": "Design Report",
                                     "short_description": "Highway Intersection Design Report",
                                     "percent_of_module": 0.3,
@@ -2369,15 +2378,6 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "12\/11\/2026"
-                                },
-                                {
-                                    "description": "3 hour unseen exam",
-                                    "short_description": "Unseen exam",
-                                    "percent_of_module": 0.7,
-                                    "credits": 7,
-                                    "is_exam": true,
-                                    "is_multi_submission": false,
-                                    "submission_date": "18\/01\/2027"
                                 }
                             ]
                         },
@@ -2767,22 +2767,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
-                                    "short_description": "Individual Report",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "05\/03\/2027"
-                                },
-                                {
                                     "description": "Group Report - Stakeholder Demand and Catchment Management",
                                     "short_description": "Group Report",
                                     "percent_of_module": 0.5,
                                     "credits": 7.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
+                                },
+                                {
+                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
+                                    "short_description": "Individual Report",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/02\/2027"
                                 }
                             ]
                         },
@@ -2808,22 +2808,22 @@
                                     "submission_date": "17\/05\/2027"
                                 },
                                 {
+                                    "description": "Design Project and Written Report",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.4,
+                                    "credits": 6,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/03\/2027"
+                                },
+                                {
                                     "description": "Group Project",
-                                    "short_description": "Concept Design - Peer reviewed",
+                                    "short_description": "Concept Project",
                                     "percent_of_module": 0.1,
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "26\/02\/2027"
-                                },
-                                {
-                                    "description": "Design Exercise Project Report",
-                                    "short_description": "Design Exercise",
-                                    "percent_of_module": 0.4,
-                                    "credits": 6,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
                                 }
                             ]
                         },
@@ -2846,7 +2846,7 @@
                                     "credits": 15,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "07\/05\/2027"
                                 }
                             ]
                         },
@@ -3144,9 +3144,9 @@
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
-                                    "is_exam": false,
+                                    "is_exam": true,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/03\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Construction Technology and Management in Construction Examination",
@@ -4337,9 +4337,9 @@
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
-                                    "is_exam": false,
+                                    "is_exam": true,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/03\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Construction Technology and Management in Construction Examination",
@@ -4830,7 +4830,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "16\/11\/2026"
+                                    "submission_date": "17\/11\/2026"
                                 }
                             ]
                         },
@@ -5307,6 +5307,15 @@
                             "other_school": "",
                             "assessments": [
                                 {
+                                    "description": "3 hour unseen exam",
+                                    "short_description": "Unseen exam",
+                                    "percent_of_module": 0.7,
+                                    "credits": 7,
+                                    "is_exam": true,
+                                    "is_multi_submission": false,
+                                    "submission_date": "11\/01\/2027"
+                                },
+                                {
                                     "description": "Design Report",
                                     "short_description": "Highway Intersection Design Report",
                                     "percent_of_module": 0.3,
@@ -5314,15 +5323,6 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "12\/11\/2026"
-                                },
-                                {
-                                    "description": "3 hour unseen exam",
-                                    "short_description": "Unseen exam",
-                                    "percent_of_module": 0.7,
-                                    "credits": 7,
-                                    "is_exam": true,
-                                    "is_multi_submission": false,
-                                    "submission_date": "18\/01\/2027"
                                 }
                             ]
                         },
@@ -5712,22 +5712,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
-                                    "short_description": "Individual Report",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "05\/03\/2027"
-                                },
-                                {
                                     "description": "Group Report - Stakeholder Demand and Catchment Management",
                                     "short_description": "Group Report",
                                     "percent_of_module": 0.5,
                                     "credits": 7.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
+                                },
+                                {
+                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
+                                    "short_description": "Individual Report",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/02\/2027"
                                 }
                             ]
                         },
@@ -5753,22 +5753,22 @@
                                     "submission_date": "17\/05\/2027"
                                 },
                                 {
+                                    "description": "Design Project and Written Report",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.4,
+                                    "credits": 6,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/03\/2027"
+                                },
+                                {
                                     "description": "Group Project",
-                                    "short_description": "Concept Design - Peer reviewed",
+                                    "short_description": "Concept Project",
                                     "percent_of_module": 0.1,
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "26\/02\/2027"
-                                },
-                                {
-                                    "description": "Design Exercise Project Report",
-                                    "short_description": "Design Exercise",
-                                    "percent_of_module": 0.4,
-                                    "credits": 6,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
                                 }
                             ]
                         },
@@ -5791,7 +5791,7 @@
                                     "credits": 15,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "07\/05\/2027"
                                 }
                             ]
                         },
@@ -6089,9 +6089,9 @@
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
-                                    "is_exam": false,
+                                    "is_exam": true,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/03\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Construction Technology and Management in Construction Examination",
@@ -6509,7 +6509,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "16\/11\/2026"
+                                    "submission_date": "17\/11\/2026"
                                 }
                             ]
                         },
@@ -6885,6 +6885,15 @@
                             "other_school": "",
                             "assessments": [
                                 {
+                                    "description": "3 hour unseen exam",
+                                    "short_description": "Unseen exam",
+                                    "percent_of_module": 0.7,
+                                    "credits": 7,
+                                    "is_exam": true,
+                                    "is_multi_submission": false,
+                                    "submission_date": "11\/01\/2027"
+                                },
+                                {
                                     "description": "Design Report",
                                     "short_description": "Highway Intersection Design Report",
                                     "percent_of_module": 0.3,
@@ -6892,15 +6901,6 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "12\/11\/2026"
-                                },
-                                {
-                                    "description": "3 hour unseen exam",
-                                    "short_description": "Unseen exam",
-                                    "percent_of_module": 0.7,
-                                    "credits": 7,
-                                    "is_exam": true,
-                                    "is_multi_submission": false,
-                                    "submission_date": "18\/01\/2027"
                                 }
                             ]
                         },
@@ -7180,15 +7180,6 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Design Project",
-                                    "short_description": "Design Project",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
-                                },
-                                {
                                     "description": "Standard Exam",
                                     "short_description": "Standard Exam",
                                     "percent_of_module": 0.5,
@@ -7196,6 +7187,15 @@
                                     "is_exam": true,
                                     "is_multi_submission": false,
                                     "submission_date": "11\/01\/2027"
+                                },
+                                {
+                                    "description": "Design Project",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "11\/12\/2026"
                                 }
                             ]
                         },
@@ -7212,22 +7212,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
-                                    "short_description": "Individual Report",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "05\/03\/2027"
-                                },
-                                {
                                     "description": "Group Report - Stakeholder Demand and Catchment Management",
                                     "short_description": "Group Report",
                                     "percent_of_module": 0.5,
                                     "credits": 7.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
+                                },
+                                {
+                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
+                                    "short_description": "Individual Report",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/02\/2027"
                                 }
                             ]
                         },
@@ -7253,22 +7253,22 @@
                                     "submission_date": "17\/05\/2027"
                                 },
                                 {
+                                    "description": "Design Project and Written Report",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.4,
+                                    "credits": 6,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/03\/2027"
+                                },
+                                {
                                     "description": "Group Project",
-                                    "short_description": "Concept Design - Peer reviewed",
+                                    "short_description": "Group Project",
                                     "percent_of_module": 0.1,
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "26\/02\/2027"
-                                },
-                                {
-                                    "description": "Design Exercise Project Report",
-                                    "short_description": "Design Exercise",
-                                    "percent_of_module": 0.4,
-                                    "credits": 6,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
                                 }
                             ]
                         },
@@ -7332,7 +7332,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "02\/02\/2027"
                                 },
                                 {
                                     "description": "Examination",
@@ -7555,7 +7555,7 @@
                                     "credits": 3.75,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/03\/2027"
+                                    "submission_date": "18\/03\/2027"
                                 },
                                 {
                                     "description": "Presentation",
@@ -7564,7 +7564,7 @@
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "25\/02\/2027"
+                                    "submission_date": "26\/02\/2027"
                                 }
                             ]
                         },
@@ -7741,13 +7741,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
+                                    "description": "Individual Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.15,
+                                    "credits": 6.75,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "04\/05\/2027"
+                                },
+                                {
                                     "description": "Professional Discussion",
                                     "short_description": "Professional Discussion",
                                     "percent_of_module": 0.2,
                                     "credits": 9,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "06\/09\/2027"
                                 },
                                 {
                                     "description": "Dissertation",
@@ -7756,16 +7765,7 @@
                                     "credits": 29.25,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
-                                },
-                                {
-                                    "description": "Individual Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.15,
-                                    "credits": 6.75,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "10\/08\/2027"
                                 }
                             ]
                         }
@@ -7915,7 +7915,7 @@
                                     "credits": 3.75,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/03\/2027"
+                                    "submission_date": "18\/03\/2027"
                                 },
                                 {
                                     "description": "Presentation",
@@ -7924,7 +7924,7 @@
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "25\/02\/2027"
+                                    "submission_date": "26\/02\/2027"
                                 }
                             ]
                         },
@@ -7973,13 +7973,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
+                                    "description": "Individual Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.15,
+                                    "credits": 6.75,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "04\/05\/2027"
+                                },
+                                {
                                     "description": "Professional Discussion",
                                     "short_description": "Professional Discussion",
                                     "percent_of_module": 0.2,
                                     "credits": 9,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "06\/09\/2027"
                                 },
                                 {
                                     "description": "Dissertation",
@@ -7988,16 +7997,7 @@
                                     "credits": 29.25,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
-                                },
-                                {
-                                    "description": "Individual Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.15,
-                                    "credits": 6.75,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "10\/08\/2027"
                                 }
                             ]
                         },
@@ -8084,7 +8084,7 @@
                                     "credits": 10.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "06\/05\/2027"
+                                    "submission_date": "07\/05\/2027"
                                 },
                                 {
                                     "description": "Coursework",
@@ -8093,7 +8093,7 @@
                                     "credits": 4.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "25\/03\/2027"
+                                    "submission_date": "18\/03\/2027"
                                 }
                             ]
                         },
@@ -8110,13 +8110,13 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "MCQ in-class test 1",
-                                    "short_description": "MCQ 1",
-                                    "percent_of_module": 0.15,
-                                    "credits": 2.25,
+                                    "description": "Individual Project Report",
+                                    "short_description": "Project Report",
+                                    "percent_of_module": 0.7,
+                                    "credits": 10.5,
                                     "is_exam": false,
-                                    "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "is_multi_submission": false,
+                                    "submission_date": "11\/12\/2026"
                                 },
                                 {
                                     "description": "MCQ in-class test 2",
@@ -8125,16 +8125,16 @@
                                     "credits": 2.25,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "27\/11\/2026"
                                 },
                                 {
-                                    "description": "Individual Project Report",
-                                    "short_description": "Project Report",
-                                    "percent_of_module": 0.7,
-                                    "credits": 10.5,
+                                    "description": "MCQ in-class test 1",
+                                    "short_description": "MCQ 1",
+                                    "percent_of_module": 0.15,
+                                    "credits": 2.25,
                                     "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "is_multi_submission": true,
+                                    "submission_date": "30\/10\/2026"
                                 }
                             ]
                         }
@@ -8214,7 +8214,7 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Instrumentation Tests",
+                                    "description": "Instrumentation Tests (Chengdu)",
                                     "short_description": "Instrumentation Tests",
                                     "percent_of_module": 0.075,
                                     "credits": 1.5,
@@ -8223,7 +8223,7 @@
                                     "submission_date": "04\/03\/2027"
                                 },
                                 {
-                                    "description": "Group project: Traversing and Setting out (Survey camp)",
+                                    "description": "Group project: Traversing and Setting out (Survey camp) - Chengdu",
                                     "short_description": "Fieldcourse",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
@@ -8232,7 +8232,7 @@
                                     "submission_date": "04\/03\/2027"
                                 },
                                 {
-                                    "description": "MCQ Test - Engineering Surveying",
+                                    "description": "MCQ Test - Engineering Surveying - Chengdu",
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the residential fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
@@ -8250,7 +8250,7 @@
                                     "submission_date": "12\/10\/2026"
                                 },
                                 {
-                                    "description": "Construction Technology Examination",
+                                    "description": "Construction Technology and Management in Construction Examination - Chengdu",
                                     "short_description": "Unseen Examination on the Construction Technology element of the module",
                                     "percent_of_module": 0.25,
                                     "credits": 5,
@@ -8706,7 +8706,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "16\/11\/2026"
+                                    "submission_date": "17\/11\/2026"
                                 }
                             ]
                         },
@@ -8981,7 +8981,7 @@
                         {
                             "module_code": "XJCV3000",
                             "module_title": "Reflective Portfolio (Civil)",
-                            "module_leader": "Yue Huang",
+                            "module_leader": "Zhe Zhan",
                             "module_description": "",
                             "credits": 0,
                             "semester": 1,
@@ -9431,9 +9431,9 @@
                                     "short_description": "The MCQ test covers the Engineering Surveying element of the module and it is taken on the last day of the fieldcourse.",
                                     "percent_of_module": 0.3,
                                     "credits": 6,
-                                    "is_exam": false,
+                                    "is_exam": true,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/03\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Construction Technology and Management in Construction Examination",
@@ -9892,7 +9892,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "16\/11\/2026"
+                                    "submission_date": "17\/11\/2026"
                                 }
                             ]
                         },
@@ -10516,7 +10516,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "02\/02\/2027"
                                 },
                                 {
                                     "description": "Examination",
@@ -10574,22 +10574,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
-                                    "short_description": "Individual Report",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "05\/03\/2027"
-                                },
-                                {
                                     "description": "Group Report - Stakeholder Demand and Catchment Management",
                                     "short_description": "Group Report",
                                     "percent_of_module": 0.5,
                                     "credits": 7.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
+                                },
+                                {
+                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
+                                    "short_description": "Individual Report",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/02\/2027"
                                 }
                             ]
                         },
@@ -10615,22 +10615,22 @@
                                     "submission_date": "17\/05\/2027"
                                 },
                                 {
+                                    "description": "Design Project and Written Report",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.4,
+                                    "credits": 6,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/03\/2027"
+                                },
+                                {
                                     "description": "Group Project",
-                                    "short_description": "Concept Design - Peer reviewed",
+                                    "short_description": "Concept Project",
                                     "percent_of_module": 0.1,
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "26\/02\/2027"
-                                },
-                                {
-                                    "description": "Design Exercise Project Report",
-                                    "short_description": "Design Exercise",
-                                    "percent_of_module": 0.4,
-                                    "credits": 6,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
                                 }
                             ]
                         },
@@ -10653,7 +10653,7 @@
                                     "credits": 15,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "07\/05\/2027"
                                 }
                             ]
                         },
@@ -10952,19 +10952,19 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Group presentation 2",
-                                    "short_description": "Group presentation 2",
-                                    "percent_of_module": 0.15,
-                                    "credits": 2.25,
+                                    "description": "Group project report",
+                                    "short_description": "Group project report",
+                                    "percent_of_module": 0.3,
+                                    "credits": 4.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "02\/12\/2026"
                                 },
                                 {
-                                    "description": "Group project report",
-                                    "short_description": "Group project report",
-                                    "percent_of_module": 0.3,
-                                    "credits": 4.5,
+                                    "description": "Group presentation 2",
+                                    "short_description": "Group presentation 2",
+                                    "percent_of_module": 0.15,
+                                    "credits": 2.25,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "02\/12\/2026"
@@ -11176,7 +11176,7 @@
                                     "credits": 15,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "07\/05\/2027"
                                 }
                             ]
                         },
@@ -12310,7 +12310,7 @@
                         },
                         {
                             "module_code": "CIVE5312M",
-                            "module_title": "Wastewater and Faecal Sludge Management",
+                            "module_title": "Wastewater and Faecal Sludge Treatment",
                             "module_leader": "Miller Camargo - Valero",
                             "module_description": "",
                             "credits": 15,
@@ -12321,15 +12321,6 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Design Project",
-                                    "short_description": "Design Project",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "01\/10\/2026"
-                                },
-                                {
                                     "description": "Standard Exam",
                                     "short_description": "Standard Exam",
                                     "percent_of_module": 0.5,
@@ -12337,6 +12328,15 @@
                                     "is_exam": true,
                                     "is_multi_submission": false,
                                     "submission_date": "11\/01\/2027"
+                                },
+                                {
+                                    "description": "Design Project",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "11\/12\/2026"
                                 }
                             ]
                         },
@@ -12353,22 +12353,22 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
-                                    "short_description": "Individual Report",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "05\/03\/2027"
-                                },
-                                {
                                     "description": "Group Report - Stakeholder Demand and Catchment Management",
                                     "short_description": "Group Report",
                                     "percent_of_module": 0.5,
                                     "credits": 7.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
+                                },
+                                {
+                                    "description": "Individual Report - Reservoir Yield Assessment and Modelling",
+                                    "short_description": "Individual Report",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/02\/2027"
                                 }
                             ]
                         },
@@ -12394,22 +12394,22 @@
                                     "submission_date": "17\/05\/2027"
                                 },
                                 {
+                                    "description": "Design Project and Written Report",
+                                    "short_description": "Design Project",
+                                    "percent_of_module": 0.4,
+                                    "credits": 6,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "19\/03\/2027"
+                                },
+                                {
                                     "description": "Group Project",
-                                    "short_description": "Concept Design - Peer reviewed",
+                                    "short_description": "Group Project",
                                     "percent_of_module": 0.1,
                                     "credits": 1.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "26\/02\/2027"
-                                },
-                                {
-                                    "description": "Design Exercise Project Report",
-                                    "short_description": "Design Exercise",
-                                    "percent_of_module": 0.4,
-                                    "credits": 6,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/03\/2027"
                                 }
                             ]
                         },
@@ -12432,7 +12432,7 @@
                                     "credits": 3,
                                     "is_exam": false,
                                     "is_multi_submission": true,
-                                    "submission_date": "01\/10\/2026"
+                                    "submission_date": "02\/02\/2027"
                                 },
                                 {
                                     "description": "Examination",
