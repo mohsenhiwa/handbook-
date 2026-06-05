@@ -639,7 +639,7 @@
         </div>
 
         <a href="https://eps-apps.leeds.ac.uk/kai/staff/cwt/index.php" target="_blank" class="sidebar-link-btn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             View Assessment Details
         </a>
         
@@ -684,7 +684,6 @@
         </section>
     </main>
 
-    <!-- Interactive Module Detail View Modal Section Popup -->
     <div class="modal-overlay" id="modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="toggleModal(false)">&times;</button>
@@ -692,7 +691,6 @@
         </div>
     </div>
 
-    <!-- Mandatory Informational Enrollment Site Disclaimer Modal Layout -->
     <div class="modal-overlay" id="disclaimer-modal">
         <div class="modal-container" style="max-width: 500px; text-align: center;">
             <div style="color: var(--secondary); margin-bottom: 1rem;">
@@ -710,6 +708,33 @@
     </div>
 
     <script>
+        // Staff Title Map derived from CSV
+        const STAFF_TITLES = {
+            'Gehan Selim': 'Prof', 'Peter Woodward': 'Prof', 'Justin Lunn': 'Prof', 
+            'Yasar Awais': 'Mr', 'Paul Hutchings': 'Dr', 'Marco-Felipe King': 'Dr', 
+            'Rodrigo Juarez': 'Dr', 'William Collinge': 'Dr', 'Ana Heitor': 'Dr', 
+            'Han Fang': 'Dr', 'Mohsen Besharat': 'Dr', 'Yue Huang': 'Dr', 
+            'Louise Fletcher': 'Dr', 'Michal Drewniok': 'Dr', 'Suhaila Mattar': 'Dr', 
+            'Leon Black': 'Prof', 'Duncan Borman': 'Dr', 'May Newisar': 'Dr', 
+            'Doug Stewart': 'Prof', 'Francesco Pugliese': 'Dr', 'Doug Booker': 'Dr', 
+            'Ashani Ranathunga': 'Dr', 'Xiaoan Mao': 'Dr', 'Sally Shahzad': 'Dr', 
+            'Judith Wang': 'Dr', 'Maryam Asachi': 'Dr', 'Cynthia Okoro-Shekwaga': 'Dr', 
+            'Barbara Evans': 'Prof', 'Mark Thomas': 'Dr', 'Nikolas Nikitas': 'Prof', 
+            'John Forth': 'Prof', 'Mark Trigg': 'Prof', 'David Connolly': 'Prof', 
+            'Vasilis Sarhosis': 'Prof', 'Mateusz Bocian': 'Dr', 'Luca Sabini': 'Dr', 
+            'Miller Camargo - Valero': 'Dr', 'Dicle Kortantamer': 'Dr', 
+            'Christine Unterhitzenberger': 'Prof', 'Alex Torku': 'Dr', 
+            'Yixue Shen': 'Dr', 'Apollo Tutesigensi': 'Dr', 'David Richardson': 'Dr', 
+            'Ioannis Mitseas': 'Dr', 'Matthew Ketteringham': 'Mr', 
+            'Dariusz Wanatowski': 'Prof', 'Chandra Balijepalli': 'Dr', 
+            'John Walley': 'Prof', 'Xiaohui Chen': 'Dr'
+        };
+
+        // Helper to remove JSON-embedded titles
+        function getCleanName(name) {
+            return name.replace(/(Dr\.?|Prof\.?|Professor|Mr\.?)\s+/i, '').trim();
+        }
+
         // State Variables
         let allProgrammes = [];
         let currentProgrammeObj = null;
@@ -1451,6 +1476,11 @@
 
             let notesHtml = mod.notes ? `<p style="margin-top:1rem; font-size:0.9rem; color:var(--secondary);"><strong>Notes:</strong> ${mod.notes}</p>` : '';
             
+            // Format Module Leader Name
+            const cleanName = getCleanName(mod.module_leader || 'TBC');
+            const title = STAFF_TITLES[cleanName] || 'NoT';
+            const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
             const content = `
                 <span class="module-code">${mod.module_code}</span>
                 <h3 style="margin: 1rem 0 0.5rem 0; font-size: 1.5rem;">${mod.module_title}</h3>
@@ -1460,7 +1490,7 @@
                     <span class="badge" style="background:#e2e8f0;">${mod.credits} Credits</span>
                 </div>
                 <hr style="border:0; border-top:1px solid var(--border); margin-bottom:1rem;">
-                <p style="color:#4a5568; margin-bottom: 0.75rem;"><strong>Module Leader:</strong> ${mod.module_leader || 'TBC'}</p>
+                <p style="color:#4a5568; margin-bottom: 0.75rem;"><strong>Module Leader:</strong> ${leaderDisplay}</p>
                 <div style="margin-bottom: 1rem; color: #2d3748; line-height: 1.5;"><strong>Description:</strong> <p style="margin-top:0.25rem; color:#4a5568;">${descHtml}</p></div>
                 <div style="margin-bottom: 1rem; color: #2d3748;"><strong>Assessment Breakdown:</strong> ${assessmentsHtml}</div>
                 ${notesHtml}
@@ -1487,6 +1517,11 @@
                 assessmentSummary = mod.assessments.map(a => a.short_description || a.description).join(', ');
             }
 
+            // Format Module Leader Name
+            const cleanName = getCleanName(mod.module_leader || 'TBC');
+            const title = STAFF_TITLES[cleanName] || 'NoT';
+            const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
             return `
                 <div class="module-card ${isSelected}" onclick="showDetails('${mod.module_code}')">
                     <div class="module-header">
@@ -1499,7 +1534,7 @@
                         <span class="badge badge-term">${termString}</span>
                     </div>
                     <p class="module-desc" style="font-size: 0.85rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;"><strong>Description:</strong> ${descSnippet}</p>
-                    <p class="card-subtext"><strong>Leader:</strong> ${mod.module_leader || 'TBC'}</p>
+                    <p class="card-subtext"><strong>Leader:</strong> ${leaderDisplay}</p>
                     <p class="card-subtext" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;"><strong>Assessment:</strong> ${assessmentSummary}</p>
                     <div class="card-actions">
                         <button class="select-btn" ${btnDisabled} onclick="toggleModuleSelection('${mod.module_code}', event)">${btnText}</button>
@@ -1568,6 +1603,11 @@
                         if (LIST_C_CODES_1781.includes(m.module_code)) groupContext = 'List C Option';
                     }
 
+                    // Format Module Leader Name
+                    const cleanName = getCleanName(m.module_leader || 'TBC');
+                    const title = STAFF_TITLES[cleanName] || 'NoT';
+                    const leaderDisplay = title === 'NoT' ? cleanName : `${title} ${cleanName}`;
+
                     return `
                         <tr>
                             <td style="font-weight: bold; white-space: nowrap;">
@@ -1577,7 +1617,7 @@
                             <td style="font-weight: 500;">${m.module_title}</td>
                             <td style="text-align: center;">${m.credits}</td>
                             <td>${getTermString(m.semester)}</td>
-                            <td>${m.module_leader || 'TBC'}</td>
+                            <td>${leaderDisplay}</td>
                             <td style="font-size: 9pt; line-height:1.3;">
                                 ${assessPrint}
                                 ${m.notes ? `<div style="margin-top: 4px; color: #444; font-style: italic;"><strong>Note:</strong> ${m.notes}</div>` : ''}
