@@ -1189,13 +1189,18 @@
             const specGrid = document.getElementById('spec-meta-grid');
             
             if (currentProgrammeObj && currentProgrammeObj.specCode) {
+                // Apply custom Title formatting to Manager
+                const managerClean = getCleanName(currentProgrammeObj.specManager);
+                const managerTitle = STAFF_TITLES[managerClean] || 'NoT';
+                const managerDisplay = managerTitle === 'NoT' ? managerClean : `${managerTitle} ${managerClean}`;
+
                 specGrid.innerHTML = `
                     <div class="spec-item"><strong>Prog Code:</strong> ${currentProgrammeObj.specCode}</div>
                     <div class="spec-item"><strong>UCAS Code:</strong> ${currentProgrammeObj.specUcas || 'N/A'}</div>
                     <div class="spec-item"><strong>Duration:</strong> ${currentProgrammeObj.specDuration}</div>
                     <div class="spec-item"><strong>Attendance:</strong> ${currentProgrammeObj.specAttendance}</div>
                     <div class="spec-item"><strong>Total Load:</strong> ${currentProgrammeObj.specTotalCredits} Credits</div>
-                    <div class="spec-item"><strong>Programme Leader:</strong> ${currentProgrammeObj.specManager}</div>
+                    <div class="spec-item"><strong>Programme Leader:</strong> ${managerDisplay}</div>
                     <div class="spec-item" style="grid-column: 1 / -1;"><strong>Contact:</strong> <a href="mailto:${currentProgrammeObj.specEmail}" style="color:var(--secondary); text-decoration:none; font-weight:600;">${currentProgrammeObj.specEmail}</a></div>
                 `;
                 specPanel.style.display = 'block';
