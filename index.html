@@ -1250,20 +1250,20 @@
             selector.innerHTML = '';
             
             const groups = {
-                'Architecture': [],
-                'MSc': [],
-                'Civil MEng BEng': []
+                'Architecture Programmes': [],
+                'MSc Programmes': [],
+                'Civil Engineering Programmes': []
             };
 
             allProgrammes.forEach(prog => {
                 const title = prog.programme_title.toLowerCase();
                 
                 if (prog.isMScType) {
-                    groups['MSc'].push(prog);
+                    groups['MSc Programmes'].push(prog);
                 } else if (title.includes('architecture') || title.includes('architectural')) {
-                    groups['Architecture'].push(prog);
+                    groups['Architecture Programmes'].push(prog);
                 } else {
-                    groups['Civil MEng BEng'].push(prog);
+                    groups['Civil Engineering Programmes'].push(prog);
                 }
             });
 
@@ -1280,9 +1280,9 @@
                 selector.appendChild(optgroup);
             };
 
-            appendGroup('Civil MEng BEng', groups['Civil MEng BEng']);
-            appendGroup('Architecture', groups['Architecture']);
-            appendGroup('MSc', groups['MSc']);
+            appendGroup('Civil Engineering Programmes', groups['Civil Engineering Programmes']);
+            appendGroup('Architecture Programmes', groups['Architecture Programmes']);
+            appendGroup('MSc Programmes', groups['MSc Programmes']);
             
             if (allProgrammes.length > 0) switchProgramme();
         }
