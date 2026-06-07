@@ -1400,6 +1400,8 @@
             document.getElementById('controls-panel').style.display = 'none';
             document.getElementById('level-title').innerText = `Global Search Results Matrix`;
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById('spec-meta-panel').style.display = 'none';
+            document.getElementById('programme-display-title').innerText = '';
 
             let resultsHTML = '';
             let matchedCount = 0;
