@@ -1252,7 +1252,7 @@
             const groups = {
                 'Architecture': [],
                 'MSc': [],
-                'Civil MEng BEng': []
+                'Civil Programmes': []
             };
 
             allProgrammes.forEach(prog => {
@@ -1263,7 +1263,7 @@
                 } else if (title.includes('architecture') || title.includes('architectural')) {
                     groups['Architecture'].push(prog);
                 } else {
-                    groups['Civil MEng BEng'].push(prog);
+                    groups['Civil Programmes'].push(prog);
                 }
             });
 
@@ -1280,9 +1280,9 @@
                 selector.appendChild(optgroup);
             };
 
-            appendGroup('Civil MEng BEng', groups['Civil MEng BEng']);
-            appendGroup('Architecture', groups['Architecture']);
-            appendGroup('MSc', groups['MSc']);
+            appendGroup('Civil Programmes', groups['Civil Programmes']);
+            appendGroup('Architecture Programmes', groups['Architecture Programmes']);
+            appendGroup('MSc Programmes', groups['MSc Programmes']);
             
             if (allProgrammes.length > 0) switchProgramme();
         }
