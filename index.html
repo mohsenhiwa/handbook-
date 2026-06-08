@@ -12,7 +12,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civil Engineering Interactive Programme Handbook</title>
+    <title>IPH (Interactive Programme Handbook)</title>
     <style>
         :root {
             --primary: #1C1C1C; /* Dark Charcoal for Header & Sidebar */
@@ -1250,20 +1250,20 @@
             selector.innerHTML = '';
             
             const groups = {
-                'Architecture Programmes': [],
-                'MSc Programmes': [],
-                'Civil Engineering Programmes': []
+                'Architecture Programmes (Undergraduate)': [],
+                'MSc Programmes (Postgraduate)': [],
+                'Civil Engineering Programmes (Undergraduate)': []
             };
 
             allProgrammes.forEach(prog => {
                 const title = prog.programme_title.toLowerCase();
                 
                 if (prog.isMScType) {
-                    groups['MSc Programmes'].push(prog);
+                    groups['MSc Programmes (Postgraduate)'].push(prog);
                 } else if (title.includes('architecture') || title.includes('architectural')) {
-                    groups['Architecture Programmes'].push(prog);
+                    groups['Architecture Programmes (Undergraduate)'].push(prog);
                 } else {
-                    groups['Civil Engineering Programmes'].push(prog);
+                    groups['Civil Engineering Programmes (Undergraduate)'].push(prog);
                 }
             });
 
@@ -1280,9 +1280,9 @@
                 selector.appendChild(optgroup);
             };
 
-            appendGroup('Civil Engineering Programmes', groups['Civil Engineering Programmes']);
-            appendGroup('Architecture Programmes', groups['Architecture Programmes']);
-            appendGroup('MSc Programmes', groups['MSc Programmes']);
+            appendGroup('Civil Engineering Programmes (Undergraduate)', groups['Civil Engineering Programmes (Undergraduate)']);
+            appendGroup('Architecture Programmes (Undergraduate)', groups['Architecture Programmes (Undergraduate)']);
+            appendGroup('MSc Programmes (Postgraduate)', groups['MSc Programmes (Postgraduate)']);
             
             if (allProgrammes.length > 0) switchProgramme();
         }
