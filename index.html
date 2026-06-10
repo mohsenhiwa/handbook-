@@ -1787,8 +1787,8 @@
 
         function createCardHTML(mod) {
             const isSelected = selections[mod.module_code] ? 'selected' : '';
-            const btnText = mod.compulsory ? 'Compulsory Base' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
-            const btnDisabled = mod.compulsory ? 'disabled style="cursor:not-allowed; background:#d4edda; color:#155724; border-color:#c3e6cb;"' : '';
+            const btnText = mod.compulsory ? '' : (selections[mod.module_code] ? '✓ Selected' : '+ Add Option');
+            const btnDisabled = mod.compulsory ? 'disabled style="cursor:default; background:transparent; border:none; height:0;"' : '';            
             const termString = getTermString(mod.semester);
             
             let descSnippet = mod.module_description && mod.module_description.trim() !== "" ? mod.module_description : 'No description available.';
