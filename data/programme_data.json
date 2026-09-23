@@ -1,5 +1,5 @@
 {
-    "export_date": "2026-08-26",
+    "export_date": "2026-09-23",
     "year_begin": 2026,
     "year_end": 2027,
     "school": "civil",
@@ -339,49 +339,31 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Project 4 - Raised Walkway",
-                                    "short_description": "Project 4 - Raised Walkway",
+                                    "description": "Part 2 – Design Brief & Feasibility Study (Individual)",
+                                    "short_description": "Design Brief & Feasibility Study (Individual)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/02\/2027"
+                                    "submission_date": "04\/12\/2026"
                                 },
                                 {
-                                    "description": "Project 2 - Site Analysis",
-                                    "short_description": "Project 2 - Site Analysis",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
+                                    "description": "Part 3 – Developed Design Proposal (Individual)",
+                                    "short_description": "Developed Design Proposal (Individual)",
+                                    "percent_of_module": 0.6,
+                                    "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/11\/2026"
+                                    "submission_date": "23\/04\/2027"
                                 },
                                 {
-                                    "description": "Project 3 - Vertical Barrier",
-                                    "short_description": "Project 3 - Vertical Barrier",
+                                    "description": "Part 1 – Site & Precedent Analysis (Group)",
+                                    "short_description": "Part 1 – Site & Precedent Analysis (Group)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "21\/01\/2027"
-                                },
-                                {
-                                    "description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "short_description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/10\/2026"
-                                },
-                                {
-                                    "description": "Project 5 - Pavillion",
-                                    "short_description": "Project 5 - Pavillion",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "submission_date": "29\/10\/2026"
                                 }
                             ]
                         }
@@ -827,15 +809,6 @@
                                     "submission_date": "07\/06\/2027"
                                 },
                                 {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "10\/12\/2026"
-                                },
-                                {
                                     "description": "Project Report",
                                     "short_description": "Project Report",
                                     "percent_of_module": 0.6,
@@ -843,6 +816,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "21\/04\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "26\/11\/2026"
                                 }
                             ]
                         },
@@ -1607,49 +1589,31 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Project 4 - Raised Walkway",
-                                    "short_description": "Project 4 - Raised Walkway",
+                                    "description": "Part 2 – Design Brief & Feasibility Study (Individual)",
+                                    "short_description": "Design Brief & Feasibility Study (Individual)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/02\/2027"
+                                    "submission_date": "04\/12\/2026"
                                 },
                                 {
-                                    "description": "Project 2 - Site Analysis",
-                                    "short_description": "Project 2 - Site Analysis",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
+                                    "description": "Part 3 – Developed Design Proposal (Individual)",
+                                    "short_description": "Developed Design Proposal (Individual)",
+                                    "percent_of_module": 0.6,
+                                    "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/11\/2026"
+                                    "submission_date": "23\/04\/2027"
                                 },
                                 {
-                                    "description": "Project 3 - Vertical Barrier",
-                                    "short_description": "Project 3 - Vertical Barrier",
+                                    "description": "Part 1 – Site & Precedent Analysis (Group)",
+                                    "short_description": "Part 1 – Site & Precedent Analysis (Group)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "21\/01\/2027"
-                                },
-                                {
-                                    "description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "short_description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/10\/2026"
-                                },
-                                {
-                                    "description": "Project 5 - Pavillion",
-                                    "short_description": "Project 5 - Pavillion",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "submission_date": "29\/10\/2026"
                                 }
                             ]
                         }
@@ -2577,15 +2541,6 @@
                                     "submission_date": "07\/06\/2027"
                                 },
                                 {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "10\/12\/2026"
-                                },
-                                {
                                     "description": "Project Report",
                                     "short_description": "Project Report",
                                     "percent_of_module": 0.6,
@@ -2593,6 +2548,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "21\/04\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "26\/11\/2026"
                                 }
                             ]
                         },
@@ -2998,7 +2962,7 @@
                                     "credits": 4.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "14\/01\/2027"
+                                    "submission_date": "26\/11\/2026"
                                 },
                                 {
                                     "description": "Dissertation",
@@ -3423,49 +3387,31 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Project 4 - Raised Walkway",
-                                    "short_description": "Project 4 - Raised Walkway",
+                                    "description": "Part 2 – Design Brief & Feasibility Study (Individual)",
+                                    "short_description": "Design Brief & Feasibility Study (Individual)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/02\/2027"
+                                    "submission_date": "04\/12\/2026"
                                 },
                                 {
-                                    "description": "Project 2 - Site Analysis",
-                                    "short_description": "Project 2 - Site Analysis",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
+                                    "description": "Part 3 – Developed Design Proposal (Individual)",
+                                    "short_description": "Developed Design Proposal (Individual)",
+                                    "percent_of_module": 0.6,
+                                    "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/11\/2026"
+                                    "submission_date": "23\/04\/2027"
                                 },
                                 {
-                                    "description": "Project 3 - Vertical Barrier",
-                                    "short_description": "Project 3 - Vertical Barrier",
+                                    "description": "Part 1 – Site & Precedent Analysis (Group)",
+                                    "short_description": "Part 1 – Site & Precedent Analysis (Group)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "21\/01\/2027"
-                                },
-                                {
-                                    "description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "short_description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/10\/2026"
-                                },
-                                {
-                                    "description": "Project 5 - Pavillion",
-                                    "short_description": "Project 5 - Pavillion",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "submission_date": "29\/10\/2026"
                                 }
                             ]
                         }
@@ -4052,15 +3998,6 @@
                                     "submission_date": "07\/06\/2027"
                                 },
                                 {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "10\/12\/2026"
-                                },
-                                {
                                     "description": "Project Report",
                                     "short_description": "Project Report",
                                     "percent_of_module": 0.6,
@@ -4068,6 +4005,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "21\/04\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "26\/11\/2026"
                                 }
                             ]
                         },
@@ -4662,49 +4608,31 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Project 4 - Raised Walkway",
-                                    "short_description": "Project 4 - Raised Walkway",
+                                    "description": "Part 2 – Design Brief & Feasibility Study (Individual)",
+                                    "short_description": "Design Brief & Feasibility Study (Individual)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/02\/2027"
+                                    "submission_date": "04\/12\/2026"
                                 },
                                 {
-                                    "description": "Project 2 - Site Analysis",
-                                    "short_description": "Project 2 - Site Analysis",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
+                                    "description": "Part 3 – Developed Design Proposal (Individual)",
+                                    "short_description": "Developed Design Proposal (Individual)",
+                                    "percent_of_module": 0.6,
+                                    "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/11\/2026"
+                                    "submission_date": "23\/04\/2027"
                                 },
                                 {
-                                    "description": "Project 3 - Vertical Barrier",
-                                    "short_description": "Project 3 - Vertical Barrier",
+                                    "description": "Part 1 – Site & Precedent Analysis (Group)",
+                                    "short_description": "Part 1 – Site & Precedent Analysis (Group)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "21\/01\/2027"
-                                },
-                                {
-                                    "description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "short_description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/10\/2026"
-                                },
-                                {
-                                    "description": "Project 5 - Pavillion",
-                                    "short_description": "Project 5 - Pavillion",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "submission_date": "29\/10\/2026"
                                 }
                             ]
                         }
@@ -5614,15 +5542,6 @@
                                     "submission_date": "07\/06\/2027"
                                 },
                                 {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "10\/12\/2026"
-                                },
-                                {
                                     "description": "Project Report",
                                     "short_description": "Project Report",
                                     "percent_of_module": 0.6,
@@ -5630,6 +5549,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "21\/04\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "26\/11\/2026"
                                 }
                             ]
                         },
@@ -6035,7 +5963,7 @@
                                     "credits": 4.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "14\/01\/2027"
+                                    "submission_date": "26\/11\/2026"
                                 },
                                 {
                                     "description": "Dissertation",
@@ -6460,49 +6388,31 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Project 4 - Raised Walkway",
-                                    "short_description": "Project 4 - Raised Walkway",
+                                    "description": "Part 2 – Design Brief & Feasibility Study (Individual)",
+                                    "short_description": "Design Brief & Feasibility Study (Individual)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/02\/2027"
+                                    "submission_date": "04\/12\/2026"
                                 },
                                 {
-                                    "description": "Project 2 - Site Analysis",
-                                    "short_description": "Project 2 - Site Analysis",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
+                                    "description": "Part 3 – Developed Design Proposal (Individual)",
+                                    "short_description": "Developed Design Proposal (Individual)",
+                                    "percent_of_module": 0.6,
+                                    "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/11\/2026"
+                                    "submission_date": "23\/04\/2027"
                                 },
                                 {
-                                    "description": "Project 3 - Vertical Barrier",
-                                    "short_description": "Project 3 - Vertical Barrier",
+                                    "description": "Part 1 – Site & Precedent Analysis (Group)",
+                                    "short_description": "Part 1 – Site & Precedent Analysis (Group)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "21\/01\/2027"
-                                },
-                                {
-                                    "description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "short_description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/10\/2026"
-                                },
-                                {
-                                    "description": "Project 5 - Pavillion",
-                                    "short_description": "Project 5 - Pavillion",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "submission_date": "29\/10\/2026"
                                 }
                             ]
                         }
@@ -7197,15 +7107,6 @@
                                     "submission_date": "07\/06\/2027"
                                 },
                                 {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "10\/12\/2026"
-                                },
-                                {
                                     "description": "Project Report",
                                     "short_description": "Project Report",
                                     "percent_of_module": 0.6,
@@ -7213,6 +7114,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "21\/04\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "26\/11\/2026"
                                 }
                             ]
                         },
@@ -7575,15 +7485,6 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "River Aire Report",
-                                    "short_description": "Report",
-                                    "percent_of_module": 0.7,
-                                    "credits": 10.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "02\/11\/2026"
-                                },
-                                {
                                     "description": "Infection Outbreak Group Presentation",
                                     "short_description": "Group presentation",
                                     "percent_of_module": 0.3,
@@ -7591,6 +7492,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "05\/10\/2026"
+                                },
+                                {
+                                    "description": "River Aire Report",
+                                    "short_description": "Report",
+                                    "percent_of_module": 0.7,
+                                    "credits": 10.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "05\/11\/2026"
                                 }
                             ]
                         }
@@ -7740,7 +7650,7 @@
                                     "credits": 3.75,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
                                 },
                                 {
                                     "description": "Presentation",
@@ -8100,7 +8010,7 @@
                                     "credits": 3.75,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/03\/2027"
+                                    "submission_date": "12\/03\/2027"
                                 },
                                 {
                                     "description": "Presentation",
@@ -8199,6 +8109,15 @@
                             "other_school": "",
                             "assessments": [
                                 {
+                                    "description": "Coursework",
+                                    "short_description": "Report",
+                                    "percent_of_module": 0.5,
+                                    "credits": 7.5,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "03\/12\/2026"
+                                },
+                                {
                                     "description": "Exam",
                                     "short_description": "Exam",
                                     "percent_of_module": 0.5,
@@ -8206,15 +8125,6 @@
                                     "is_exam": true,
                                     "is_multi_submission": false,
                                     "submission_date": "11\/01\/2027"
-                                },
-                                {
-                                    "description": "Coursework",
-                                    "short_description": "Report",
-                                    "percent_of_module": 0.5,
-                                    "credits": 7.5,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "11\/12\/2026"
                                 }
                             ]
                         },
@@ -9201,7 +9111,7 @@
                                     "credits": 0,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "12\/01\/2027"
+                                    "submission_date": "03\/12\/2026"
                                 }
                             ]
                         },
@@ -9436,19 +9346,19 @@
                                     "submission_date": "09\/04\/2027"
                                 },
                                 {
-                                    "description": "Part 1: Feasibility report (individual submission)",
-                                    "short_description": "Feasibility report",
-                                    "percent_of_module": 0.25,
-                                    "credits": 10,
+                                    "description": "Part 4: Individual oral presentation (individual submission)",
+                                    "short_description": "Oral presentation",
+                                    "percent_of_module": 0.1,
+                                    "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "11\/12\/2026"
                                 },
                                 {
-                                    "description": "Part 4: Individual oral presentation (individual submission)",
-                                    "short_description": "Oral presentation",
-                                    "percent_of_module": 0.1,
-                                    "credits": 4,
+                                    "description": "Part 1: Feasibility report (individual submission)",
+                                    "short_description": "Feasibility report",
+                                    "percent_of_module": 0.25,
+                                    "credits": 10,
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "11\/12\/2026"
@@ -9501,16 +9411,7 @@
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "05\/05\/2027"
-                                },
-                                {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "07\/12\/2026"
+                                    "submission_date": "10\/05\/2027"
                                 },
                                 {
                                     "description": "Project Report",
@@ -9519,7 +9420,7 @@
                                     "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "10\/05\/2027"
+                                    "submission_date": "17\/05\/2027"
                                 },
                                 {
                                     "description": "Assessment of Engagement",
@@ -9528,7 +9429,16 @@
                                     "credits": 2,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "10\/05\/2027"
+                                    "submission_date": "17\/05\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "30\/11\/2026"
                                 }
                             ]
                         },
@@ -9912,49 +9822,31 @@
                             "other_school": "",
                             "assessments": [
                                 {
-                                    "description": "Project 4 - Raised Walkway",
-                                    "short_description": "Project 4 - Raised Walkway",
+                                    "description": "Part 2 – Design Brief & Feasibility Study (Individual)",
+                                    "short_description": "Design Brief & Feasibility Study (Individual)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "18\/02\/2027"
+                                    "submission_date": "04\/12\/2026"
                                 },
                                 {
-                                    "description": "Project 2 - Site Analysis",
-                                    "short_description": "Project 2 - Site Analysis",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
+                                    "description": "Part 3 – Developed Design Proposal (Individual)",
+                                    "short_description": "Developed Design Proposal (Individual)",
+                                    "percent_of_module": 0.6,
+                                    "credits": 12,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "19\/11\/2026"
+                                    "submission_date": "23\/04\/2027"
                                 },
                                 {
-                                    "description": "Project 3 - Vertical Barrier",
-                                    "short_description": "Project 3 - Vertical Barrier",
+                                    "description": "Part 1 – Site & Precedent Analysis (Group)",
+                                    "short_description": "Part 1 – Site & Precedent Analysis (Group)",
                                     "percent_of_module": 0.2,
                                     "credits": 4,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "21\/01\/2027"
-                                },
-                                {
-                                    "description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "short_description": "Project 1 - Reflective Design Exercise (RDE)",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "26\/10\/2026"
-                                },
-                                {
-                                    "description": "Project 5 - Pavillion",
-                                    "short_description": "Project 5 - Pavillion",
-                                    "percent_of_module": 0.2,
-                                    "credits": 4,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "29\/04\/2027"
+                                    "submission_date": "29\/10\/2026"
                                 }
                             ]
                         }
@@ -10727,15 +10619,6 @@
                                     "submission_date": "07\/06\/2027"
                                 },
                                 {
-                                    "description": "Research Proposal",
-                                    "short_description": "Research Proposal",
-                                    "percent_of_module": 0.1,
-                                    "credits": 2,
-                                    "is_exam": false,
-                                    "is_multi_submission": false,
-                                    "submission_date": "10\/12\/2026"
-                                },
-                                {
                                     "description": "Project Report",
                                     "short_description": "Project Report",
                                     "percent_of_module": 0.6,
@@ -10743,6 +10626,15 @@
                                     "is_exam": false,
                                     "is_multi_submission": false,
                                     "submission_date": "21\/04\/2027"
+                                },
+                                {
+                                    "description": "Research Proposal",
+                                    "short_description": "Research Proposal",
+                                    "percent_of_module": 0.1,
+                                    "credits": 2,
+                                    "is_exam": false,
+                                    "is_multi_submission": false,
+                                    "submission_date": "26\/11\/2026"
                                 }
                             ]
                         },
@@ -11053,7 +10945,7 @@
                                     "credits": 4.5,
                                     "is_exam": false,
                                     "is_multi_submission": false,
-                                    "submission_date": "14\/01\/2027"
+                                    "submission_date": "26\/11\/2026"
                                 },
                                 {
                                     "description": "Dissertation",
